@@ -1,0 +1,12 @@
+steps:
+  - name: 'gcr.io/$PROJECT_ID/firebase/hosting:current'
+    args: ['yarn install']
+
+  - name: 'gcr.io/$PROJECT_ID/firebase/hosting:current'
+    args: ['yarn lint']
+
+  - name: 'gcr.io/$PROJECT_ID/firebase/hosting:current'
+    args: ['yarn test']
+
+options:
+  logging: GCS_ONLY

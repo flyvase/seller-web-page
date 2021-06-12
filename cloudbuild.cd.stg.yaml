@@ -1,0 +1,19 @@
+steps:
+  - name: 'gcr.io/$PROJECT_ID/firebase/hosting:current'
+    args: ['yarn install']
+
+  - name: 'gcr.io/$PROJECT_ID/firebase/hosting:current'
+    args: ['yarn lint']
+
+  - name: 'gcr.io/$PROJECT_ID/firebase/hosting:current'
+    args: ['yarn test']
+
+  - name: 'gcr.io/$PROJECT_ID/firebase/hosting:current'
+    args: ['yarn build:stg']
+
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: /bin/bash
+    args: ['-c', 'gcloud app deploy --project $PROJECT_ID --quiet']
+
+options:
+  logging: GCS_ONLY
