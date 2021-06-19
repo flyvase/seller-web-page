@@ -20,12 +20,16 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-      }
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
     ]
   },
   resolve: {
     extensions: [
-      '.tsx', '.ts', '.js',
+      '.tsx', '.ts', '.js', 'png', 'svg', 'jpg', 'jpeg', 'gif'
     ],
   },
   plugins: [
