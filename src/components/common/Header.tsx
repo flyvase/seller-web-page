@@ -33,7 +33,7 @@ export const Header: React.VFC = (props) => {
         </Box>
         <Divider orientation="vertical" flexItem />
         <Box width={20} />
-        <Tabs value={0}>
+        <Tabs value={false}>
           <HeaderTab label="search" />
           <HeaderTab label="booking" />
           <HeaderTab label="chat" />
