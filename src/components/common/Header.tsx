@@ -28,9 +28,7 @@ export const Header: React.VFC = (props) => {
   return (
     <AppBar color="transparent" variant="outlined" position="fixed">
       <Toolbar disableGutters>
-        <Box px={2}>
-          <img src={horizontalLogo} className={classes.logo} />
-        </Box>
+        <img src={horizontalLogo} className={classes.logo} />
         <Divider orientation="vertical" flexItem />
         <Box width={20} />
         <Tabs value={false}>
