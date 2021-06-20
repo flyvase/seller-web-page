@@ -8,7 +8,7 @@ export const App: React.VFC = () => {
   return (
     <Box>
       <Header />
-      <Box height={72} />
+      <Box height={64} />
       <SearchResultScreen />
     </Box>
   );
