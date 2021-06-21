@@ -5,7 +5,7 @@ type HeaderTabProps = {
   label: string;
 };
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles(() => {
   return {
     root: {
       textTransform: 'capitalize',

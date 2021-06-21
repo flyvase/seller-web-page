@@ -5,7 +5,7 @@ import { SpaceListItem } from './SpaceListItem';
 
 import { searchResultScreenData } from '../../data/searchResultScreenData';
 
-export const SpaceList: React.VFC = (props) => {
+export const SpaceList: React.VFC = () => {
   return (
     <List>
       {searchResultScreenData.map((data, index) => (

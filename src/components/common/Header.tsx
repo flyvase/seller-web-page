@@ -14,7 +14,7 @@ import horizontalLogo from '../../assets/logos/horizontal.svg';
 import { HeaderTab } from './HeaderTab';
 import { Spacer } from './Spacer';
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles(() => {
   return {
     root: {
       backgroundColor: 'white',
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-export const Header: React.VFC = (props) => {
+export const Header: React.VFC = () => {
   const classes = useStyles();
 
   return (

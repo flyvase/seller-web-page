@@ -4,7 +4,7 @@ import React from 'react';
 import { SpaceList } from '../components/search_result_screen/SpaceList';
 import { SpaceMap } from '../components/search_result_screen/SpaceMap';
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles(() => {
   return {
     list: {
       height: '100vh',

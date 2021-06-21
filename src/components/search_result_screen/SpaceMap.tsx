@@ -1,8 +1,8 @@
 import React from 'react';
 import { LoadScript, GoogleMap } from '@react-google-maps/api';
-import { Box, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles(() => {
   return {
     mapContainer: {
       height: '100%',
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-export const SpaceMap: React.VFC = (props) => {
+export const SpaceMap: React.VFC = () => {
   const classes = useStyles();
 
   return (
