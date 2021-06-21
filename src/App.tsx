@@ -1,12 +1,14 @@
+import { Box } from '@material-ui/core';
 import React from 'react';
 
-import logo from './assets/logos/symbol_only.svg';
+import { SearchResultScreen } from './screens/SearchResultScreen';
+import { Header } from './components/common/Header';
 
 export const App: React.VFC = () => {
   return (
-    <div>
-      Hello world!
-      <img src={logo} />
-    </div>
+    <Box>
+      <Header />
+      <SearchResultScreen />
+    </Box>
   );
 };
