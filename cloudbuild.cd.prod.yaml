@@ -16,6 +16,3 @@ steps:
 
   - name: 'gcr.io/$PROJECT_ID/firebase/hosting:current'
     args: ['yarn deploy:prod']
-
-options:
-  logging: GCS_ONLY
