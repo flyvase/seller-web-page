@@ -5,8 +5,8 @@ import {
   Tabs,
   Toolbar,
   Divider,
-  Box,
   Avatar,
+  Box,
 } from '@material-ui/core';
 
 import horizontalLogo from '../../assets/logos/horizontal.svg';
@@ -23,6 +23,12 @@ const useStyles = makeStyles(() => {
     logo: {
       height: 64,
     },
+    tabs: {
+      paddingLeft: 20,
+    },
+    avatar: {
+      paddingRight: 20,
+    },
   };
 });
 
@@ -33,17 +39,21 @@ export const Header: React.VFC = () => {
     <AppBar className={classes.root} variant="outlined" position="fixed">
       <Toolbar disableGutters>
         <img src={horizontalLogo} className={classes.logo} />
+
         <Divider orientation="vertical" flexItem />
-        <Box width={20} />
-        <Tabs value={false}>
+
+        <Tabs value={false} className={classes.tabs}>
           <HeaderTab label="search" />
           <HeaderTab label="booking" />
           <HeaderTab label="chat" />
           <HeaderTab label="settings" />
         </Tabs>
+
         <Spacer />
-        <Avatar />
-        <Box width={20} />
+
+        <Box className={classes.avatar}>
+          <Avatar />
+        </Box>
       </Toolbar>
     </AppBar>
   );
