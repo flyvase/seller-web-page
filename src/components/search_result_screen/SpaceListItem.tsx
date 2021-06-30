@@ -24,11 +24,16 @@ const useStyles = makeStyles((theme) => {
       flexGrow: 1,
       display: 'flex',
       flexDirection: 'column',
+      paddingLeft: 16,
     },
     image: {
       width: 300,
       height: 200,
       borderRadius: 16,
+    },
+    dividerWrapper: {
+      paddingTop: 8,
+      paddingBottom: 4,
     },
     miniDivider: {
       width: '32px',
@@ -56,20 +61,29 @@ export const SpaceListItem: React.VFC<SpaceListItemProps> = (
   return (
     <Box className={classes.root}>
       <img src={props.imgSrc} className={classes.image} />
-      <Box pl={2} className={classes.content}>
+
+      <Box className={classes.content}>
         <Typography variant="caption">
           {props.address}の{props.spaceCategory}
         </Typography>
+
         <Typography variant="h5">{props.name}</Typography>
-        <Box height={8} />
-        <Box className={classes.miniDivider} />
-        <Box height={4} />
+
+        <Box className={classes.dividerWrapper}>
+          <Box className={classes.miniDivider} />
+        </Box>
+
         <Typography variant="body2">{props.facilities.join('・')}</Typography>
+
         <Spacer />
+
         <Box className={classes.bottom}>
           <Star color="secondary" />
+
           <Typography>{props.rating}</Typography>
+
           <Spacer />
+
           <Box className={classes.price}>
             <Typography variant="subtitle1">¥{props.price} / 週</Typography>
             <Typography variant="caption">
