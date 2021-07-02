@@ -7,7 +7,9 @@ import {
   CardMedia,
   makeStyles,
   Typography,
+  Box,
 } from '@material-ui/core';
+import { Star } from '@material-ui/icons';
 
 type BookingCardItemProps = {
   imgSrc: string;
@@ -28,6 +30,9 @@ const useStyles = makeStyles(() => {
     media: {
       height: 170,
     },
+    actionArea: {
+      display: 'flex',
+    },
   };
 });
 
@@ -43,7 +48,20 @@ export const BookingCard: React.VFC<BookingCardItemProps> = (
         <Typography gutterBottom variant="h5" component="h2">
           {props.name}
         </Typography>
+        <Typography gutterBottom variant="body1">
+          {props.address}
+        </Typography>
       </CardContent>
+      <CardActions disableSpacing className={classes.actionArea}>
+        <Box>
+          <Star color="secondary" />
+          <Typography>{props.rating}</Typography>
+        </Box>
+        <Box>
+          <Button size="small" color="primary"></Button>
+          詳細をみる
+        </Box>
+      </CardActions>
     </Card>
   );
 };
