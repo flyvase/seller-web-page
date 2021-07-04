@@ -8,7 +8,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'static/main.js',
-    clean: true
+    clean: true,
+    assetModuleFilename: 'static/[hash][ext]'
   },
   module: {
     rules: [
