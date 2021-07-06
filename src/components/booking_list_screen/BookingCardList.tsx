@@ -8,7 +8,8 @@ import { searchResultScreenData } from '../../data/searchResultScreenData';
 const useStyles = makeStyles(() => {
   return {
     root: {
-      display: 'flex',
+      height: '490',
+      width: '350',
     },
   };
 });
@@ -17,9 +18,9 @@ export const BookingCardList: React.VFC = () => {
   const classes = useStyles();
 
   return (
-    <List>
+    <Box display="flex" flexWrap="wrap">
       {searchResultScreenData.map((data, index) => (
-        <Box key={index} className={classes.root}>
+        <Box key={index} width="30%">
           <BookingCard
             imgSrc={data.imgSrc}
             address={data.address}
@@ -32,6 +33,6 @@ export const BookingCardList: React.VFC = () => {
           />
         </Box>
       ))}
-    </List>
+    </Box>
   );
 };
