@@ -1,50 +1,27 @@
 import React from 'react';
+
 import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  makeStyles,
-  Typography,
   Box,
-  Container,
-  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Button,
+  Typography,
+  makeStyles,
 } from '@material-ui/core';
 import { Star } from '@material-ui/icons';
-type BookingCardItemProps = {
-  imgSrc: string;
-  address: string;
-  spaceCategory: string;
-  name: string;
-  facilities: string[];
-  rating: number;
-  price: number;
-  weeks: number;
-};
-const useStyles = makeStyles((theme) => {
+
+const useStyles = makeStyles(() => {
   return {
     root: {
+      // height: '100vh',
+      marginTop: 64,
       maxWidth: 490,
-    },
-    media: {
-      height: 170,
-    },
-    cardGrid: {
-      paddingTop: theme.spacing(8),
-      paddingBottom: theme.spacing(8),
-    },
-    card: {
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
+      maxHeight: 350,
     },
     cardMedia: {
-      paddingTop: '56.25%', // 16:9
-      height: '140',
-    },
-    cardContent: {
-      flexGrow: 1,
+      height: 170,
     },
     rating: {
       display: 'flex',
@@ -57,40 +34,31 @@ const useStyles = makeStyles((theme) => {
     },
   };
 });
-export const BookingCard: React.VFC<BookingCardItemProps> = (
-  props: BookingCardItemProps
-) => {
+
+export const BookingCard: React.VFC = () => {
   const classes = useStyles();
+
   return (
-    <React.Fragment>
-      {/* <Container className={classes.cardGrid} maxWidth="md">
-        <Grid container spacing={4}> */}
-      {/* <Grid item xs={12} sm={6} md={4}> */}
-      <Card className={classes.card}>
-        <CardMedia className={classes.media} image={props.imgSrc}></CardMedia>
-        <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
-            {props.name}
-          </Typography>
-          <Typography gutterBottom variant="body1">
-            {props.address}
-          </Typography>
-        </CardContent>
-        <CardActions classes={{ root: classes.cardActions }}>
-          {/* <Grid container> */}
-          <Box className={classes.rating}>
-            <Star color="secondary" />
-            <Typography>{props.rating}</Typography>
-          </Box>
-          <Button size="small" color="primary">
-            詳細を見る
-          </Button>
-          {/* </Grid> */}
-        </CardActions>
-      </Card>
-      {/* </Grid>
-        </Grid> */}
-      {/* </Container> */}
-    </React.Fragment>
+    <Card className={classes.root}>
+      <CardMedia
+        className={classes.cardMedia}
+        image="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+      />
+      <CardContent>
+        <Typography variant="h5">
+          【珈琲物語】ゆったり落ち着ける下町の純喫茶
+        </Typography>
+        <Typography variant="body1">東京都 足立区</Typography>
+      </CardContent>
+      <CardActions className={classes.cardActions}>
+        <Box className={classes.rating}>
+          <Star color="secondary" />
+          <Typography>4.8</Typography>
+        </Box>
+        <Button size="small" color="primary">
+          詳細を見る
+        </Button>
+      </CardActions>
+    </Card>
   );
 };

@@ -1,12 +1,12 @@
 import { Box } from '@material-ui/core';
 import React from 'react';
 
-import { BookingCardList } from '../components/booking_list_screen/BookingCardList';
+import { BookingCard } from '../components/booking_list_screen/BookingCard';
 
 export const BookingListScreen: React.VFC = () => {
   return (
     <Box>
-      <BookingCardList />
+      <BookingCard />
     </Box>
   );
 };
