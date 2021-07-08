@@ -12,13 +12,22 @@ import {
 } from '@material-ui/core';
 import { Star } from '@material-ui/icons';
 
+type BookingCardProps = {
+  imgSrc: string;
+  address: string;
+  name: string;
+  rating: number;
+};
+
 const useStyles = makeStyles(() => {
   return {
     root: {
-      // height: '100vh',
       marginTop: 64,
-      maxWidth: 490,
-      maxHeight: 350,
+      width: 490,
+      height: 350,
+    },
+    card: {
+      borderRadius: '24px',
     },
     cardMedia: {
       height: 170,
@@ -35,30 +44,31 @@ const useStyles = makeStyles(() => {
   };
 });
 
-export const BookingCard: React.VFC = () => {
+export const BookingCard: React.VFC<BookingCardProps> = (
+  props: BookingCardProps
+) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <CardMedia
-        className={classes.cardMedia}
-        image="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-      />
-      <CardContent>
-        <Typography variant="h5">
-          【珈琲物語】ゆったり落ち着ける下町の純喫茶
-        </Typography>
-        <Typography variant="body1">東京都 足立区</Typography>
-      </CardContent>
-      <CardActions className={classes.cardActions}>
-        <Box className={classes.rating}>
-          <Star color="secondary" />
-          <Typography>4.8</Typography>
-        </Box>
-        <Button size="small" color="primary">
-          詳細を見る
-        </Button>
-      </CardActions>
-    </Card>
+    <React.Fragment>
+      <Box className={classes.root}>
+        <Card className={classes.card}>
+          <CardMedia className={classes.cardMedia} image={props.imgSrc} />
+          <CardContent>
+            <Typography variant="h5">{props.name}</Typography>
+            <Typography variant="body1">{props.address}</Typography>
+          </CardContent>
+          <CardActions className={classes.cardActions}>
+            <Box className={classes.rating}>
+              <Star color="secondary" />
+              <Typography>{props.rating}</Typography>
+            </Box>
+            <Button size="small" color="primary">
+              詳細を見る
+            </Button>
+          </CardActions>
+        </Card>
+      </Box>
+    </React.Fragment>
   );
 };
