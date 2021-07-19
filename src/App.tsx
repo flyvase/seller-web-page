@@ -1,12 +1,12 @@
 import { Box } from '@material-ui/core';
 import React from 'react';
 
-import { TwoFactorAuthenticationScreen } from './screens/TwoFactorAuthenticationScreen';
+import { CreateBrandScreen } from './screens/CreateBrandScreen';
 
 export const App: React.VFC = () => {
   return (
     <Box>
-      <TwoFactorAuthenticationScreen />
+      <CreateBrandScreen />
     </Box>
   );
 };
