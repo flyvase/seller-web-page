@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => {
     root: {
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center', // なぜか上下中央にならない。。
+      alignItems: 'center',
     },
     paper: {
       marginTop: '96px',
@@ -24,7 +24,6 @@ const useStyles = makeStyles(() => {
       height: '44px',
       textTransform: 'none',
       fontSize: '14px',
-      fontWeight: 'medium',
     },
   };
 });

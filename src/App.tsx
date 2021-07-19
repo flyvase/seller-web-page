@@ -1,12 +1,12 @@
 import { Box } from '@material-ui/core';
 import React from 'react';
 
-import { AuthenticationScreen } from './screens/AuthenticationScreen';
+import { CreateAccountScreen } from './screens/CreateAccountScreen';
 
 export const App: React.VFC = () => {
   return (
     <Box>
-      <AuthenticationScreen />
+      <CreateAccountScreen />
     </Box>
   );
 };
