@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'production',
@@ -29,6 +30,9 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({template: 'template.html'})
+    new HtmlWebpackPlugin({template: 'template.html'}),
+    new webpack.DefinePlugin({
+      'process.env.SERVER_DOMAIN': JSON.stringify('https://flyvase-stg.an.r.appspot.com')
+    })
   ]
 }
