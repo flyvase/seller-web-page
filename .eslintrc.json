@@ -19,9 +19,26 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "import"
     ],
-    "rules": {},
+    "rules": {
+        "import/order": [
+            "error",
+            {
+                "groups": [
+                    "builtin",
+                    "external",
+                    "internal",
+                    [
+                        "parent",
+                        "sibling"
+                    ]
+                ],
+                "newlines-between": "always"
+            }
+        ]
+    },
     "settings": {
         "react": {
             "version": "detect"
