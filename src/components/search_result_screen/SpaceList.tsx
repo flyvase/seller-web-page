@@ -2,7 +2,6 @@ import { List, Divider, Box } from '@material-ui/core';
 import React from 'react';
 
 import { SpaceListItem } from './SpaceListItem';
-
 import { searchResultScreenData } from '../../data/searchResultScreenData';
 
 export const SpaceList: React.VFC = () => {

@@ -10,7 +10,6 @@ import {
 } from '@material-ui/core';
 
 import horizontalLogo from '../../assets/logos/horizontal.svg';
-
 import { HeaderTab } from './HeaderTab';
 import { Spacer } from './Spacer';
 
