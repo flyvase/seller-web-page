@@ -16,7 +16,6 @@ function countryToFlag(isoCode: string) {
 
 type CountryPickerProps = {
   placeHolder?: string;
-  inputVariant?: 'filled' | 'outlined' | 'standard';
   onChange: (country: Country | null) => void;
 };
 
@@ -31,12 +30,13 @@ const useStyles = makeStyles(() => {
 export const CountryPicker: React.VFC<CountryPickerProps> = (
   props: CountryPickerProps
 ) => {
-  const { inputVariant = 'outlined', placeHolder = '国' } = props;
+  const { placeHolder = '国' } = props;
   const classes = useStyles();
 
   return (
     <Autocomplete
       autoHighlight
+      disableClearable
       options={countries as Country[]}
       classes={{ paper: classes.paper }}
       getOptionLabel={(option) => countryToFlag(option.code)}
@@ -47,7 +47,7 @@ export const CountryPicker: React.VFC<CountryPickerProps> = (
         <TextField
           {...params}
           label={placeHolder}
-          variant={inputVariant}
+          variant="outlined"
           inputProps={{
             ...params.inputProps,
             autoComplete: 'new-password', // disable autocomplete and autofill
