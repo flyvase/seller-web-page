@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { Box, TextField } from '@material-ui/core';
 
@@ -17,6 +17,7 @@ function countryToFlag(isoCode: string) {
 type CountryPickerProps = {
   placeHolder?: string;
   inputVariant?: 'filled' | 'outlined' | 'standard';
+  onChange: (country: Country | null) => void;
 };
 
 export const CountryPicker: React.VFC<CountryPickerProps> = (
@@ -46,6 +47,12 @@ export const CountryPicker: React.VFC<CountryPickerProps> = (
           }}
         />
       )}
+      onChange={(
+        event: ChangeEvent<Record<string, unknown>>,
+        newValue: Country | null
+      ) => {
+        props.onChange(newValue);
+      }}
     />
   );
 };
