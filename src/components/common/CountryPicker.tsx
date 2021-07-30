@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { Autocomplete } from '@material-ui/lab';
-import { Box, TextField } from '@material-ui/core';
+import { makeStyles, TextField } from '@material-ui/core';
 
 import { countries, Country } from '../../config/country';
 
@@ -20,27 +20,34 @@ type CountryPickerProps = {
   onChange: (country: Country | null) => void;
 };
 
+const useStyles = makeStyles(() => {
+  return {
+    paper: {
+      minWidth: 280,
+    },
+  };
+});
+
 export const CountryPicker: React.VFC<CountryPickerProps> = (
   props: CountryPickerProps
 ) => {
+  const { inputVariant = 'outlined', placeHolder = '国' } = props;
+  const classes = useStyles();
+
   return (
     <Autocomplete
       autoHighlight
       options={countries as Country[]}
-      getOptionLabel={(option) =>
-        countryToFlag(option.code) + ' ' + option.label
+      classes={{ paper: classes.paper }}
+      getOptionLabel={(option) => countryToFlag(option.code)}
+      renderOption={(option) =>
+        `${countryToFlag(option.code)} ${option.label} (+${option.phone})`
       }
-      renderOption={(option) => (
-        <Box>
-          <span>{countryToFlag(option.code) + ' '}</span>
-          {option.label} ({option.code}) +{option.phone}
-        </Box>
-      )}
       renderInput={(params) => (
         <TextField
           {...params}
-          label={props.placeHolder ?? '国を選択してください'}
-          variant={props.inputVariant ?? 'outlined'}
+          label={placeHolder}
+          variant={inputVariant}
           inputProps={{
             ...params.inputProps,
             autoComplete: 'new-password', // disable autocomplete and autofill
