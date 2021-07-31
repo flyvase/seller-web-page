@@ -8,6 +8,7 @@ import {
 import React from 'react';
 
 import horizontalLogo from '../assets/logos/horizontal.svg';
+import { CountryPicker } from '../components/common/CountryPicker';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -30,11 +31,22 @@ const useStyles = makeStyles((theme) => {
     title: {
       paddingBottom: 16,
     },
-    nameInput: {
+    firstNameInput: {
       paddingBottom: 16,
     },
-    phoneInput: {
+    lastNameInput: {
       paddingBottom: 32,
+    },
+    phoneInputs: {
+      paddingBottom: 32,
+      display: 'flex',
+    },
+    countryPicker: {
+      minWidth: 80,
+      width: '30%',
+    },
+    phoneInput: {
+      paddingLeft: '16px',
     },
     submitButton: {
       padding: '8px 0px',
@@ -54,14 +66,16 @@ export const SignUpScreen: React.VFC = () => {
           アカウントを作成
         </Typography>
 
-        <TextField className={classes.nameInput} fullWidth label="姓" />
-        <TextField className={classes.nameInput} fullWidth label="名" />
-        <TextField
-          className={classes.phoneInput}
-          fullWidth
-          label="電話番号"
-          type="tel"
-        />
+        <TextField className={classes.firstNameInput} fullWidth label="姓" />
+        <TextField className={classes.lastNameInput} fullWidth label="名" />
+        <Box className={classes.phoneInputs}>
+          <Box className={classes.countryPicker}>
+            <CountryPicker error onChange={console.log} />
+          </Box>
+          <Box className={classes.phoneInput}>
+            <TextField fullWidth label="電話番号" variant="outlined" />
+          </Box>
+        </Box>
 
         <Button
           className={classes.submitButton}
