@@ -94,10 +94,10 @@ export const SignUpScreen: React.VFC = () => {
           <TextField
             className={classes.firstNameInput}
             fullWidth
-            label="* 姓"
+            label="姓 *"
           />
 
-          <TextField className={classes.lastNameInput} fullWidth label="* 名" />
+          <TextField className={classes.lastNameInput} fullWidth label="名 *" />
 
           <Box className={classes.phoneInputs}>
             <Box className={classes.countryPicker}>
@@ -115,7 +115,7 @@ export const SignUpScreen: React.VFC = () => {
             <Box className={classes.phoneInput}>
               <TextField
                 fullWidth
-                label="* 電話番号"
+                label="電話番号 *"
                 variant="outlined"
                 id="phoneNumber"
                 value={formControl.values.phoneNumber}
