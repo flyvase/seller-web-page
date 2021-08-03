@@ -17,8 +17,8 @@ function countryToFlag(isoCode: string) {
 type CountryPickerProps = {
   placeHolder?: string;
   onChange: (country: Country | null) => void;
-  error?: boolean;
-  helperText?: string;
+  value?: Country;
+  id?: string;
 };
 
 const useStyles = makeStyles(() => {
@@ -32,18 +32,15 @@ const useStyles = makeStyles(() => {
 export const CountryPicker: React.VFC<CountryPickerProps> = (
   props: CountryPickerProps
 ) => {
-  const {
-    placeHolder = '国',
-    error = false,
-    helperText = '選択してください',
-  } = props;
+  const { placeHolder = '国' } = props;
   const classes = useStyles();
 
   return (
     <Autocomplete
+      id={props.id}
       autoHighlight
       disableClearable
-      defaultValue={countries[112]}
+      value={props.value}
       options={countries as Country[]}
       classes={{ paper: classes.paper }}
       getOptionLabel={(option) => countryToFlag(option.code)}
@@ -59,8 +56,6 @@ export const CountryPicker: React.VFC<CountryPickerProps> = (
             ...params.inputProps,
             autoComplete: 'new-password', // disable autocomplete and autofill
           }}
-          error={error}
-          helperText={helperText}
         />
       )}
       onChange={(
