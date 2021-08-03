@@ -11,6 +11,7 @@ import { object, string } from 'yup';
 
 import horizontalLogo from '../assets/logos/horizontal.svg';
 import { CountryPicker } from '../components/common/CountryPicker';
+import { countries } from '../config/country';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -58,7 +59,11 @@ const useStyles = makeStyles((theme) => {
 });
 
 const validationSchema = object({
-  // country: string().required('選択してください'),
+  country: object({
+    code: string(),
+    label: string(),
+    phone: string(),
+  }),
   phoneNumber: string().required('必ず入力してください'),
 });
 
@@ -67,6 +72,7 @@ export const SignUpScreen: React.VFC = () => {
 
   const formControl = useFormik({
     initialValues: {
+      country: countries[112],
       phoneNumber: '',
     },
     validationSchema: validationSchema,
@@ -85,19 +91,33 @@ export const SignUpScreen: React.VFC = () => {
         </Typography>
 
         <form onSubmit={formControl.handleSubmit}>
-          <TextField className={classes.firstNameInput} fullWidth label="姓" />
-          <TextField className={classes.lastNameInput} fullWidth label="名" />
+          <TextField
+            className={classes.firstNameInput}
+            fullWidth
+            label="* 姓"
+          />
+
+          <TextField className={classes.lastNameInput} fullWidth label="* 名" />
+
           <Box className={classes.phoneInputs}>
             <Box className={classes.countryPicker}>
-              <CountryPicker onChange={console.log} />
+              <CountryPicker
+                onChange={(country) => {
+                  formControl.setFieldValue(
+                    'country',
+                    country ?? formControl.initialValues.country
+                  );
+                }}
+                value={formControl.values.country}
+                id="countryPicker"
+              />
             </Box>
             <Box className={classes.phoneInput}>
               <TextField
                 fullWidth
-                label="電話番号"
+                label="* 電話番号"
                 variant="outlined"
                 id="phoneNumber"
-                name="phoneNumber"
                 value={formControl.values.phoneNumber}
                 onChange={formControl.handleChange}
                 error={
