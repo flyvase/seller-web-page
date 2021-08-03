@@ -137,6 +137,7 @@ export const SignUpScreen: React.VFC = () => {
             variant="contained"
             color="primary"
             fullWidth
+            disableElevation
             type="submit"
           >
             作成
