@@ -6,10 +6,6 @@ import { object, string } from 'yup';
 import { japan } from '../../config/country';
 import { CountryPicker } from '../common/CountryPicker';
 
-const validationSchema = object({
-  phoneNumberInput: string().required('必ず入力してください'),
-});
-
 const useStyles = makeStyles(() => ({
   firstNameInput: {
     paddingBottom: 16,
@@ -31,11 +27,25 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+const validationSchema = object({
+  firstNameInput: string()
+    .required('必ず入力してください')
+    .max(100, '100文字以下にしてください'),
+  lastNameInput: string()
+    .required('必ず入力してください')
+    .max(100, '100文字以下にしてください'),
+  phoneNumberInput: string()
+    .required('必ず入力してください')
+    .max(16, '正しい電話番号を入力してください'),
+});
+
 export const SignUpForm: React.VFC = () => {
   const classes = useStyles();
 
   const formController = useFormik({
     initialValues: {
+      firstNameInput: '',
+      lastNameInput: '',
       countryPicker: japan,
       phoneNumberInput: '',
     },
@@ -47,9 +57,39 @@ export const SignUpForm: React.VFC = () => {
 
   return (
     <form onSubmit={formController.handleSubmit}>
-      <TextField className={classes.firstNameInput} fullWidth label="姓 *" />
+      <TextField
+        className={classes.firstNameInput}
+        fullWidth
+        label="姓 *"
+        id="firstNameInput"
+        value={formController.values.firstNameInput}
+        onChange={formController.handleChange}
+        error={
+          formController.touched.firstNameInput &&
+          Boolean(formController.errors.firstNameInput)
+        }
+        helperText={
+          formController.touched.firstNameInput &&
+          formController.errors.firstNameInput
+        }
+      />
 
-      <TextField className={classes.lastNameInput} fullWidth label="名 *" />
+      <TextField
+        className={classes.lastNameInput}
+        fullWidth
+        label="名 *"
+        id="lastNameInput"
+        value={formController.values.lastNameInput}
+        onChange={formController.handleChange}
+        error={
+          formController.touched.lastNameInput &&
+          Boolean(formController.errors.lastNameInput)
+        }
+        helperText={
+          formController.touched.lastNameInput &&
+          formController.errors.lastNameInput
+        }
+      />
 
       <Box className={classes.phoneNumberField}>
         <Box className={classes.countryPicker}>
