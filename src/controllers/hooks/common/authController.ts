@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 import { AuthInterface } from '../../../interfaces/authInterface';
@@ -10,12 +10,19 @@ export function useGoogleSignIn(
   return authRepository.googleSignIn;
 }
 
-export function useAuthObserver(authRepository: AuthInterface): void {
+export function useAuthObserver(authRepository: AuthInterface): boolean {
+  const [initialized, setInitialized] = useState(false);
+
   const setAuthState = useSetRecoilState(authState);
   useEffect(() => {
     const cancel = authRepository.authObserver((auth) => {
+      if (!initialized) {
+        setInitialized(true);
+      }
       setAuthState(auth);
     });
     return cancel;
   }, []);
+
+  return initialized;
 }
