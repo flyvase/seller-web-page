@@ -41,7 +41,13 @@ const validationSchema = object({
     .max(16, '正しい電話番号を入力してください'),
 });
 
-export const SignUpForm: React.VFC = () => {
+export type SignUpFormProps = {
+  onSubmit: (firstName: string, lastName: string, phoneNumber: string) => void;
+};
+
+export const SignUpForm: React.VFC<SignUpFormProps> = (
+  props: SignUpFormProps
+) => {
   const classes = useStyles();
   const [, setFormMode] = useRecoilState(formModeState);
 
@@ -54,8 +60,9 @@ export const SignUpForm: React.VFC = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      const phoneNumber = values.countryPicker.phone + values.phoneNumberInput;
+      props.onSubmit(values.firstNameInput, values.lastNameInput, phoneNumber);
       setFormMode('pinCode');
-      console.log(values);
     },
   });
 
