@@ -262,3 +262,5 @@ export const countries = [
   { code: 'ZM', label: 'Zambia', phone: '260' },
   { code: 'ZW', label: 'Zimbabwe', phone: '263' },
 ];
+
+export const japan = countries[112];

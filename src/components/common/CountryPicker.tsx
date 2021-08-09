@@ -54,7 +54,7 @@ export const CountryPicker: React.VFC<CountryPickerProps> = (
           variant="outlined"
           inputProps={{
             ...params.inputProps,
-            autoComplete: 'new-password', // disable autocomplete and autofill
+            autoComplete: 'off',
           }}
         />
       )}
