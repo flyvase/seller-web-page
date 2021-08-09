@@ -5,3 +5,7 @@ export function useGoogleSignIn(
 ): () => Promise<void> {
   return authRepository.googleSignIn;
 }
+
+export function useUid(authRepository: AuthInterface): string | undefined {
+  return authRepository.uid;
+}
