@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => {
 
 export const SignUpScreen: React.VFC = () => {
   const classes = useStyles();
-  const [formMode, setFormMode] = useRecoilState(formModeState);
+  const [formMode] = useRecoilState(formModeState);
 
   return (
     <Box className={classes.root}>
