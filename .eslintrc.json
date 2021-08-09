@@ -37,7 +37,8 @@
                 ],
                 "newlines-between": "always"
             }
-        ]
+        ],
+        "@typescript-eslint/no-non-null-assertion": "off"
     },
     "settings": {
         "react": {
