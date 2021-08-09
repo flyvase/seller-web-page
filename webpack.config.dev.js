@@ -14,7 +14,10 @@ module.exports = {
   devServer: {
     contentBase: './dist',
     port: 3000,
-    open: true
+    open: true,
+    historyApiFallback: {
+      rewrites: [{ from: /^\/*/, to: '/index.html' }],
+    },
   },
   module: {
     rules: [
