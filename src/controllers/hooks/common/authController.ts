@@ -16,10 +16,10 @@ export function useAuthObserver(authRepository: AuthInterface): boolean {
   const setAuthState = useSetRecoilState(authState);
   useEffect(() => {
     const cancel = authRepository.authObserver((auth) => {
+      setAuthState(auth);
       if (!initialized) {
         setInitialized(true);
       }
-      setAuthState(auth);
     });
     return cancel;
   }, []);
