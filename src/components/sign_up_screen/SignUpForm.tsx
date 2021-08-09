@@ -1,9 +1,11 @@
 import { Box, Button, makeStyles, TextField } from '@material-ui/core';
+import { useRecoilState } from 'recoil';
 import { useFormik } from 'formik';
 import React from 'react';
 import { object, string } from 'yup';
 
 import { japan } from '../../config/country';
+import { formModeState } from '../../controllers/state/sign_up_screen/formModeState';
 import { CountryPicker } from '../common/CountryPicker';
 
 const useStyles = makeStyles(() => ({
@@ -41,6 +43,7 @@ const validationSchema = object({
 
 export const SignUpForm: React.VFC = () => {
   const classes = useStyles();
+  const [, setFormMode] = useRecoilState(formModeState);
 
   const formController = useFormik({
     initialValues: {
@@ -51,6 +54,7 @@ export const SignUpForm: React.VFC = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      setFormMode('pinCode');
       console.log(values);
     },
   });
