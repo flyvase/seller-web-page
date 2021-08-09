@@ -1,4 +1,4 @@
-import { AuthInterface } from "../../interfaces/authInterface";
+import { AuthInterface } from '../../../interfaces/authInterface';
 
 export function useGoogleSignIn(
   authRepository: AuthInterface
