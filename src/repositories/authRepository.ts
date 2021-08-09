@@ -8,10 +8,6 @@ export class AuthRepository implements AuthInterface {
     const provider = new firebase.auth.GoogleAuthProvider();
     await firebase.auth().signInWithRedirect(provider);
   }
-
-  get uid(): string | undefined {
-    return firebase.auth().currentUser?.uid;
-  }
 }
 
 export const AuthRepositoryContext = createContext<AuthRepository>(

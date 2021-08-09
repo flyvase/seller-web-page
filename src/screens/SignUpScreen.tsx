@@ -1,14 +1,12 @@
 import { Box, makeStyles, Typography } from '@material-ui/core';
 import { useRecoilState } from 'recoil';
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
 
 import horizontalLogo from '../assets/logos/horizontal.svg';
 import { PinCodeForm } from '../components/sign_up_screen/PinCodeForm';
 import { SignUpForm } from '../components/sign_up_screen/SignUpForm';
 import { formModeState } from '../controllers/state/sign_up_screen/formModeState';
 import { User } from '../entities/user';
-import { useUid } from '../controllers/hooks/common/authController';
-import { AuthRepositoryContext } from '../repositories/authRepository';
 
 export type SignUpFormMode = 'signUp' | 'pinCode';
 
@@ -44,9 +42,6 @@ export const SignUpScreen: React.VFC = () => {
   const userRef = useRef<User>(null!);
   const phoneNumberRef = useRef<string>(null!);
 
-  const authRepository = useContext(AuthRepositoryContext);
-  const uid = useUid(authRepository);
-
   return (
     <Box className={classes.root}>
       <Box className={classes.container}>
@@ -61,7 +56,7 @@ export const SignUpScreen: React.VFC = () => {
         {formMode === 'signUp' ? (
           <SignUpForm
             onSubmit={(firstName, lastName, phoneNumber) => {
-              userRef.current = new User(uid!, firstName, lastName);
+              userRef.current = new User('hoge', firstName, lastName);
               phoneNumberRef.current = phoneNumber;
             }}
           />
