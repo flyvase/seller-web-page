@@ -56,7 +56,7 @@ export const SignUpScreen: React.VFC = () => {
         {formMode === 'signUp' ? (
           <SignUpForm
             onSubmit={(firstName, lastName, phoneNumber) => {
-              userRef.current = new User('hoge', firstName, lastName);
+              userRef.current = new User(firstName, lastName);
               phoneNumberRef.current = phoneNumber;
             }}
           />

@@ -1,16 +1,12 @@
-import { ThemeProvider } from '@material-ui/core';
-import { RecoilRoot } from 'recoil';
-import React from 'react';
+import React, { useContext } from 'react';
 
+import { useAuthObserver } from './controllers/hooks/common/authController';
+import { AuthRepositoryContext } from './repositories/authRepository';
 import { SignUpScreen } from './screens/SignUpScreen';
-import { theme } from './theme';
 
 export const App: React.VFC = () => {
-  return (
-    <RecoilRoot>
-      <ThemeProvider theme={theme}>
-        <SignUpScreen />
-      </ThemeProvider>
-    </RecoilRoot>
-  );
+  const authRepository = useContext(AuthRepositoryContext);
+  useAuthObserver(authRepository);
+
+  return <SignUpScreen />;
 };
