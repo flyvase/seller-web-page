@@ -10,6 +10,12 @@ export function useGoogleSignIn(
   return authRepository.googleSignIn;
 }
 
+export function useAuthResult(
+  authRepository: AuthInterface
+): () => Promise<boolean> {
+  return authRepository.authResult;
+}
+
 export function useAuthObserver(authRepository: AuthInterface): boolean {
   const [initialized, setInitialized] = useState(false);
 
