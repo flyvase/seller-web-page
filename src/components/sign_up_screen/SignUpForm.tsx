@@ -41,7 +41,7 @@ const validationSchema = object({
     .max(16, '正しい電話番号を入力してください'),
 });
 
-export type SignUpFormProps = {
+type SignUpFormProps = {
   onSubmit: (firstName: string, lastName: string, phoneNumber: string) => void;
 };
 

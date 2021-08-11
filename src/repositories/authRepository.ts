@@ -10,6 +10,11 @@ export class AuthRepository implements AuthInterface {
     await firebase.auth().signInWithRedirect(provider);
   }
 
+  async authResult(): Promise<boolean> {
+    const credential = await firebase.auth().getRedirectResult();
+    return credential.user != null;
+  }
+
   authObserver(callback: (auth: Auth | null) => void): () => void {
     const cancel = firebase.auth().onAuthStateChanged((user) => {
       if (user == null) {
