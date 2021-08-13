@@ -1,38 +1,89 @@
-import { useRecoilState } from 'recoil';
-import React, { useRef } from 'react';
+import React from 'react';
+import { Button, makeStyles, TextField } from '@material-ui/core';
+import { object, string } from 'yup';
+import { useFormik } from 'formik';
 
-import { PinCodeForm } from '../components/sign_up_screen/PinCodeForm';
-import { SignUpForm } from '../components/sign_up_screen/SignUpForm';
-import { formModeState } from '../controllers/state/sign_up_screen/formModeState';
-import { User } from '../entities/user';
 import { OnBoardingForm } from '../components/common/OnBoardingForm';
 
-export type SignUpFormMode = 'signUp' | 'pinCode';
+const useStyles = makeStyles(() => ({
+  firstNameInput: {
+    paddingBottom: 16,
+  },
+  lastNameInput: {
+    paddingBottom: 32,
+  },
+}));
+
+const validationSchema = object({
+  firstNameInput: string()
+    .required('必ず入力してください')
+    .max(100, '100文字以下にしてください'),
+  lastNameInput: string()
+    .required('必ず入力してください')
+    .max(100, '100文字以下にしてください'),
+});
 
 export const SignUpScreen: React.VFC = () => {
-  const [formMode] = useRecoilState(formModeState);
+  const classes = useStyles();
 
-  const userRef = useRef<User>(null!);
-  const phoneNumberRef = useRef<string>(null!);
+  const formController = useFormik({
+    initialValues: {
+      firstNameInput: '',
+      lastNameInput: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
 
   return (
-    <OnBoardingForm
-      title={
-        formMode === 'signUp'
-          ? 'アカウントを作成'
-          : 'SMSに送信された6桁の番号を入力してください'
-      }
-    >
-      {formMode === 'signUp' ? (
-        <SignUpForm
-          onSubmit={(firstName, lastName, phoneNumber) => {
-            userRef.current = new User(firstName, lastName);
-            phoneNumberRef.current = phoneNumber;
-          }}
+    <OnBoardingForm title="アカウント作成">
+      <form onSubmit={formController.handleSubmit}>
+        <TextField
+          className={classes.firstNameInput}
+          fullWidth
+          label="姓 *"
+          id="firstNameInput"
+          value={formController.values.firstNameInput}
+          onChange={formController.handleChange}
+          error={
+            formController.touched.firstNameInput &&
+            Boolean(formController.errors.firstNameInput)
+          }
+          helperText={
+            formController.touched.firstNameInput &&
+            formController.errors.firstNameInput
+          }
         />
-      ) : (
-        <PinCodeForm />
-      )}
+
+        <TextField
+          className={classes.lastNameInput}
+          fullWidth
+          label="名 *"
+          id="lastNameInput"
+          value={formController.values.lastNameInput}
+          onChange={formController.handleChange}
+          error={
+            formController.touched.lastNameInput &&
+            Boolean(formController.errors.lastNameInput)
+          }
+          helperText={
+            formController.touched.lastNameInput &&
+            formController.errors.lastNameInput
+          }
+        />
+
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          disableElevation
+          type="submit"
+        >
+          次へ
+        </Button>
+      </form>
     </OnBoardingForm>
   );
 };
