@@ -1,11 +1,9 @@
 import { Box, Button, makeStyles, TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
 import { object, string } from 'yup';
 
 import { japan } from '../../config/country';
-import { formModeState } from '../../controllers/state/phone_verification_screen/formModeState';
 import { CountryPicker } from '../common/CountryPicker';
 
 const useStyles = makeStyles(() => ({
@@ -38,8 +36,6 @@ export const PhoneNumberForm: React.VFC<PhoneNumberFormProps> = (
 ) => {
   const classes = useStyles();
 
-  const setFormMode = useSetRecoilState(formModeState);
-
   const formController = useFormik({
     initialValues: {
       countryPicker: japan,
@@ -50,9 +46,9 @@ export const PhoneNumberForm: React.VFC<PhoneNumberFormProps> = (
       const phoneNumber =
         '+' + values.countryPicker.phone + values.phoneNumberInput;
       props.onSubmit(phoneNumber);
-      setFormMode('pinCode');
     },
   });
+
   return (
     <form onSubmit={formController.handleSubmit}>
       <Box className={classes.phoneNumberField}>

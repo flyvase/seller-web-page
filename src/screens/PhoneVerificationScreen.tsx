@@ -1,16 +1,15 @@
-import React from 'react';
-import { useRef } from 'react';
-import { useRecoilValue } from 'recoil';
+import React, { useRef, useState } from 'react';
 
 import { OnBoardingForm } from '../components/common/OnBoardingForm';
 import { PhoneNumberForm } from '../components/phone_verification_screen/PhoneNumberForm';
 import { PinCodeForm } from '../components/common/PinCodeForm';
-import { formModeState } from '../controllers/state/phone_verification_screen/formModeState';
+
+type FormMode = 'phoneNumber' | 'pinCode';
 
 export const PhoneVerificationScreen: React.VFC = () => {
   const phoneNumberRef = useRef<string>(null!);
 
-  const formMode = useRecoilValue(formModeState);
+  const [formMode] = useState<FormMode>('phoneNumber');
 
   return (
     <OnBoardingForm
