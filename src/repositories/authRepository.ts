@@ -2,7 +2,10 @@ import firebase from 'firebase';
 import { createContext } from 'react';
 
 import { Auth } from '../entities/auth';
-import { AuthInterface } from '../interfaces/authInterface';
+import {
+  AuthInterface,
+  ReAuthenticationResult,
+} from '../interfaces/authInterface';
 
 export class AuthRepository implements AuthInterface {
   async googleSignIn(): Promise<void> {
@@ -13,6 +16,25 @@ export class AuthRepository implements AuthInterface {
   async authResult(): Promise<boolean> {
     const credential = await firebase.auth().getRedirectResult();
     return credential.user != null;
+  }
+
+  async reAuthenticateWithGoogle(): Promise<void> {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const user = firebase.auth().currentUser;
+    await user!.reauthenticateWithRedirect(provider);
+  }
+
+  async reAuthenticationResult(): Promise<ReAuthenticationResult> {
+    let credential: firebase.auth.UserCredential;
+    try {
+      credential = await firebase.auth().getRedirectResult();
+    } catch (e) {
+      if (e.code === 'auth/multi-factor-auth-required') {
+        return 'requireMfa';
+      }
+    }
+
+    return credential!.user == null ? 'unAuthenticated' : 'reAuthenticated';
   }
 
   authObserver(callback: (auth: Auth | null) => void): () => void {

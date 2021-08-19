@@ -16,6 +16,25 @@ export function useAuthResult(
   return authRepository.authResult;
 }
 
+export function useReAuthenticateWithGoogle(
+  authRepository: AuthInterface
+): () => Promise<void> {
+  return authRepository.reAuthenticateWithGoogle;
+}
+
+export function useHandleReAuthenticationResult(
+  authRepository: AuthInterface
+): void {
+  const reAuthenticationResult = authRepository.reAuthenticationResult;
+  useEffect(() => {
+    const handleReAuthenticationResult = async () => {
+      const result = await reAuthenticationResult();
+      console.log(result);
+    };
+    handleReAuthenticationResult();
+  }, []);
+}
+
 export function useAuthObserver(authRepository: AuthInterface): boolean {
   const [initialized, setInitialized] = useState(false);
 
