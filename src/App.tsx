@@ -7,6 +7,7 @@ import { AuthRepositoryContext } from './repositories/authRepository';
 import { AuthenticationScreen } from './screens/AuthenticationScreen';
 import { LoadingScreen } from './screens/LoadingScreen';
 import { PhoneNumberEnrollmentScreen } from './screens/PhoneNumberEnrollmentScreen';
+import { SignOutScreen } from './screens/SignOutScreen';
 import { SignUpScreen } from './screens/SignUpScreen';
 
 export const App: React.VFC = () => {
@@ -21,6 +22,9 @@ export const App: React.VFC = () => {
         </Route>
         <PrivateRoute path="/phone_number_enrollment">
           <PhoneNumberEnrollmentScreen />
+        </PrivateRoute>
+        <PrivateRoute path="/sign_out">
+          <SignOutScreen />
         </PrivateRoute>
         <PrivateRoute path="/">
           <SignUpScreen />
