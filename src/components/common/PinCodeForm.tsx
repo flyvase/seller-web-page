@@ -3,6 +3,10 @@ import { useFormik } from 'formik';
 import React from 'react';
 import { object, string } from 'yup';
 
+type PinCodeFormProps = {
+  onSubmit: (pinCode: string) => void;
+};
+
 const useStyles = makeStyles(() => ({
   pinCodeInput: {
     paddingBottom: '24px',
@@ -15,7 +19,9 @@ const validationSchema = object({
     .required('必ず入力してください'),
 });
 
-export const PinCodeForm: React.VFC = () => {
+export const PinCodeForm: React.VFC<PinCodeFormProps> = (
+  props: PinCodeFormProps
+) => {
   const classes = useStyles();
 
   const formController = useFormik({
@@ -24,7 +30,7 @@ export const PinCodeForm: React.VFC = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      props.onSubmit(values.pinCodeInput);
     },
   });
 
