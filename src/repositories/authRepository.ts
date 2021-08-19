@@ -31,6 +31,10 @@ export class AuthRepository implements AuthInterface {
     } catch (e) {
       if (e.code === 'auth/multi-factor-auth-required') {
         return 'requireMfa';
+      } else {
+        throw new Error(
+          `Caught unexpected error on re authentication. Error: ${e}`
+        );
       }
     }
 
