@@ -25,6 +25,10 @@ export class AuthRepository implements AuthInterface {
     });
     return () => cancel();
   }
+
+  signOut(): Promise<void> {
+    return firebase.auth().signOut();
+  }
 }
 
 export const AuthRepositoryContext = createContext<AuthRepository>(
