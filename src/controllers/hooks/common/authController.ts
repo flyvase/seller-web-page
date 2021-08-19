@@ -24,15 +24,18 @@ export function useReAuthenticateWithGoogle(
 
 export function useHandleReAuthenticationResult(
   authRepository: AuthInterface
-): void {
-  const reAuthenticationResult = authRepository.reAuthenticationResult;
+): boolean {
+  const reAuthenticationResult = authRepository.authResult;
+  const [authenticated, setAuthenticated] = useState(false);
   useEffect(() => {
     const handleReAuthenticationResult = async () => {
       const result = await reAuthenticationResult();
-      console.log(result);
+      setAuthenticated(result);
     };
     handleReAuthenticationResult();
   }, []);
+
+  return authenticated;
 }
 
 export function useAuthObserver(authRepository: AuthInterface): boolean {
