@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-import { OnBoardingForm } from '../components/common/OnBoardingForm';
+import { LogoForm } from '../components/common/LogoForm';
 import { PhoneNumberForm } from '../components/phone_verification_screen/PhoneNumberForm';
 import { PinCodeForm } from '../components/common/PinCodeForm';
 
@@ -12,7 +12,7 @@ export const PhoneVerificationScreen: React.VFC = () => {
   const [formMode] = useState<FormMode>('phoneNumber');
 
   return (
-    <OnBoardingForm
+    <LogoForm
       title={
         formMode === 'phoneNumber'
           ? '電話番号を入力してください'
@@ -32,6 +32,6 @@ export const PhoneVerificationScreen: React.VFC = () => {
           }}
         />
       )}
-    </OnBoardingForm>
+    </LogoForm>
   );
 };

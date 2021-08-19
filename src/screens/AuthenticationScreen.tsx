@@ -7,7 +7,7 @@ import {
   useGoogleSignIn,
 } from '../controllers/hooks/common/authController';
 import { AuthRepositoryContext } from '../repositories/authRepository';
-import { OnBoardingForm } from '../components/common/OnBoardingForm';
+import { LogoForm } from '../components/common/LogoForm';
 
 export const AuthenticationScreen: React.VFC = () => {
   const authRepository = useContext(AuthRepositoryContext);
@@ -27,13 +27,13 @@ export const AuthenticationScreen: React.VFC = () => {
   }, []);
 
   return (
-    <OnBoardingForm title="サインイン、サインアップ">
+    <LogoForm title="サインイン、サインアップ">
       <GoogleSignInButton
         fullWidth
         onClick={async () => {
           await googleSignIn();
         }}
       />
-    </OnBoardingForm>
+    </LogoForm>
   );
 };
