@@ -1,10 +1,13 @@
-import { Button, makeStyles, TextField } from '@material-ui/core';
+import { makeStyles, TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
 import React from 'react';
 import { object, string } from 'yup';
 
+import { LoadingButton } from './LoadingButton';
+
 type PinCodeFormProps = {
   onSubmit: (pinCode: string) => void;
+  loading: boolean;
 };
 
 const useStyles = makeStyles(() => ({
@@ -56,7 +59,8 @@ export const PinCodeForm: React.VFC<PinCodeFormProps> = (
           formController.errors.pinCodeInput
         }
       />
-      <Button
+      <LoadingButton
+        loading={props.loading}
         type="submit"
         variant="contained"
         disableElevation
@@ -64,7 +68,7 @@ export const PinCodeForm: React.VFC<PinCodeFormProps> = (
         color="primary"
       >
         次へ
-      </Button>
+      </LoadingButton>
     </form>
   );
 };

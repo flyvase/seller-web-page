@@ -18,3 +18,14 @@ export class InvalidArgumentError implements Error {
     this.stack = stack;
   }
 }
+
+export class RequiresRecentLoginError implements Error {
+  name: string;
+  message: string;
+  stack?: string;
+
+  constructor(operation: string) {
+    this.name = new.target.name;
+    this.message = `Re authentication is required for ${operation}`;
+  }
+}

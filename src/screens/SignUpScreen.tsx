@@ -3,7 +3,7 @@ import { Button, makeStyles, TextField } from '@material-ui/core';
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
 
-import { OnBoardingForm } from '../components/common/OnBoardingForm';
+import { LogoForm } from '../components/common/LogoForm';
 
 const useStyles = makeStyles(() => ({
   firstNameInput: {
@@ -38,7 +38,7 @@ export const SignUpScreen: React.VFC = () => {
   });
 
   return (
-    <OnBoardingForm title="アカウント作成">
+    <LogoForm title="アカウント作成">
       <form onSubmit={formController.handleSubmit}>
         <TextField
           className={classes.firstNameInput}
@@ -84,6 +84,6 @@ export const SignUpScreen: React.VFC = () => {
           次へ
         </Button>
       </form>
-    </OnBoardingForm>
+    </LogoForm>
   );
 };

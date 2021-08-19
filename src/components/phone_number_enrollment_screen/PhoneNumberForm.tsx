@@ -4,6 +4,7 @@ import React from 'react';
 import { object, string } from 'yup';
 
 import { japan } from '../../config/country';
+import { reCaptchaContainerId } from '../../interfaces/authInterface';
 import { CountryPicker } from '../common/CountryPicker';
 
 const useStyles = makeStyles(() => ({
@@ -90,6 +91,7 @@ export const PhoneNumberForm: React.VFC<PhoneNumberFormProps> = (
         fullWidth
         disableElevation
         type="submit"
+        id={reCaptchaContainerId}
       >
         次へ
       </Button>

@@ -25,14 +25,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-type OnBoardingFormProps = {
+type LogoFormProps = {
   children: ReactNode;
   title: string;
 };
 
-export const OnBoardingForm: React.VFC<OnBoardingFormProps> = (
-  props: OnBoardingFormProps
-) => {
+export const LogoForm: React.VFC<LogoFormProps> = (props: LogoFormProps) => {
   const classes = useStyles();
 
   return (
