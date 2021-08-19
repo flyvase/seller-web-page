@@ -24,7 +24,7 @@ export class AuthRepository implements AuthInterface {
     await user!.reauthenticateWithRedirect(provider);
   }
 
-  async enrollPhoneNumber(phoneNumber: string): Promise<string> {
+  async requestSmsWithNewPhoneNumber(phoneNumber: string): Promise<string> {
     const verifier = new firebase.auth.RecaptchaVerifier(reCaptchaContainerId, {
       size: 'invisible',
     });

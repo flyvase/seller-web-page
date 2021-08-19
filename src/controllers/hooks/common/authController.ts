@@ -38,10 +38,10 @@ export function useHandleReAuthenticationResult(
   return authenticated;
 }
 
-export function useEnrollPhoneNumber(
+export function useRequestSmsWithNewPhoneNumber(
   authRepository: AuthInterface
 ): (phoneNumber: string) => Promise<string> {
-  return authRepository.enrollPhoneNumber;
+  return authRepository.requestSmsWithNewPhoneNumber;
 }
 
 export function useAuthObserver(authRepository: AuthInterface): boolean {
