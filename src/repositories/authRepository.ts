@@ -38,6 +38,17 @@ export class AuthRepository implements AuthInterface {
     return provider.verifyPhoneNumber(options, verifier);
   }
 
+  enrollPhoneNumber(verificationId: string, pinCode: string): Promise<void> {
+    const credential = firebase.auth.PhoneAuthProvider.credential(
+      verificationId,
+      pinCode
+    );
+    const assertion =
+      firebase.auth.PhoneMultiFactorGenerator.assertion(credential);
+    const user = firebase.auth().currentUser;
+    return user!.multiFactor.enroll(assertion);
+  }
+
   authObserver(callback: (auth: Auth | null) => void): () => void {
     const cancel = firebase.auth().onAuthStateChanged((user) => {
       if (user == null) {

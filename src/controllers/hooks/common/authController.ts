@@ -44,6 +44,12 @@ export function useRequestSmsWithNewPhoneNumber(
   return authRepository.requestSmsWithNewPhoneNumber;
 }
 
+export function useEnrollPhoneNumber(
+  authRepository: AuthInterface
+): (verificationId: string, pinCode: string) => Promise<void> {
+  return authRepository.enrollPhoneNumber;
+}
+
 export function useAuthObserver(authRepository: AuthInterface): boolean {
   const [initialized, setInitialized] = useState(false);
 

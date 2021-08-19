@@ -1,6 +1,11 @@
 import React, { useState, useContext, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useToggle } from 'react-use';
 
-import { useRequestSmsWithNewPhoneNumber } from '../../controllers/hooks/common/authController';
+import {
+  useEnrollPhoneNumber,
+  useRequestSmsWithNewPhoneNumber,
+} from '../../controllers/hooks/common/authController';
 import { AuthRepositoryContext } from '../../repositories/authRepository';
 import { LogoForm } from '../common/LogoForm';
 import { PinCodeForm } from '../common/PinCodeForm';
@@ -12,9 +17,13 @@ export const PhoneNumberEnrollmentForm: React.VFC = () => {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [inputMode, setInputMode] = useState<InputMode>('phoneNumber');
   const verificationIdRef = useRef<string>(null!);
+  const [loading, toggle] = useToggle(false);
 
   const authRepository = useContext(AuthRepositoryContext);
   const requestSms = useRequestSmsWithNewPhoneNumber(authRepository);
+  const enrollPhoneNumber = useEnrollPhoneNumber(authRepository);
+
+  const history = useHistory();
 
   return (
     <LogoForm
@@ -35,9 +44,13 @@ export const PhoneNumberEnrollmentForm: React.VFC = () => {
         />
       ) : (
         <PinCodeForm
-          onSubmit={(pinCode) => {
-            console.log(pinCode);
+          onSubmit={async (pinCode) => {
+            toggle(true);
+            await enrollPhoneNumber(verificationIdRef.current, pinCode);
+            toggle(false);
+            history.push('/');
           }}
+          loading={loading}
         />
       )}
     </LogoForm>
