@@ -38,6 +38,12 @@ export function useHandleReAuthenticationResult(
   return authenticated;
 }
 
+export function useEnrollPhoneNumber(
+  authRepository: AuthInterface
+): (phoneNumber: string) => Promise<string> {
+  return authRepository.enrollPhoneNumber;
+}
+
 export function useAuthObserver(authRepository: AuthInterface): boolean {
   const [initialized, setInitialized] = useState(false);
 
