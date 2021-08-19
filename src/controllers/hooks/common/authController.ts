@@ -32,3 +32,7 @@ export function useAuthObserver(authRepository: AuthInterface): boolean {
 
   return initialized;
 }
+
+export function useSignOut(authRepository: AuthInterface): () => Promise<void> {
+  return authRepository.signOut;
+}
