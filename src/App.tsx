@@ -6,6 +6,7 @@ import { useAuthObserver } from './controllers/hooks/common/authController';
 import { AuthRepositoryContext } from './repositories/authRepository';
 import { AuthenticationScreen } from './screens/AuthenticationScreen';
 import { LoadingScreen } from './screens/LoadingScreen';
+import { PhoneNumberEnrollmentScreen } from './screens/PhoneNumberEnrollmentScreen';
 import { PhoneVerificationScreen } from './screens/PhoneVerificationScreen';
 import { SignUpScreen } from './screens/SignUpScreen';
 
@@ -21,6 +22,9 @@ export const App: React.VFC = () => {
         </Route>
         <PrivateRoute path="/phone_verification">
           <PhoneVerificationScreen />
+        </PrivateRoute>
+        <PrivateRoute path="/phone_number_enrollment">
+          <PhoneNumberEnrollmentScreen />
         </PrivateRoute>
         <PrivateRoute path="/">
           <SignUpScreen />
