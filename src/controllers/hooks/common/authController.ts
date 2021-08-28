@@ -16,40 +16,6 @@ export function useAuthResult(
   return authRepository.authResult;
 }
 
-export function useReAuthenticateWithGoogle(
-  authRepository: AuthInterface
-): () => Promise<void> {
-  return authRepository.reAuthenticateWithGoogle;
-}
-
-export function useHandleReAuthenticationResult(
-  authRepository: AuthInterface
-): boolean {
-  const reAuthenticationResult = authRepository.authResult;
-  const [authenticated, setAuthenticated] = useState(false);
-  useEffect(() => {
-    const handleReAuthenticationResult = async () => {
-      const result = await reAuthenticationResult();
-      setAuthenticated(result);
-    };
-    handleReAuthenticationResult();
-  }, []);
-
-  return authenticated;
-}
-
-export function useRequestSmsWithNewPhoneNumber(
-  authRepository: AuthInterface
-): (phoneNumber: string) => Promise<string> {
-  return authRepository.requestSmsWithNewPhoneNumber;
-}
-
-export function useEnrollPhoneNumber(
-  authRepository: AuthInterface
-): (verificationId: string, pinCode: string) => Promise<void> {
-  return authRepository.enrollPhoneNumber;
-}
-
 export function useAuthObserver(authRepository: AuthInterface): boolean {
   const [initialized, setInitialized] = useState(false);
 
