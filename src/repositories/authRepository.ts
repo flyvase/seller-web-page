@@ -2,10 +2,7 @@ import firebase from 'firebase';
 import { createContext } from 'react';
 
 import { Auth } from '../entities/auth';
-import {
-  AuthInterface,
-  reCaptchaContainerId,
-} from '../interfaces/authInterface';
+import { AuthInterface } from '../interfaces/authInterface';
 
 export class AuthRepository implements AuthInterface {
   async googleSignIn(): Promise<void> {
@@ -16,37 +13,6 @@ export class AuthRepository implements AuthInterface {
   async authResult(): Promise<boolean> {
     const credential = await firebase.auth().getRedirectResult();
     return credential.user != null;
-  }
-
-  async reAuthenticateWithGoogle(): Promise<void> {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    const user = firebase.auth().currentUser;
-    await user!.reauthenticateWithRedirect(provider);
-  }
-
-  async requestSmsWithNewPhoneNumber(phoneNumber: string): Promise<string> {
-    const verifier = new firebase.auth.RecaptchaVerifier(reCaptchaContainerId, {
-      size: 'invisible',
-    });
-    const user = firebase.auth().currentUser;
-    const session = await user!.multiFactor.getSession();
-    const options = {
-      phoneNumber,
-      session,
-    };
-    const provider = new firebase.auth.PhoneAuthProvider();
-    return provider.verifyPhoneNumber(options, verifier);
-  }
-
-  enrollPhoneNumber(verificationId: string, pinCode: string): Promise<void> {
-    const credential = firebase.auth.PhoneAuthProvider.credential(
-      verificationId,
-      pinCode
-    );
-    const assertion =
-      firebase.auth.PhoneMultiFactorGenerator.assertion(credential);
-    const user = firebase.auth().currentUser;
-    return user!.multiFactor.enroll(assertion);
   }
 
   authObserver(callback: (auth: Auth | null) => void): () => void {
