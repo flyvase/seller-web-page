@@ -1,7 +1,7 @@
 import { Button, ButtonProps, makeStyles } from '@material-ui/core';
 import React from 'react';
 
-import googleLogo from '../../assets/logos/google_logo.svg';
+import googleLogo from '../../../assets/logos/google_logo.svg';
 
 const useStyles = makeStyles(() => ({
   button: {

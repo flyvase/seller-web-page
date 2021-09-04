@@ -1,7 +1,7 @@
 import { Box, makeStyles, Typography } from '@material-ui/core';
 import React, { ReactNode } from 'react';
 
-import horizontalLogo from '../../assets/logos/horizontal.svg';
+import horizontalLogo from '../../../assets/logos/horizontal.svg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
