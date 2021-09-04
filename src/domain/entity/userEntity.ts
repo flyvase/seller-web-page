@@ -20,14 +20,14 @@ export class UserEntity {
       throw new InvalidArgumentError(
         '"firstName" must be shorter than 100 characters',
         'firstName',
-        'User'
+        'UserEntity'
       );
     }
     if (lastName.length >= 100) {
       throw new InvalidArgumentError(
         '"lastName" must be shorter than 100 characters',
         'lastName',
-        'User'
+        'UserEntity'
       );
     }
 
