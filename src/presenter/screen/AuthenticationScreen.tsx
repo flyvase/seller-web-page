@@ -6,11 +6,11 @@ import {
   useAuthResult,
   useGoogleSignIn,
 } from '../../controller/common/authController';
-import { AuthRepositoryContext } from '../../infrastructure/repository/authRepositoryImpl';
 import { LogoForm } from '../component/common/LogoForm';
+import { authRepositoryContext } from '../../domain/repository/authRepository';
 
 export const AuthenticationScreen: React.VFC = () => {
-  const authRepository = useContext(AuthRepositoryContext);
+  const authRepository = useContext(authRepositoryContext);
   const googleSignIn = useGoogleSignIn(authRepository);
   const authResult = useAuthResult(authRepository);
 

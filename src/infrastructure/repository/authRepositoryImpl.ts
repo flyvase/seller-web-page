@@ -31,7 +31,3 @@ export class AuthRepositoryImpl implements AuthRepository {
     return firebase.auth().signOut();
   }
 }
-
-export const AuthRepositoryContext = createContext<AuthRepository>(
-  new AuthRepositoryImpl()
-);
