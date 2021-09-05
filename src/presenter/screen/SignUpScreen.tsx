@@ -1,9 +1,12 @@
-import React from 'react';
-import { Button, makeStyles, TextField } from '@material-ui/core';
+import React, { useContext } from 'react';
+import { makeStyles, TextField } from '@material-ui/core';
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
 
 import { LogoForm } from '../component/common/LogoForm';
+import { userRepositoryContext } from '../../domain/repository/userRepository';
+import { useCreateUser } from '../../controller/common/userController';
+import { LoadingButton } from '../component/common/LoadingButton';
 
 const useStyles = makeStyles(() => ({
   firstNameInput: {
@@ -26,6 +29,9 @@ const validationSchema = object({
 export const SignUpScreen: React.VFC = () => {
   const classes = useStyles();
 
+  const userRepository = useContext(userRepositoryContext);
+  const [loading, createUser] = useCreateUser(userRepository);
+
   const formController = useFormik({
     initialValues: {
       firstNameInput: '',
@@ -33,7 +39,7 @@ export const SignUpScreen: React.VFC = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      createUser(values.firstNameInput, values.lastNameInput);
     },
   });
 
@@ -74,7 +80,8 @@ export const SignUpScreen: React.VFC = () => {
           }
         />
 
-        <Button
+        <LoadingButton
+          loading={loading}
           variant="contained"
           color="primary"
           fullWidth
@@ -82,7 +89,7 @@ export const SignUpScreen: React.VFC = () => {
           type="submit"
         >
           次へ
-        </Button>
+        </LoadingButton>
       </form>
     </LogoForm>
   );
