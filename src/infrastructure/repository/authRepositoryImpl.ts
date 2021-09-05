@@ -16,18 +16,15 @@ export class AuthRepositoryImpl implements AuthRepository {
   }
 
   authObserver(callback: (auth: AuthEntity | null) => void): () => void {
-    const cancel = firebase.auth().onAuthStateChanged((user) => {
+    const cancel = firebase.auth().onAuthStateChanged(async (user) => {
       if (user == null) {
         callback(null);
       } else {
-        callback(new AuthEntity(user.uid));
+        const token = await user.getIdToken();
+        callback(new AuthEntity(user.uid, token));
       }
     });
     return () => cancel();
-  }
-
-  getIdToken(): Promise<string> {
-    return firebase.auth().currentUser!.getIdToken();
   }
 
   signOut(): Promise<void> {
