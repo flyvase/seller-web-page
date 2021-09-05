@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import { createContext } from 'react';
 
 import { AuthEntity } from '../../domain/entity/authEntity';
 import { AuthRepository } from '../../domain/repository/authRepository';
