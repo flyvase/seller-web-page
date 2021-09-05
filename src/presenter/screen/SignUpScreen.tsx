@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { makeStyles, TextField } from '@material-ui/core';
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
+import { useHistory } from 'react-router-dom';
 
 import { LogoForm } from '../component/common/LogoForm';
 import { userRepositoryContext } from '../../domain/repository/userRepository';
@@ -32,14 +33,17 @@ export const SignUpScreen: React.VFC = () => {
   const userRepository = useContext(userRepositoryContext);
   const [loading, createUser] = useCreateUser(userRepository);
 
+  const history = useHistory();
+
   const formController = useFormik({
     initialValues: {
       firstNameInput: '',
       lastNameInput: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      createUser(values.firstNameInput, values.lastNameInput);
+    onSubmit: async (values) => {
+      await createUser(values.firstNameInput, values.lastNameInput);
+      history.push('/post_sign_up');
     },
   });
 
