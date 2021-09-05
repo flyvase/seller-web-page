@@ -1,7 +1,7 @@
 import { InvalidArgumentError } from '../../core/error/commonErrors';
 
 export class AuthEntity {
-  uid: string;
+  readonly uid: string;
 
   constructor(uid: string) {
     if (uid.length >= 255) {
