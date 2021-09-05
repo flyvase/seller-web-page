@@ -26,6 +26,10 @@ export class AuthRepositoryImpl implements AuthRepository {
     return () => cancel();
   }
 
+  getIdToken(): Promise<string> {
+    return firebase.auth().currentUser!.getIdToken();
+  }
+
   signOut(): Promise<void> {
     return firebase.auth().signOut();
   }
