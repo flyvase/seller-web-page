@@ -2,21 +2,27 @@ import { ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 
-import {
-  AuthRepositoryContext,
-  AuthRepositoryImpl,
-} from './infrastructure/repository/authRepositoryImpl';
+import { authRepositoryContext } from './domain/repository/authRepository';
+import { userRepositoryContext } from './domain/repository/userRepository';
+import { AuthRepositoryImpl } from './infrastructure/repository/authRepositoryImpl';
+import { UserRepositoryImpl } from './infrastructure/repository/userRepositoryImpl';
+import { WebClientImpl } from './infrastructure/repository/webClientImpl';
 import { App } from './presenter/App';
 import { theme } from './theme';
 
 export const Provider: React.VFC = () => {
   const authRepositoryImpl = new AuthRepositoryImpl();
+  const webClientImpl = new WebClientImpl();
+  const userRepositoryImpl = new UserRepositoryImpl(webClientImpl);
+
   return (
     <RecoilRoot>
       <ThemeProvider theme={theme}>
-        <AuthRepositoryContext.Provider value={authRepositoryImpl}>
-          <App />
-        </AuthRepositoryContext.Provider>
+        <authRepositoryContext.Provider value={authRepositoryImpl}>
+          <userRepositoryContext.Provider value={userRepositoryImpl}>
+            <App />
+          </userRepositoryContext.Provider>
+        </authRepositoryContext.Provider>
       </ThemeProvider>
     </RecoilRoot>
   );

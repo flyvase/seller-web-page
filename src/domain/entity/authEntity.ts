@@ -1,9 +1,10 @@
 import { InvalidArgumentError } from '../../core/error/commonErrors';
 
 export class AuthEntity {
-  uid: string;
+  readonly uid: string;
+  readonly token: string;
 
-  constructor(uid: string) {
+  constructor(uid: string, token: string) {
     if (uid.length >= 255) {
       throw new InvalidArgumentError(
         '"uid" must be shorter than 255 characters',
@@ -13,5 +14,6 @@ export class AuthEntity {
     }
 
     this.uid = uid;
+    this.token = token;
   }
 }

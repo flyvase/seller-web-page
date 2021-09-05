@@ -1,12 +1,12 @@
 import { InvalidArgumentError } from '../../core/error/commonErrors';
 
 export class UserEntity {
-  id?: string;
-  firstName: string;
-  lastName: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  deletedAt?: Date;
+  readonly id?: string;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly createdAt?: Date;
+  readonly updatedAt?: Date;
+  readonly deletedAt?: Date;
 
   constructor(
     firstName: string,

@@ -3,14 +3,15 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { PrivateRoute } from './component/common/PrivateRoute';
 import { useAuthObserver } from '../controller/common/authController';
-import { AuthRepositoryContext } from '../infrastructure/repository/authRepositoryImpl';
 import { AuthenticationScreen } from './screen/AuthenticationScreen';
 import { LoadingScreen } from './screen/LoadingScreen';
 import { SignOutScreen } from './screen/SignOutScreen';
 import { SignUpScreen } from './screen/SignUpScreen';
+import { authRepositoryContext } from '../domain/repository/authRepository';
+import { PostSignUpScreen } from './screen/PostSignUpScreen';
 
 export const App: React.VFC = () => {
-  const authRepository = useContext(AuthRepositoryContext);
+  const authRepository = useContext(authRepositoryContext);
   const initialized = useAuthObserver(authRepository);
 
   return initialized ? (
@@ -21,6 +22,9 @@ export const App: React.VFC = () => {
         </Route>
         <PrivateRoute path="/sign_out">
           <SignOutScreen />
+        </PrivateRoute>
+        <PrivateRoute path="/post_sign_up">
+          <PostSignUpScreen />
         </PrivateRoute>
         <PrivateRoute path="/">
           <SignUpScreen />

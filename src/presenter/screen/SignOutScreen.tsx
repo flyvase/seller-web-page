@@ -4,10 +4,10 @@ import { useContext } from 'react';
 
 import { LogoForm } from '../component/common/LogoForm';
 import { useSignOut } from '../../controller/common/authController';
-import { AuthRepositoryContext } from '../../infrastructure/repository/authRepositoryImpl';
+import { authRepositoryContext } from '../../domain/repository/authRepository';
 
 export const SignOutScreen: React.VFC = () => {
-  const authRepository = useContext(AuthRepositoryContext);
+  const authRepository = useContext(authRepositoryContext);
   const signOut = useSignOut(authRepository);
 
   return (

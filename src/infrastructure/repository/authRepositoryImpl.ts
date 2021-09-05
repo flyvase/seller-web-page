@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import { createContext } from 'react';
 
 import { AuthEntity } from '../../domain/entity/authEntity';
 import { AuthRepository } from '../../domain/repository/authRepository';
@@ -16,11 +15,12 @@ export class AuthRepositoryImpl implements AuthRepository {
   }
 
   authObserver(callback: (auth: AuthEntity | null) => void): () => void {
-    const cancel = firebase.auth().onAuthStateChanged((user) => {
+    const cancel = firebase.auth().onAuthStateChanged(async (user) => {
       if (user == null) {
         callback(null);
       } else {
-        callback(new AuthEntity(user.uid));
+        const token = await user.getIdToken();
+        callback(new AuthEntity(user.uid, token));
       }
     });
     return () => cancel();
@@ -30,7 +30,3 @@ export class AuthRepositoryImpl implements AuthRepository {
     return firebase.auth().signOut();
   }
 }
-
-export const AuthRepositoryContext = createContext<AuthRepository>(
-  new AuthRepositoryImpl()
-);
