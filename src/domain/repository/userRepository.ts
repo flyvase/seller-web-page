@@ -1,3 +1,5 @@
+import { createContext } from 'react';
+
 export interface UserRepository {
   create(
     uid: string,
@@ -6,3 +8,5 @@ export interface UserRepository {
     authToken: string
   ): Promise<void>;
 }
+
+export const userRepositoryContext = createContext({} as UserRepository);
