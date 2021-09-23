@@ -17,14 +17,21 @@ export const PrivateRoute: React.VFC<RouteProps & PrivateRouteProps> = ({
   return (
     <Route
       {...rest}
-      render={({ location }) =>
-        auth == null ? (
-          <Redirect
-            to={{ pathname: 'authentication', state: { from: location } }}
-          />
-        ) : (
-          children
-        )
+      render={({ location }) => {
+          if (auth == null) return (
+            <Redirect
+              to={{ pathname: 'authentication', state: { from: location } }}
+            />
+          )
+          else if (auth.id == null) return (
+            <Redirect
+              to={{ pathname: 'sign_up', state: { from: location } }}
+            />
+          )
+          else return (
+            children
+          )
+        }
       }
     />
   );
