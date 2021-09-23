@@ -23,11 +23,11 @@ export const App: React.VFC = () => {
         <PrivateRoute path="/sign_out">
           <SignOutScreen />
         </PrivateRoute>
-        <PrivateRoute path="/post_sign_up">
-          <PostSignUpScreen />
+        <PrivateRoute path="/sign_up">
+          <SignUpScreen />
         </PrivateRoute>
         <PrivateRoute path="/">
-          <SignUpScreen />
+          <PostSignUpScreen />
         </PrivateRoute>
       </Switch>
     </BrowserRouter>
