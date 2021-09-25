@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import { PrivateRoute } from './component/common/PrivateRoute';
-import { ProtectedRoute } from './component/common/ProtectedRoute';
+import { GuardedRoute } from './component/common/GuardedRoute';
 import { useAuthObserver } from '../controller/common/authController';
 import { AuthenticationScreen } from './screen/AuthenticationScreen';
 import { LoadingScreen } from './screen/LoadingScreen';
@@ -21,15 +20,15 @@ export const App: React.VFC = () => {
         <Route path="/authentication">
           <AuthenticationScreen />
         </Route>
-        <ProtectedRoute path="/sign_out">
+        <GuardedRoute path="/sign_out" requireAuth={true}>
           <SignOutScreen />
-        </ProtectedRoute>
-        <ProtectedRoute path="/sign_up">
+        </GuardedRoute>
+        <GuardedRoute path="/sign_up" requireAuth={true}>
           <SignUpScreen />
-        </ProtectedRoute>
-        <PrivateRoute path="/">
+        </GuardedRoute>
+        <GuardedRoute path="/" requireAuth={true} requireSignUp={true}>
           <PostSignUpScreen />
-        </PrivateRoute>
+        </GuardedRoute>
       </Switch>
     </BrowserRouter>
   ) : (

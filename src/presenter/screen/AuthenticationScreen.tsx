@@ -20,7 +20,7 @@ export const AuthenticationScreen: React.VFC = () => {
     const navigate = async () => {
       const signedIn = await authResult();
       if (signedIn) {
-        history.push('/sign_up');
+        history.push('/');
       }
     };
     navigate();
