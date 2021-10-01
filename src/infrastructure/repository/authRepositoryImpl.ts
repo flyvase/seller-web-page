@@ -20,7 +20,8 @@ export class AuthRepositoryImpl implements AuthRepository {
         callback(null);
       } else {
         const token = await user.getIdToken();
-        callback(new AuthEntity(user.uid, token));
+        const claims = (await user.getIdTokenResult()).claims;
+        callback(new AuthEntity(user.uid, token, claims?.id));
       }
     });
     return () => cancel();

@@ -43,7 +43,7 @@ export const SignUpScreen: React.VFC = () => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       await createUser(values.firstNameInput, values.lastNameInput);
-      history.push('/post_sign_up');
+      history.push('/');
     },
   });
 
