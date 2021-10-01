@@ -20,13 +20,13 @@ export const App: React.VFC = () => {
         <Route path="/authentication">
           <AuthenticationScreen />
         </Route>
-        <GuardedRoute path="/sign_out" requireAuth={true}>
+        <GuardedRoute path="/sign_out" requireAuth>
           <SignOutScreen />
         </GuardedRoute>
-        <GuardedRoute path="/sign_up" requireAuth={true}>
+        <GuardedRoute path="/sign_up" requireAuth>
           <SignUpScreen />
         </GuardedRoute>
-        <GuardedRoute path="/" requireAuth={true} requireSignUp={true}>
+        <GuardedRoute path="/" requireAuth requireSignUp>
           <PostSignUpScreen />
         </GuardedRoute>
       </Switch>

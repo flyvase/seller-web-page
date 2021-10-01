@@ -2,7 +2,7 @@ import { InvalidArgumentError } from '../../core/error/commonErrors';
 
 export class AuthEntity {
   readonly uid: string;
-  readonly id?: string
+  readonly id?: string;
   readonly token: string;
 
   constructor(uid: string, token: string, id?: string) {

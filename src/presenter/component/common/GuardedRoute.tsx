@@ -22,25 +22,24 @@ export const GuardedRoute: React.VFC<RouteProps & GuardedRouteProps> = ({
     <Route
       {...rest}
       render={({ location }) => {
-          if (requireAuth) {
-            if (auth == null) return (
+        if (requireAuth) {
+          if (auth == null)
+            return (
               <Redirect
                 to={{ pathname: 'authentication', state: { from: location } }}
               />
-            )
-          }
-          if (requireSignUp) {
-            if (auth != null && !auth.id) return (
+            );
+        }
+        if (requireSignUp) {
+          if (auth != null && !auth.id)
+            return (
               <Redirect
                 to={{ pathname: 'sign_up', state: { from: location } }}
               />
-            )
-          }
-          return (
-            children
-          )
+            );
         }
-      }
+        return children;
+      }}
     />
   );
 };
