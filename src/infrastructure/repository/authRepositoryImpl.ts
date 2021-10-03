@@ -15,7 +15,7 @@ export class AuthRepositoryImpl implements AuthRepository {
   }
 
   authObserver(callback: (auth: AuthEntity | null) => void): () => void {
-    const cancel = firebase.auth().onAuthStateChanged(async (user) => {
+    const cancel = firebase.auth().onIdTokenChanged(async (user) => {
       if (user == null) {
         callback(null);
       } else {

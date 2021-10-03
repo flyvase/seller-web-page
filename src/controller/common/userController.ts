@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import { useToggle } from 'react-use';
 import { useRecoilValue } from 'recoil';
 
@@ -16,6 +17,7 @@ export function useCreateUser(
     async (firstName: string, lastName: string) => {
       toggle(true);
       await userRepository.create(uid, firstName, lastName, token);
+      firebase.auth().currentUser?.reload();
       toggle(false);
     },
   ];
