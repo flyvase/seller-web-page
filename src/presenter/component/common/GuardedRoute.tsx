@@ -7,13 +7,11 @@ import { authState } from '../../../controller/common/authController';
 type GuardedRouteProps = {
   children: ReactNode;
   requireAuth?: boolean;
-  requireSignUp?: boolean;
 };
 
 export const GuardedRoute: React.VFC<RouteProps & GuardedRouteProps> = ({
   children,
   requireAuth = false,
-  requireSignUp = false,
   ...rest
 }: RouteProps & GuardedRouteProps) => {
   const auth = useRecoilValue(authState);
@@ -27,14 +25,6 @@ export const GuardedRoute: React.VFC<RouteProps & GuardedRouteProps> = ({
             return (
               <Redirect
                 to={{ pathname: 'authentication', state: { from: location } }}
-              />
-            );
-        }
-        if (requireSignUp) {
-          if (auth != null && !auth.id)
-            return (
-              <Redirect
-                to={{ pathname: 'sign_up', state: { from: location } }}
               />
             );
         }
