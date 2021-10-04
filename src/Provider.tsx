@@ -6,7 +6,7 @@ import { authRepositoryContext } from './domain/repository/authRepository';
 import { userRepositoryContext } from './domain/repository/userRepository';
 import { AuthRepositoryImpl } from './infrastructure/repository/authRepositoryImpl';
 import { UserRepositoryImpl } from './infrastructure/repository/userRepositoryImpl';
-import { WebClientImpl } from './infrastructure/repository/webClientImpl';
+import { WebClientImpl } from './infrastructure/web/core/webClientImpl';
 import { App } from './presenter/App';
 import { theme } from './theme';
 

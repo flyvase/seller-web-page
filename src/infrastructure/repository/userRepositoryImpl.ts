@@ -1,5 +1,5 @@
 import { UserRepository } from '../../domain/repository/userRepository';
-import { WebClient } from '../../domain/repository/webClient';
+import { WebClient } from '../web/core/webClient';
 import { UserPostRequest } from '../web/request/userRequest';
 
 export class UserRepositoryImpl implements UserRepository {

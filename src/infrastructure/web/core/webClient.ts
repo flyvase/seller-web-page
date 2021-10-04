@@ -1,4 +1,4 @@
-import { HttpMethods } from '../../core/types';
+import { HttpMethods } from '../../../core/types';
 
 export interface WebClient {
   execute<T extends WebRequest>(request: T): Promise<Response>;
