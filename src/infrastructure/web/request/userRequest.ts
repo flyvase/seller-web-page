@@ -1,4 +1,4 @@
-import { WebRequest } from '../../../domain/repository/webClient';
+import { WebRequest } from '../core/webClient';
 import { buildDefaultHeader } from './helper';
 
 export class UserPostRequest extends WebRequest {
