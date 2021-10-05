@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import React from 'react';
 import { useContext } from 'react';
 
@@ -12,7 +12,7 @@ export const SignOutScreen: React.VFC = () => {
 
   return (
     <LogoForm title="サインアウト">
-      <Button fullWidth variant="contained" color="primary" onClick={signOut}>
+      <Button fullWidth variant="contained" onClick={signOut}>
         サインアウト
       </Button>
     </LogoForm>
