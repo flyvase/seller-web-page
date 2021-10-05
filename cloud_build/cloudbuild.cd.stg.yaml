@@ -1,15 +1,19 @@
 steps:
-  - name: 'gcr.io/$PROJECT_ID/firebase/hosting:current'
-    args: ['yarn install']
+  - name: 'node:current'
+    entrypoint: 'npm'
+    args: ['install']
 
-  - name: 'gcr.io/$PROJECT_ID/firebase/hosting:current'
-    args: ['yarn lint']
+  - name: 'node:current'
+    entrypoint: 'npm'
+    args: ['run', 'lint']
 
-  - name: 'gcr.io/$PROJECT_ID/firebase/hosting:current'
-    args: ['yarn test']
+  - name: 'node:current'
+    entrypoint: 'npm'
+    args: ['run', 'test']
 
-  - name: 'gcr.io/$PROJECT_ID/firebase/hosting:current'
-    args: ['yarn build:stg']
+  - name: 'node:current'
+    entrypoint: 'npm'
+    args: ['run', 'build:stg']
 
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
     entrypoint: /bin/bash
