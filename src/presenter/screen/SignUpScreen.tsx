@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
-import { makeStyles, TextField } from '@material-ui/core';
+import { styled } from '@mui/material/styles';
+import { TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
 import { useHistory } from 'react-router-dom';
@@ -7,15 +9,13 @@ import { useHistory } from 'react-router-dom';
 import { LogoForm } from '../component/common/LogoForm';
 import { userRepositoryContext } from '../../domain/repository/userRepository';
 import { useCreateUser } from '../../controller/common/userController';
-import { LoadingButton } from '../component/common/LoadingButton';
 
-const useStyles = makeStyles(() => ({
-  firstNameInput: {
-    paddingBottom: 16,
-  },
-  lastNameInput: {
-    paddingBottom: 32,
-  },
+const FirstNameInput = styled(TextField)(() => ({
+  paddingBottom: 16,
+}));
+
+const LastNameInput = styled(TextField)(() => ({
+  paddingBottom: 32,
 }));
 
 const validationSchema = object({
@@ -28,8 +28,6 @@ const validationSchema = object({
 });
 
 export const SignUpScreen: React.VFC = () => {
-  const classes = useStyles();
-
   const userRepository = useContext(userRepositoryContext);
   const [loading, createUser] = useCreateUser(userRepository);
 
@@ -50,8 +48,7 @@ export const SignUpScreen: React.VFC = () => {
   return (
     <LogoForm title="アカウント作成">
       <form onSubmit={formController.handleSubmit}>
-        <TextField
-          className={classes.firstNameInput}
+        <FirstNameInput
           fullWidth
           label="姓 *"
           id="firstNameInput"
@@ -67,8 +64,7 @@ export const SignUpScreen: React.VFC = () => {
           }
         />
 
-        <TextField
-          className={classes.lastNameInput}
+        <LastNameInput
           fullWidth
           label="名 *"
           id="lastNameInput"
@@ -87,7 +83,6 @@ export const SignUpScreen: React.VFC = () => {
         <LoadingButton
           loading={loading}
           variant="contained"
-          color="primary"
           fullWidth
           disableElevation
           type="submit"

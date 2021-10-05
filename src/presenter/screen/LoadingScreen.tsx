@@ -1,26 +1,24 @@
-import { Box, makeStyles } from '@material-ui/core';
+import { Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import React from 'react';
 
 import verticalLogo from '../../assets/logos/vertical.svg';
 
-const useStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-  },
-  logo: {
-    width: '400px',
-  },
+const RootBox = styled(Box)(() => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100vh',
+}));
+
+const Logo = styled('img')(() => ({
+  width: '400px',
 }));
 
 export const LoadingScreen: React.VFC = () => {
-  const classes = useStyles();
-
   return (
-    <Box className={classes.root}>
-      <img src={verticalLogo} className={classes.logo} />
-    </Box>
+    <RootBox>
+      <Logo src={verticalLogo} />
+    </RootBox>
   );
 };
