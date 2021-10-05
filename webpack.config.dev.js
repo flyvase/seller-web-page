@@ -12,7 +12,9 @@ module.exports = {
     clean: true
   },
   devServer: {
-    contentBase: './dist',
+    static: {
+      directory: './dist'
+    },
     port: 3000,
     open: true,
     historyApiFallback: {
