@@ -1,21 +1,35 @@
-import firebase from 'firebase';
+import {
+  GoogleAuthProvider,
+  signInWithRedirect,
+  getRedirectResult,
+  onAuthStateChanged,
+  signOut,
+  getAuth,
+} from 'firebase/auth';
 
 import { AuthEntity } from '../../domain/entity/authEntity';
 import { AuthRepository } from '../../domain/repository/authRepository';
 
 export class AuthRepositoryImpl implements AuthRepository {
   async googleSignIn(): Promise<void> {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    await firebase.auth().signInWithRedirect(provider);
+    const authClient = getAuth();
+    const provider = new GoogleAuthProvider();
+    await signInWithRedirect(authClient, provider);
   }
 
   async authResult(): Promise<boolean> {
-    const credential = await firebase.auth().getRedirectResult();
-    return credential.user != null;
+    const authClient = getAuth();
+    const credential = await getRedirectResult(authClient);
+    if (credential == null) {
+      return false;
+    } else {
+      return credential.user != null;
+    }
   }
 
   authObserver(callback: (auth: AuthEntity | null) => void): () => void {
-    const cancel = firebase.auth().onAuthStateChanged(async (user) => {
+    const authClient = getAuth();
+    const cancel = onAuthStateChanged(authClient, async (user) => {
       if (user == null) {
         callback(null);
       } else {
@@ -27,6 +41,7 @@ export class AuthRepositoryImpl implements AuthRepository {
   }
 
   signOut(): Promise<void> {
-    return firebase.auth().signOut();
+    const authClient = getAuth();
+    return signOut(authClient);
   }
 }
