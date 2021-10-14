@@ -5,6 +5,7 @@ import {
   onAuthStateChanged,
   signOut,
   getAuth,
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
 
 import { AuthEntity } from '../../domain/entity/authEntity';
@@ -15,6 +16,17 @@ export class AuthRepositoryImpl implements AuthRepository {
     const authClient = getAuth();
     const provider = new GoogleAuthProvider();
     await signInWithRedirect(authClient, provider);
+  }
+
+  async passwordSignIn(email: string, password: string): Promise<boolean> {
+    const authClient = getAuth();
+    return await signInWithEmailAndPassword(authClient, email, password)
+      .then(() => {
+        return true;
+      })
+      .catch(() => {
+        return false;
+      });
   }
 
   async authResult(): Promise<boolean> {

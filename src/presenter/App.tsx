@@ -9,6 +9,7 @@ import { SignOutScreen } from './screen/SignOutScreen';
 import { SignUpScreen } from './screen/SignUpScreen';
 import { authRepositoryContext } from '../domain/repository/authRepository';
 import { PostSignUpScreen } from './screen/PostSignUpScreen';
+import { PasswordAuthenticationScreen } from './screen/PasswordAuthenticationScreen';
 
 export const App: React.VFC = () => {
   const authRepository = useContext(authRepositoryContext);
@@ -19,6 +20,9 @@ export const App: React.VFC = () => {
       <Switch>
         <Route path="/authentication">
           <AuthenticationScreen />
+        </Route>
+        <Route path="/password_authentication">
+          <PasswordAuthenticationScreen />
         </Route>
         <GuardedRoute path="/sign_out" requireAuth>
           <SignOutScreen />

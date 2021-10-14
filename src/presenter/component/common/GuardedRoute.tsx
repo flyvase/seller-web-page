@@ -24,7 +24,10 @@ export const GuardedRoute: React.VFC<RouteProps & GuardedRouteProps> = ({
           if (auth == null)
             return (
               <Redirect
-                to={{ pathname: 'authentication', state: { from: location } }}
+                to={{
+                  pathname: 'password_authentication',
+                  state: { from: location },
+                }}
               />
             );
         }
