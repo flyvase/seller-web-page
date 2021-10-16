@@ -18,7 +18,7 @@ export function useGoogleSignIn(
 
 export function usePasswordSignIn(
   authRepository: AuthRepository
-): (email: string, password: string) => Promise<boolean> {
+): (email: string, password: string) => Promise<string | null> {
   return authRepository.passwordSignIn;
 }
 

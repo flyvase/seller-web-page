@@ -5,7 +5,10 @@ import { TextField, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useFormik } from 'formik';
 
-import { usePasswordSignIn } from '../../controller/common/authController';
+import {
+  useAuthResult,
+  usePasswordSignIn,
+} from '../../controller/common/authController';
 import { LogoForm } from '../component/common/LogoForm';
 import { authRepositoryContext } from '../../domain/repository/authRepository';
 
@@ -29,6 +32,7 @@ const validationSchema = object({
 export const PasswordAuthenticationScreen: React.VFC = () => {
   const authRepository = useContext(authRepositoryContext);
   const passwordSignIn = usePasswordSignIn(authRepository);
+  const authResult = useAuthResult(authRepository);
 
   const history = useHistory();
 
@@ -39,12 +43,17 @@ export const PasswordAuthenticationScreen: React.VFC = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      const signedIn = await passwordSignIn(
+      const errMsg = await passwordSignIn(
         values.emailInput,
         values.passwordInput
       );
+      const signedIn = await authResult();
+      console.log(signedIn);
       if (signedIn) {
         history.push('/');
+      } else {
+        // errMsgをポップアップで表示
+        console.error(errMsg);
       }
     },
   });

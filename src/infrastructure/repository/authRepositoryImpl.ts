@@ -1,3 +1,4 @@
+import { FirebaseError } from '@firebase/util';
 import {
   GoogleAuthProvider,
   signInWithRedirect,
@@ -18,15 +19,27 @@ export class AuthRepositoryImpl implements AuthRepository {
     await signInWithRedirect(authClient, provider);
   }
 
-  async passwordSignIn(email: string, password: string): Promise<boolean> {
+  async passwordSignIn(
+    email: string,
+    password: string
+  ): Promise<string | null> {
     const authClient = getAuth();
-    return await signInWithEmailAndPassword(authClient, email, password)
-      .then(() => {
-        return true;
-      })
-      .catch(() => {
-        return false;
-      });
+    try {
+      await signInWithEmailAndPassword(authClient, email, password);
+    } catch (e) {
+      if (e instanceof FirebaseError) {
+        switch (e.code) {
+          case 'auth/user-not-found':
+            return 'ユーザーが見つかりませんでした';
+          case 'auth/invalid-email':
+            return '無効なメールアドレスです';
+          case 'auth/wrong-password':
+            return 'パスワードが間違っています';
+        }
+      }
+      return '不明なエラーが発生しました';
+    }
+    return null;
   }
 
   async authResult(): Promise<boolean> {
