@@ -25,7 +25,14 @@ export class AuthRepositoryImpl implements AuthRepository {
   ): Promise<string | null> {
     const authClient = getAuth();
     try {
-      await signInWithEmailAndPassword(authClient, email, password);
+      const credential = await signInWithEmailAndPassword(
+        authClient,
+        email,
+        password
+      );
+      if (credential.user == null) {
+        return '認証に失敗しました';
+      }
     } catch (e) {
       if (e instanceof FirebaseError) {
         switch (e.code) {
