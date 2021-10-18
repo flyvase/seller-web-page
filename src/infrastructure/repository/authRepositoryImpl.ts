@@ -9,6 +9,7 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 
+import { AuthError } from '../../core/error/authErrors';
 import { AuthEntity } from '../../domain/entity/authEntity';
 import { AuthRepository } from '../../domain/repository/authRepository';
 
@@ -22,7 +23,7 @@ export class AuthRepositoryImpl implements AuthRepository {
   async passwordSignIn(
     email: string,
     password: string
-  ): Promise<string | null> {
+  ): Promise<AuthError | null> {
     const authClient = getAuth();
     try {
       const credential = await signInWithEmailAndPassword(
@@ -31,20 +32,20 @@ export class AuthRepositoryImpl implements AuthRepository {
         password
       );
       if (credential.user == null) {
-        return '認証に失敗しました';
+        return new AuthError('authentication error');
       }
     } catch (e) {
       if (e instanceof FirebaseError) {
         switch (e.code) {
           case 'auth/user-not-found':
-            return 'ユーザーが見つかりませんでした';
+            return new AuthError('user not found', e.code);
           case 'auth/invalid-email':
-            return '無効なメールアドレスです';
+            return new AuthError('invalid email', e.code);
           case 'auth/wrong-password':
-            return 'パスワードが間違っています';
+            return new AuthError('wrong password', e.code);
         }
       }
-      return '不明なエラーが発生しました';
+      return new AuthError('unknown error');
     }
     return null;
   }

@@ -4,6 +4,7 @@ import { atom } from 'recoil';
 
 import { AuthRepository } from '../../domain/repository/authRepository';
 import { AuthEntity } from '../../domain/entity/authEntity';
+import { AuthError } from '../../core/error/authErrors';
 
 export const authState = atom<AuthEntity | null>({
   key: 'authState',
@@ -18,7 +19,7 @@ export function useGoogleSignIn(
 
 export function usePasswordSignIn(
   authRepository: AuthRepository
-): (email: string, password: string) => Promise<string | null> {
+): (email: string, password: string) => Promise<AuthError | null> {
   return authRepository.passwordSignIn;
 }
 

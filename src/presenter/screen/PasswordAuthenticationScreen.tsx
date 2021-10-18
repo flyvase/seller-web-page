@@ -39,15 +39,15 @@ export const PasswordAuthenticationScreen: React.VFC = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      const errMsg = await passwordSignIn(
+      const error = await passwordSignIn(
         values.emailInput,
         values.passwordInput
       );
-      if (errMsg == null) {
+      if (error == null) {
         history.push('/');
       } else {
         // errMsgをポップアップで表示
-        console.error(errMsg);
+        console.error(error.message);
       }
     },
   });
