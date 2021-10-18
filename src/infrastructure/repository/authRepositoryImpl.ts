@@ -9,7 +9,12 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 
-import { AuthError } from '../../core/error/authErrors';
+import {
+  InvalidEmailError,
+  UnexpectedAuthError,
+  UserNotFoundError,
+  WrongPasswordError,
+} from '../../core/error/authErrors';
 import { AuthEntity } from '../../domain/entity/authEntity';
 import { AuthRepository } from '../../domain/repository/authRepository';
 
@@ -20,10 +25,7 @@ export class AuthRepositoryImpl implements AuthRepository {
     await signInWithRedirect(authClient, provider);
   }
 
-  async passwordSignIn(
-    email: string,
-    password: string
-  ): Promise<AuthError | null> {
+  async passwordSignIn(email: string, password: string): Promise<boolean> {
     const authClient = getAuth();
     try {
       const credential = await signInWithEmailAndPassword(
@@ -32,22 +34,22 @@ export class AuthRepositoryImpl implements AuthRepository {
         password
       );
       if (credential.user == null) {
-        return new AuthError('authentication error');
+        throw new Error();
       }
     } catch (e) {
       if (e instanceof FirebaseError) {
         switch (e.code) {
           case 'auth/user-not-found':
-            return new AuthError('user not found', e.code);
+            throw new UserNotFoundError();
           case 'auth/invalid-email':
-            return new AuthError('invalid email', e.code);
+            throw new InvalidEmailError();
           case 'auth/wrong-password':
-            return new AuthError('wrong password', e.code);
+            throw new WrongPasswordError();
         }
       }
-      return new AuthError('unknown error');
+      throw new UnexpectedAuthError((e as Error).message);
     }
-    return null;
+    return true;
   }
 
   async authResult(): Promise<boolean> {
