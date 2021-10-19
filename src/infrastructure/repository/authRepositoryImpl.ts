@@ -34,7 +34,7 @@ export class AuthRepositoryImpl implements AuthRepository {
         password
       );
       if (credential.user == null) {
-        throw new Error();
+        throw new UnexpectedAuthError('unexpected error');
       }
     } catch (e) {
       if (e instanceof FirebaseError) {
@@ -45,9 +45,10 @@ export class AuthRepositoryImpl implements AuthRepository {
             throw new InvalidEmailError();
           case 'auth/wrong-password':
             throw new WrongPasswordError();
+          default:
+            throw new UnexpectedAuthError(e.message);
         }
       }
-      throw new UnexpectedAuthError((e as Error).message);
     }
     return true;
   }
