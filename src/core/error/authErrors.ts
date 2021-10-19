@@ -1,16 +1,4 @@
-export class AuthError implements Error {
-  name: string;
-  message: string;
-  stack?: string;
-
-  constructor(message: string, stack?: string) {
-    this.name = new.target.name;
-    this.message = message;
-    this.stack = stack;
-  }
-}
-
-export class UserNotFoundError implements AuthError {
+export class UserNotFoundError implements Error {
   name: string;
   stack?: string;
   message = 'user not found';
@@ -21,7 +9,7 @@ export class UserNotFoundError implements AuthError {
   }
 }
 
-export class InvalidEmailError implements AuthError {
+export class InvalidEmailError implements Error {
   name: string;
   stack?: string;
   message = 'invalid email';
@@ -32,7 +20,7 @@ export class InvalidEmailError implements AuthError {
   }
 }
 
-export class WrongPasswordError implements AuthError {
+export class WrongPasswordError implements Error {
   name: string;
   stack?: string;
   message = 'wrong password';
@@ -43,7 +31,7 @@ export class WrongPasswordError implements AuthError {
   }
 }
 
-export class UnexpectedAuthError implements AuthError {
+export class UnexpectedAuthError implements Error {
   name: string;
   message: string;
   stack?: string;
