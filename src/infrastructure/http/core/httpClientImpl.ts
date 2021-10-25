@@ -1,10 +1,10 @@
 import { serverDomain } from '../../../config/http';
-import { WebClient, WebRequest } from './webClient';
+import { HttpClient, HttpRequest, HttpResponse } from './httpClient';
 
-export class WebClientImpl implements WebClient {
-  async execute<T extends WebRequest>(request: T): Promise<Response> {
+export class HttpClientImpl implements HttpClient {
+  async execute<T extends HttpRequest>(request: T): Promise<HttpResponse> {
     const url = new URL(request.path, serverDomain);
-    return fetch(url.toString(), {
+    const res = await fetch(url.toString(), {
       method: request.options.httpMethod,
       mode: request.options.mode,
       headers:
@@ -16,5 +16,12 @@ export class WebClientImpl implements WebClient {
           ? JSON.stringify(Object.fromEntries(request.options.body))
           : undefined,
     });
+
+    const body = await res.json();
+    return new HttpResponse(
+      res.status,
+      res.statusText,
+      new Map(Object.entries(body))
+    );
   }
 }
