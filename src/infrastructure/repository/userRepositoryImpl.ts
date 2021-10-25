@@ -1,13 +1,13 @@
 import { UserRepository } from '../../domain/repository/userRepository';
-import { WebClient } from '../web/core/webClient';
-import { UserPostRequest } from '../web/request/userRequest';
+import { HttpClient } from '../http/core/httpClient';
+import { UserPostRequest } from '../http/request/userRequest';
 
 export class UserRepositoryImpl implements UserRepository {
-  constructor(client: WebClient) {
+  constructor(client: HttpClient) {
     this.client = client;
   }
 
-  client: WebClient;
+  client: HttpClient;
 
   async create(
     uid: string,

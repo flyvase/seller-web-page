@@ -1,7 +1,7 @@
-import { WebRequest } from '../core/webClient';
-import { buildDefaultHeader } from './helper';
+import { HttpRequest } from '../core/httpClient';
+import { buildPostDefaultHeader } from './helper';
 
-export class UserPostRequest extends WebRequest {
+export class UserPostRequest extends HttpRequest {
   constructor(
     uid: string,
     firstName: string,
@@ -11,7 +11,7 @@ export class UserPostRequest extends WebRequest {
     super('user/', {
       mode: 'cors',
       httpMethod: 'POST',
-      httpHeaders: buildDefaultHeader(authToken),
+      httpHeaders: buildPostDefaultHeader(authToken),
       body: new Map<string, unknown>([
         ['uid', uid],
         ['first_name', firstName],

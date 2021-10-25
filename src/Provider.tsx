@@ -6,14 +6,14 @@ import { authRepositoryContext } from './domain/repository/authRepository';
 import { userRepositoryContext } from './domain/repository/userRepository';
 import { AuthRepositoryImpl } from './infrastructure/repository/authRepositoryImpl';
 import { UserRepositoryImpl } from './infrastructure/repository/userRepositoryImpl';
-import { WebClientImpl } from './infrastructure/web/core/webClientImpl';
+import { HttpClientImpl } from './infrastructure/http/core/httpClientImpl';
 import { App } from './presenter/App';
 import { theme } from './theme';
 
 export const Provider: React.VFC = () => {
   const authRepositoryImpl = new AuthRepositoryImpl();
-  const webClientImpl = new WebClientImpl();
-  const userRepositoryImpl = new UserRepositoryImpl(webClientImpl);
+  const httpClientImpl = new HttpClientImpl();
+  const userRepositoryImpl = new UserRepositoryImpl(httpClientImpl);
 
   return (
     <RecoilRoot>
