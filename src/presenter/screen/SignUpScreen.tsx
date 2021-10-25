@@ -9,6 +9,8 @@ import { useHistory } from 'react-router-dom';
 import { LogoForm } from '../component/common/LogoForm';
 import { userRepositoryContext } from '../../domain/repository/userRepository';
 import { useCreateUser } from '../../controller/common/userController';
+import { spaceRepositoryContext } from '../../domain/repository/spaceRepository';
+import { useFetchSpaces } from '../../controller/common/spaceController';
 
 const FirstNameInput = styled(TextField)(() => ({
   paddingBottom: 16,
@@ -30,6 +32,8 @@ const validationSchema = object({
 export const SignUpScreen: React.VFC = () => {
   const userRepository = useContext(userRepositoryContext);
   const [loading, createUser] = useCreateUser(userRepository);
+  const spaceRepository = useContext(spaceRepositoryContext);
+  const [loading2, fetchSpaces] = useFetchSpaces(spaceRepository);
 
   const history = useHistory();
 
@@ -40,7 +44,8 @@ export const SignUpScreen: React.VFC = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      await createUser(values.firstNameInput, values.lastNameInput);
+      await fetchSpaces();
+      // await createUser(values.firstNameInput, values.lastNameInput);
       history.push('/');
     },
   });
