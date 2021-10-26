@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { SpaceRepository } from '../../domain/repository/spaceRepository';
 import { authState } from './authController';
 
-export function useFetchSpaces(
+export function useListSpaces(
   spaceRepository: SpaceRepository
 ): [boolean, () => Promise<void>] {
   const [loading, toggle] = useToggle(false);
@@ -14,8 +14,8 @@ export function useFetchSpaces(
     loading,
     async () => {
       toggle(true);
-      console.log('start!');
-      await spaceRepository.fetch(token);
+      const response = await spaceRepository.list(token);
+      console.log(response);
       toggle(false);
     },
   ];

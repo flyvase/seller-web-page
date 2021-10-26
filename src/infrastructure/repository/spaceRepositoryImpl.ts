@@ -9,11 +9,9 @@ export class SpaceRepositoryImpl implements SpaceRepository {
 
   client: HttpClient;
 
-  async fetch(authToken: string): Promise<void> {
-    console.log('pre request');
-    // const request = new SpaceGetRequest(authToken);
-    // await this.client.execute(request);
-    // console.log(response);
-    // return response;
+  async list(authToken: string): Promise<HttpResponse> {
+    const request = new SpaceGetRequest(authToken);
+    const response = await this.client.execute(request);
+    return response;
   }
 }
