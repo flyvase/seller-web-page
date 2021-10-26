@@ -3,7 +3,7 @@ import { buildPostDefaultHeader } from './helper';
 
 export class SpaceGetRequest extends HttpRequest {
   constructor(authToken: string) {
-    super('space/', {
+    super('spaces/', {
       mode: 'cors',
       httpMethod: 'GET',
       httpHeaders: buildPostDefaultHeader(authToken),
