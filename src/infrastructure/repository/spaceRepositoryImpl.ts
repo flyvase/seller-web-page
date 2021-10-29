@@ -15,8 +15,19 @@ export class SpaceRepositoryImpl implements SpaceRepository {
 
   client: HttpClient;
 
+  async fetch(authToken: string, id: number): Promise<SpaceEntity> {
+    const request = new SpaceGetRequest(authToken, id);
+    const response = await this.client.execute(request);
+    const body = response.body!;
+    const space = new SpaceEntity(
+      body.get('id') as number,
+      body.get('name') as string
+    );
+    return space;
+  }
+
   async list(authToken: string): Promise<SpaceEntity[]> {
-    const request = new SpaceGetRequest(authToken);
+    const request = new SpaceGetRequest(authToken, 1);
     const response = await this.client.execute(request);
     const body = response.body!;
     const spaces = [] as SpaceEntity[];
