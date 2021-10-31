@@ -1,3 +1,4 @@
+import { uint32MaxValue } from '../../core/constants';
 import { InvalidArgumentError } from '../../core/error/commonErrors';
 
 export class SpaceEntity {
@@ -5,9 +6,9 @@ export class SpaceEntity {
   readonly name: string;
 
   constructor(id: number, name: string) {
-    if (id >= 4294967295) {
+    if (id >= uint32MaxValue) {
       throw new InvalidArgumentError(
-        '"id" must be shorter than 4294967295 characters',
+        `"id" must be smaller than ${uint32MaxValue} value`,
         'id',
         'SpaceEntity'
       );
