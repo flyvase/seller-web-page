@@ -8,7 +8,7 @@ export class UserPostRequest extends HttpRequest {
     lastName: string,
     authToken: string
   ) {
-    super('user/', {
+    super('users/', {
       mode: 'cors',
       httpMethod: 'POST',
       httpHeaders: buildPostDefaultHeader(authToken),
