@@ -1,7 +1,10 @@
 import { SpaceEntity } from '../../domain/entity/spaceEntity';
 import { SpaceRepository } from '../../domain/repository/spaceRepository';
 import { HttpClient } from '../http/core/httpClient';
-import { SpaceGetRequest } from '../http/request/spaceRequest';
+import {
+  ListSpaceRequest,
+  FetchSpaceRequest,
+} from '../http/request/spaceRequest';
 
 interface Space {
   id: number;
@@ -16,7 +19,7 @@ export class SpaceRepositoryImpl implements SpaceRepository {
   client: HttpClient;
 
   async fetchSpace(authToken: string, id: number): Promise<SpaceEntity> {
-    const request = new SpaceGetRequest(authToken, id);
+    const request = new FetchSpaceRequest(authToken, id);
     const response = await this.client.execute(request);
     const body = response.body!;
     const space = new SpaceEntity(
@@ -27,7 +30,7 @@ export class SpaceRepositoryImpl implements SpaceRepository {
   }
 
   async listSpaces(authToken: string): Promise<SpaceEntity[]> {
-    const request = new SpaceGetRequest(authToken);
+    const request = new ListSpaceRequest(authToken);
     const response = await this.client.execute(request);
     const body = response.body!;
     const spaces = [] as SpaceEntity[];
