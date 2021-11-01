@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
 export interface UserRepository {
-  create(
+  createUser(
     uid: string,
     firstName: string,
     lastName: string,

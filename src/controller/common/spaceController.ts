@@ -14,7 +14,7 @@ export function useFetchSpace(
     loading,
     async (id: number) => {
       toggle(true);
-      const response = await spaceRepository.fetch(token, id);
+      const response = await spaceRepository.fetchSpace(token, id);
       console.log(response);
       toggle(false);
     },
@@ -31,7 +31,7 @@ export function useListSpaces(
     loading,
     async () => {
       toggle(true);
-      const response = await spaceRepository.list(token);
+      const response = await spaceRepository.listSpaces(token);
       console.log(response);
       toggle(false);
     },
