@@ -9,7 +9,7 @@ export class UserRepositoryImpl implements UserRepository {
 
   client: HttpClient;
 
-  async create(
+  async createUser(
     uid: string,
     firstName: string,
     lastName: string,

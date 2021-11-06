@@ -15,7 +15,7 @@ export function useCreateUser(
     loading,
     async (firstName: string, lastName: string) => {
       toggle(true);
-      await userRepository.create(uid, firstName, lastName, token);
+      await userRepository.createUser(uid, firstName, lastName, token);
       toggle(false);
     },
   ];
