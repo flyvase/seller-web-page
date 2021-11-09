@@ -5,9 +5,9 @@ import { TextField, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useFormik } from 'formik';
 
-import { usePasswordSignIn } from '../../controller/common/authController';
-import { LogoForm } from '../component/common/LogoForm';
-import { authRepositoryContext } from '../../domain/repository/authRepository';
+import { usePasswordSignIn } from '../../controllers/authController';
+import { LogoForm } from '../../components/LogoForm';
+import { authRepositoryContext } from '../../../domain/repository/authRepository';
 
 const EmailInput = styled(TextField)(() => ({
   paddingBottom: 16,

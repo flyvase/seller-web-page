@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React, { ReactNode } from 'react';
 
-import horizontalLogo from '../../../assets/logos/horizontal.svg';
+import horizontalLogo from '../../assets/logos/horizontal.svg';
 
 const RootBox = styled(Box)(() => ({
   height: '100vh',
