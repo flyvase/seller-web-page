@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import React from 'react';
 
-import { LogoForm } from '../component/common/LogoForm';
+import { LogoForm } from '../../components/LogoForm';
 
 export const PostSignUpScreen: React.VFC = () => {
   return (

@@ -2,7 +2,7 @@ import { Redirect, Route, RouteProps } from 'react-router-dom';
 import React, { ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { authState } from '../../../controller/common/authController';
+import { authState } from '../controllers/authController';
 
 type GuardedRouteProps = {
   children: ReactNode;

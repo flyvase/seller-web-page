@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React from 'react';
 
-import verticalLogo from '../../assets/logos/vertical.svg';
+import verticalLogo from '../../../assets/logos/vertical.svg';
 
 const RootBox = styled(Box)(() => ({
   display: 'flex',

@@ -10,22 +10,10 @@ export const authState = atom<AuthEntity | null>({
   default: null,
 });
 
-export function useGoogleSignIn(
-  authRepository: AuthRepository
-): () => Promise<void> {
-  return authRepository.googleSignIn;
-}
-
 export function usePasswordSignIn(
   authRepository: AuthRepository
 ): (email: string, password: string) => Promise<boolean> {
   return authRepository.passwordSignIn;
-}
-
-export function useAuthResult(
-  authRepository: AuthRepository
-): () => Promise<boolean> {
-  return authRepository.authResult;
 }
 
 export function useAuthObserver(authRepository: AuthRepository): boolean {

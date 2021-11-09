@@ -2,9 +2,9 @@ import { Button } from '@mui/material';
 import React from 'react';
 import { useContext } from 'react';
 
-import { LogoForm } from '../component/common/LogoForm';
-import { useSignOut } from '../../controller/common/authController';
-import { authRepositoryContext } from '../../domain/repository/authRepository';
+import { LogoForm } from '../../components/LogoForm';
+import { useSignOut } from '../../controllers/authController';
+import { authRepositoryContext } from '../../../domain/repository/authRepository';
 
 export const SignOutScreen: React.VFC = () => {
   const authRepository = useContext(authRepositoryContext);

@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import { GuardedRoute } from './component/common/GuardedRoute';
-import { useAuthObserver } from '../controller/common/authController';
-import { LoadingScreen } from './screen/LoadingScreen';
-import { SignOutScreen } from './screen/SignOutScreen';
+import { GuardedRoute } from './components/GuardedRoute';
+import { useAuthObserver } from './controllers/authController';
+import { LoadingScreen } from './screens/loading/LoadingScreen';
+import { SignOutScreen } from './screens/signOut/SignOutScreen';
 import { authRepositoryContext } from '../domain/repository/authRepository';
-import { PostSignUpScreen } from './screen/PostSignUpScreen';
-import { PasswordAuthenticationScreen } from './screen/PasswordAuthenticationScreen';
+import { PostSignUpScreen } from './screens/postSignUp/PostSignUpScreen';
+import { PasswordAuthenticationScreen } from './screens/passwordAuthentication/PasswordAuthenticationScreen';
 
 export const App: React.VFC = () => {
   const authRepository = useContext(authRepositoryContext);
