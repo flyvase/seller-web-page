@@ -18,13 +18,13 @@ const Title = styled(Typography)(() => ({
   fontWeight: 'bold',
 }));
 
-type SimpleFormProps = {
+type PasswordFormProps = {
   children: ReactNode;
   title: string;
 };
 
-export const SimpleForm: React.VFC<SimpleFormProps> = (
-  props: SimpleFormProps
+export const PasswordForm: React.VFC<PasswordFormProps> = (
+  props: PasswordFormProps
 ) => {
   return (
     <RootBox>

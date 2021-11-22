@@ -1,14 +1,14 @@
 import { useHistory } from 'react-router-dom';
 import React, { useContext } from 'react';
 import { object, string } from 'yup';
-import { TextField, Button, Typography } from '@mui/material';
+import { TextField, Button, Typography, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useFormik } from 'formik';
 
 import { usePasswordSignIn } from '../../controllers/authController';
 import { authRepositoryContext } from '../../../domain/repository/authRepository';
 import { LogoAppBar } from '../../components/LogoAppBar';
-import { SimpleForm } from '../../components/SimpleForm';
+import { PasswordForm } from './PasswordForm';
 
 const EmailInput = styled(TextField)(() => ({
   paddingBottom: 16,
@@ -45,6 +45,10 @@ const LoginButton = styled(Button)(() => ({
   height: 56,
 }));
 
+const TitleContainer = styled(Container)(() => ({
+  maxWidth: 720,
+}));
+
 export const PasswordAuthenticationScreen: React.VFC = () => {
   const authRepository = useContext(authRepositoryContext);
   const passwordSignIn = usePasswordSignIn(authRepository);
@@ -75,63 +79,61 @@ export const PasswordAuthenticationScreen: React.VFC = () => {
   return (
     <div>
       <LogoAppBar />
-      <Title variant="h2" align="center">
-        低価格でポップアップストアを
-        <br />
-        出店するなら ”フライベース”
-      </Title>
-      <SubTitle variant="h4" align="center">
-        あなたの商品を販売できる
-        <br />
-        街のカフェや飲食店がすぐに見つかる
-      </SubTitle>
+      <TitleContainer>
+        <Title variant="h2" align="center">
+          低価格でポップアップストアを出店するなら ”フライベース”
+        </Title>
+        <SubTitle variant="h4" align="center">
+          あなたの商品を販売できる街のカフェや飲食店がすぐに見つかる
+        </SubTitle>
 
-      <SimpleForm title="ログイン">
-        <form onSubmit={formController.handleSubmit}>
-          <EmailInput
-            fullWidth
-            label="メールアドレス"
-            id="emailInput"
-            value={formController.values.emailInput}
-            onChange={formController.handleChange}
-            error={
-              formController.touched.emailInput &&
-              Boolean(formController.errors.emailInput)
-            }
-            helperText={
-              formController.touched.emailInput &&
-              formController.errors.emailInput
-            }
-          />
-          <PasswordInput
-            fullWidth
-            type="password"
-            label="パスワード"
-            id="passwordInput"
-            value={formController.values.passwordInput}
-            onChange={formController.handleChange}
-            error={
-              formController.touched.passwordInput &&
-              Boolean(formController.errors.passwordInput)
-            }
-            helperText={
-              formController.touched.passwordInput &&
-              formController.errors.passwordInput
-            }
-          />
+        <PasswordForm title="ログイン">
+          <form onSubmit={formController.handleSubmit}>
+            <EmailInput
+              fullWidth
+              label="メールアドレス"
+              id="emailInput"
+              value={formController.values.emailInput}
+              onChange={formController.handleChange}
+              error={
+                formController.touched.emailInput &&
+                Boolean(formController.errors.emailInput)
+              }
+              helperText={
+                formController.touched.emailInput &&
+                formController.errors.emailInput
+              }
+            />
+            <PasswordInput
+              fullWidth
+              type="password"
+              label="パスワード"
+              id="passwordInput"
+              value={formController.values.passwordInput}
+              onChange={formController.handleChange}
+              error={
+                formController.touched.passwordInput &&
+                Boolean(formController.errors.passwordInput)
+              }
+              helperText={
+                formController.touched.passwordInput &&
+                formController.errors.passwordInput
+              }
+            />
 
-          <LoginButton
-            variant="contained"
-            color="primary"
-            type="submit"
-            fullWidth
-          >
-            <LoginButtonText variant="h4" align="center" color="#FFFFFF">
-              ログインする
-            </LoginButtonText>
-          </LoginButton>
-        </form>
-      </SimpleForm>
+            <LoginButton
+              variant="contained"
+              color="primary"
+              type="submit"
+              fullWidth
+            >
+              <LoginButtonText variant="h4" align="center" color="#FFFFFF">
+                ログインする
+              </LoginButtonText>
+            </LoginButton>
+          </form>
+        </PasswordForm>
+      </TitleContainer>
     </div>
   );
 };
