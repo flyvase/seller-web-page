@@ -1,5 +1,5 @@
 {
-  "name": "react-ts-template",
+  "name": "flyvase-retail",
   "scripts": {
     "start": "webpack serve -c webpack.config.dev.js",
     "build:stg": "webpack -c webpack.config.stg.js",
