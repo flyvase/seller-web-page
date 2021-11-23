@@ -1,4 +1,4 @@
-import { Divider, Box } from '@mui/material';
+import { AppBar, Toolbar } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React from 'react';
 
@@ -6,22 +6,25 @@ import flyvaseLogo from '../../assets/logos/flyvase_logo.svg';
 
 const Logo = styled('img')(() => ({
   height: '44px',
-  paddingLeft: '52px',
+  paddingLeft: '28px',
 }));
 
-const BarBox = styled(Box)(() => ({
-  height: '80px',
-  display: 'flex',
-  alignItems: 'center',
+const LogoBar = styled(Toolbar)(() => ({
+  paddingTop: '8px',
+  paddingBottom: '8px',
+}));
+
+const RootAppBar = styled(AppBar)(() => ({
+  position: 'static',
+  backgroundColor: '#FFFFFF',
 }));
 
 export const LogoAppBar: React.VFC = () => {
   return (
-    <div>
-      <BarBox>
+    <RootAppBar elevation={1}>
+      <LogoBar>
         <Logo src={flyvaseLogo} />
-      </BarBox>
-      <Divider />
-    </div>
+      </LogoBar>
+    </RootAppBar>
   );
 };
