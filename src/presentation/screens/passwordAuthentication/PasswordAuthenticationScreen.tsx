@@ -28,13 +28,15 @@ const validationSchema = object({
 });
 
 const Title = styled(Typography)(() => ({
-  marginTop: 80,
-  paddingBottom: 48,
+  marginTop: '80px',
+  paddingBottom: '48px',
   fontWeight: 'bold',
 }));
 
 const SubTitle = styled(Typography)(() => ({
-  marginBottom: 80,
+  marginBottom: '80px',
+  paddingLeft: '80px',
+  paddingRight: '80px',
 }));
 
 const LoginButtonText = styled(Typography)(() => ({
@@ -42,11 +44,11 @@ const LoginButtonText = styled(Typography)(() => ({
 }));
 
 const LoginButton = styled(Button)(() => ({
-  height: 56,
+  height: '56px',
 }));
 
-const TitleContainer = styled(Container)(() => ({
-  maxWidth: 720,
+const ContentContainer = styled(Container)(() => ({
+  maxWidth: '720px',
 }));
 
 export const PasswordAuthenticationScreen: React.VFC = () => {
@@ -79,7 +81,7 @@ export const PasswordAuthenticationScreen: React.VFC = () => {
   return (
     <div>
       <LogoAppBar />
-      <TitleContainer>
+      <ContentContainer>
         <Title variant="h2" align="center">
           低価格でポップアップストアを出店するなら ”フライベース”
         </Title>
@@ -133,7 +135,7 @@ export const PasswordAuthenticationScreen: React.VFC = () => {
             </LoginButton>
           </form>
         </PasswordForm>
-      </TitleContainer>
+      </ContentContainer>
     </div>
   );
 };

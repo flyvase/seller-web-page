@@ -3,18 +3,18 @@ import { styled } from '@mui/material/styles';
 import React, { ReactNode } from 'react';
 
 const RootBox = styled(Box)(() => ({
-  height: 324,
+  height: '324px',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
 }));
 
 const FormContainer = styled(Box)(() => ({
-  width: 560,
+  width: '560px',
 }));
 
 const Title = styled(Typography)(() => ({
-  paddingBottom: 48,
+  paddingBottom: '48px',
   fontWeight: 'bold',
 }));
 
