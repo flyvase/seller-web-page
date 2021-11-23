@@ -47,10 +47,6 @@ const LoginButton = styled(Button)(() => ({
   height: '56px',
 }));
 
-const ContentContainer = styled(Container)(() => ({
-  maxWidth: '720px',
-}));
-
 export const PasswordAuthenticationScreen: React.VFC = () => {
   const authRepository = useContext(authRepositoryContext);
   const passwordSignIn = usePasswordSignIn(authRepository);
@@ -81,7 +77,7 @@ export const PasswordAuthenticationScreen: React.VFC = () => {
   return (
     <div>
       <LogoAppBar />
-      <ContentContainer>
+      <Container maxWidth="md">
         <Title variant="h2" align="center">
           低価格でポップアップストアを出店するなら ”フライベース”
         </Title>
@@ -135,7 +131,7 @@ export const PasswordAuthenticationScreen: React.VFC = () => {
             </LoginButton>
           </form>
         </PasswordForm>
-      </ContentContainer>
+      </Container>
     </div>
   );
 };
