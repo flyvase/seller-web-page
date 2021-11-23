@@ -9,22 +9,21 @@ const Logo = styled('img')(() => ({
   paddingLeft: '28px',
 }));
 
-const LogoBar = styled(Toolbar)(() => ({
+const LogoBox = styled(Toolbar)(() => ({
   paddingTop: '8px',
   paddingBottom: '8px',
 }));
 
 const RootAppBar = styled(AppBar)(() => ({
-  position: 'static',
   backgroundColor: '#FFFFFF',
 }));
 
 export const LogoAppBar: React.VFC = () => {
   return (
-    <RootAppBar elevation={1}>
-      <LogoBar>
+    <RootAppBar elevation={1} position="static">
+      <LogoBox>
         <Logo src={flyvaseLogo} />
-      </LogoBar>
+      </LogoBox>
     </RootAppBar>
   );
 };
