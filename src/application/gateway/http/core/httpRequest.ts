@@ -1,19 +1,23 @@
 type HttpMethods = 'GET' | 'POST';
 
-type HttpRequestOptions = {
-  readonly mode?: RequestMode;
-  readonly headers?: Map<string, string>;
-  readonly body?: Map<string, unknown>;
-};
-
 export abstract class HttpRequest {
-  constructor(
-    public readonly path: string,
-    public readonly method: HttpMethods,
-    public readonly options: HttpRequestOptions = {
-      mode: 'cors',
-      headers: new Map(),
-      body: new Map(),
-    }
-  ) {}
+  readonly path: string;
+  readonly method: HttpMethods;
+  readonly mode: RequestMode;
+  readonly body: Map<string, unknown>;
+  readonly headers: Map<string, string>;
+
+  constructor(params: {
+    path: string;
+    method: HttpMethods;
+    mode?: RequestMode;
+    body?: Map<string, unknown>;
+    headers?: Map<string, string>;
+  }) {
+    this.path = params.path;
+    this.method = params.method;
+    this.mode = params.mode ?? 'cors';
+    this.body = params.body ?? new Map();
+    this.headers = params.headers ?? new Map();
+  }
 }
