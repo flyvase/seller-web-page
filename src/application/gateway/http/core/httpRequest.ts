@@ -1,9 +1,9 @@
 type HttpMethods = 'GET' | 'POST';
 
 type HttpRequestOptions = {
-  readonly mode: RequestMode;
-  readonly headers: Map<string, string>;
-  readonly body: Map<string, unknown>;
+  readonly mode?: RequestMode;
+  readonly headers?: Map<string, string>;
+  readonly body?: Map<string, unknown>;
 };
 
 export abstract class HttpRequest {
