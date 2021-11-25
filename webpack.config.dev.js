@@ -41,6 +41,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({template: 'template.html'}),
     new webpack.DefinePlugin({
+      'process.env.ENVIRONMENT': JSON.stringify('dev'),
       'process.env.SERVER_DOMAIN': JSON.stringify('http://localhost:8080')
     })
   ]
