@@ -1,9 +1,13 @@
 import { Sex } from './sex';
 
 export class CustomerSegment {
-  constructor(
-    public readonly sex: Sex = 'notKnown',
-    public readonly minAge: number,
-    public readonly maxAge: number
-  ) {}
+  readonly sex: Sex;
+  readonly minAge: number;
+  readonly maxAge: number;
+
+  constructor(params: { sex?: Sex; minAge: number; maxAge: number }) {
+    this.sex = params.sex ?? 'notKnown';
+    this.minAge = params.minAge;
+    this.maxAge = params.maxAge;
+  }
 }

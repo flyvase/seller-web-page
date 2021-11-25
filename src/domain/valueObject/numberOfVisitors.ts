@@ -1,8 +1,11 @@
 import { Duration } from 'date-fns';
 
 export class NumberOfVisitors {
-  constructor(
-    public readonly visitors: number,
-    public readonly duration: Duration
-  ) {}
+  readonly visitors: number;
+  readonly duration: Duration;
+
+  constructor(params: { visitors: number; duration: Duration }) {
+    this.visitors = params.visitors;
+    this.duration = params.duration;
+  }
 }

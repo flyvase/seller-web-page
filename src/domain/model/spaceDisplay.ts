@@ -1,9 +1,17 @@
 import { SpaceDisplayId } from '../valueObject/spaceDisplayId';
 
 export class SpaceDisplay {
-  constructor(
-    public readonly id: SpaceDisplayId,
-    public readonly image_url: string,
-    public readonly description: string
-  ) {}
+  readonly id: SpaceDisplayId;
+  readonly imageUrl: string;
+  readonly description: string;
+
+  constructor(params: {
+    id: SpaceDisplayId;
+    imageUrl: string;
+    description: string;
+  }) {
+    this.id = params.id;
+    this.imageUrl = params.imageUrl;
+    this.description = params.description;
+  }
 }

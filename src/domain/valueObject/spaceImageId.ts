@@ -1,3 +1,7 @@
 export class SpaceImageId {
-  constructor(public readonly value: number) {}
+  readonly value: number;
+
+  constructor(params: { value: number }) {
+    this.value = params.value;
+  }
 }
