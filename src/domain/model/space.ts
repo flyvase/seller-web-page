@@ -10,13 +10,13 @@ export class Space {
   constructor(
     public readonly id: SpaceId,
     public readonly headline: string,
-    public readonly access: string,
-    public readonly numberOfVisitors: NumberOfVisitors,
-    public readonly customerSegment: CustomerSegment,
     public readonly price: Price,
-    public readonly websiteUrl: string,
     public readonly coordinate: GeoPoint,
     public readonly images: SpaceImage[],
-    public readonly displays: SpaceDisplay[]
+    public readonly displays: SpaceDisplay[],
+    public readonly access?: string,
+    public readonly numberOfVisitors?: NumberOfVisitors,
+    public readonly customerSegment?: CustomerSegment,
+    public readonly websiteUrl?: string
   ) {}
 }
