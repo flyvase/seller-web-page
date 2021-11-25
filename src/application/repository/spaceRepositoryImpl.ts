@@ -29,7 +29,7 @@ export class SpaceRepositoryImpl implements SpaceRepository {
   }
 
   async List(): Promise<Space[]> {
-    const token = await this.authRepository.authToken;
+    const token = await this.authRepository.getAuthToken();
     const request = new ListSpacesRequest({ authToken: token });
     const response = await this.httpClient.execute<
       ListSpacesRequest,
@@ -43,7 +43,7 @@ export class SpaceRepositoryImpl implements SpaceRepository {
   }
 
   async Fetch(id: SpaceId): Promise<Space> {
-    const token = await this.authRepository.authToken;
+    const token = await this.authRepository.getAuthToken();
     const request = new FetchSpaceRequest({ id: id, authToken: token });
     const response = await this.httpClient.execute<
       FetchSpaceRequest,
