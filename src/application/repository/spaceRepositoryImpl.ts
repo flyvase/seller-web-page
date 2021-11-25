@@ -4,17 +4,17 @@ import { SpaceRepository } from '../../domain/repository/spaceRepository';
 import { SpaceId } from '../../domain/valueObject/spaceId';
 import { UnexpectedError } from '../../error/common';
 import { NotFoundError } from '../../error/repository';
-import { HttpClient } from '../gateway/http/core/httpClient';
-import { FetchSpaceRequest } from '../gateway/http/request/fetchSpaceRequest';
-import { ListSpacesRequest } from '../gateway/http/request/listSpacesRequest';
+import { HttpClient } from '../http/core/httpClient';
+import { FetchSpaceRequest } from '../http/request/fetchSpaceRequest';
+import { ListSpacesRequest } from '../http/request/listSpacesRequest';
 import {
   FetchSpaceResponse,
   fetchSpaceResponseToSpaceModel,
-} from '../gateway/http/response/fetchSpaceResponse';
+} from '../http/response/fetchSpaceResponse';
 import {
   listSpaceResponseToSpaceModels,
   ListSpacesResponse,
-} from '../gateway/http/response/listSpacesResponse';
+} from '../http/response/listSpacesResponse';
 
 export class SpaceRepositoryImpl implements SpaceRepository {
   private readonly httpClient: HttpClient;

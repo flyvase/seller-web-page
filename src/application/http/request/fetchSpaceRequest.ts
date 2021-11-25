@@ -1,4 +1,4 @@
-import { SpaceId } from '../../../../domain/valueObject/spaceId';
+import { SpaceId } from '../../../domain/valueObject/spaceId';
 import { HttpRequest } from '../core/httpRequest';
 import { buildGetHeaders } from './helpers';
 

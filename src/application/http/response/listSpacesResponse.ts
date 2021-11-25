@@ -1,13 +1,13 @@
-import { millisecondsToDuration } from '../../../../core/time';
-import { Space } from '../../../../domain/model/space';
-import { SpaceImage } from '../../../../domain/model/spaceImage';
-import { CustomerSegment } from '../../../../domain/valueObject/customerSegment';
-import { GeoPoint } from '../../../../domain/valueObject/geoPoint';
-import { NumberOfVisitors } from '../../../../domain/valueObject/numberOfVisitors';
-import { Price } from '../../../../domain/valueObject/price';
-import { sexFromCode } from '../../../../domain/valueObject/sex';
-import { SpaceId } from '../../../../domain/valueObject/spaceId';
-import { SpaceImageId } from '../../../../domain/valueObject/spaceImageId';
+import { millisecondsToDuration } from '../../../core/time';
+import { Space } from '../../../domain/model/space';
+import { SpaceImage } from '../../../domain/model/spaceImage';
+import { CustomerSegment } from '../../../domain/valueObject/customerSegment';
+import { GeoPoint } from '../../../domain/valueObject/geoPoint';
+import { NumberOfVisitors } from '../../../domain/valueObject/numberOfVisitors';
+import { Price } from '../../../domain/valueObject/price';
+import { sexFromCode } from '../../../domain/valueObject/sex';
+import { SpaceId } from '../../../domain/valueObject/spaceId';
+import { SpaceImageId } from '../../../domain/valueObject/spaceImageId';
 
 export type ListSpacesResponse = {
   list: {
