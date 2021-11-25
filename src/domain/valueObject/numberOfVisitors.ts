@@ -1,4 +1,4 @@
-import { Duration } from 'date-fns';
+import { Duration } from './duration';
 
 export class NumberOfVisitors {
   readonly visitors: number;

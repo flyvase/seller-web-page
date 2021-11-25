@@ -1,7 +1,7 @@
-import { millisecondsToDuration } from '../../../core/time';
 import { Space } from '../../../domain/model/space';
 import { SpaceImage } from '../../../domain/model/spaceImage';
 import { CustomerSegment } from '../../../domain/valueObject/customerSegment';
+import { durationFromMilliseconds } from '../../../domain/valueObject/duration';
 import { GeoPoint } from '../../../domain/valueObject/geoPoint';
 import { NumberOfVisitors } from '../../../domain/valueObject/numberOfVisitors';
 import { Price } from '../../../domain/valueObject/price';
@@ -47,7 +47,7 @@ export function listSpaceResponseToSpaceModels(
       headline: e.headline,
       price: new Price({
         price: e.price.price,
-        duration: millisecondsToDuration(e.price.duration),
+        duration: durationFromMilliseconds(e.price.duration),
       }),
       coordinate: new GeoPoint({
         latitude: e.coordinate.latitude,
@@ -66,7 +66,7 @@ export function listSpaceResponseToSpaceModels(
         e.number_of_visitors != undefined
           ? new NumberOfVisitors({
               visitors: e.number_of_visitors.visitors,
-              duration: millisecondsToDuration(e.number_of_visitors.duration),
+              duration: durationFromMilliseconds(e.number_of_visitors.duration),
             })
           : undefined,
       customerSegment:
