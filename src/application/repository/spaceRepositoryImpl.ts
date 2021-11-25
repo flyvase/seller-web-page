@@ -2,11 +2,8 @@ import { Space } from '../../domain/model/space';
 import { AuthRepository } from '../../domain/repository/authRepository';
 import { SpaceRepository } from '../../domain/repository/spaceRepository';
 import { SpaceId } from '../../domain/valueObject/spaceId';
-import {
-  InternalServerError,
-  NotFoundError,
-  UnexpectedStatusCodeError,
-} from '../../error/http';
+import { UnexpectedError } from '../../error/common';
+import { NotFoundError } from '../../error/repository';
 import { HttpClient } from '../gateway/http/core/httpClient';
 import { FetchSpaceRequest } from '../gateway/http/request/fetchSpaceRequest';
 import { ListSpacesRequest } from '../gateway/http/request/listSpacesRequest';
@@ -42,15 +39,7 @@ export class SpaceRepositoryImpl implements SpaceRepository {
       return listSpaceResponseToSpaceModels(response.body!);
     }
 
-    switch (response.statusCode) {
-      case 500:
-        throw new InternalServerError({ message: response.statusText });
-      default:
-        throw new UnexpectedStatusCodeError({
-          statusCode: response.statusCode,
-          message: response.statusText,
-        });
-    }
+    throw new UnexpectedError({ message: response.statusText });
   }
 
   async Fetch(id: SpaceId): Promise<Space> {
@@ -66,15 +55,10 @@ export class SpaceRepositoryImpl implements SpaceRepository {
     }
 
     switch (response.statusCode) {
-      case 500:
-        throw new InternalServerError({ message: response.statusText });
       case 404:
         throw new NotFoundError();
       default:
-        throw new UnexpectedStatusCodeError({
-          statusCode: response.statusCode,
-          message: response.statusText,
-        });
+        throw new UnexpectedError({ message: response.statusText });
     }
   }
 }
