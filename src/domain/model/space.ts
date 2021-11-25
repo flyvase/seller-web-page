@@ -8,15 +8,15 @@ import { SpaceImage } from './spaceImage';
 
 export class Space {
   constructor(
-    public id: SpaceId,
-    public headline: string,
-    public access: string,
-    public numberOfVisitors: NumberOfVisitors,
-    public customerSegment: CustomerSegment,
-    public price: Price,
-    public websiteUrl: string,
-    public coordinate: GeoPoint,
-    public images: SpaceImage[],
-    public displays: SpaceDisplay[]
+    public readonly id: SpaceId,
+    public readonly headline: string,
+    public readonly access: string,
+    public readonly numberOfVisitors: NumberOfVisitors,
+    public readonly customerSegment: CustomerSegment,
+    public readonly price: Price,
+    public readonly websiteUrl: string,
+    public readonly coordinate: GeoPoint,
+    public readonly images: SpaceImage[],
+    public readonly displays: SpaceDisplay[]
   ) {}
 }

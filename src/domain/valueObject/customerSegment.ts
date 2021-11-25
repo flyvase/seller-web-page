@@ -2,8 +2,8 @@ import { Sex } from './sex';
 
 export class CustomerSegment {
   constructor(
-    public sex: Sex = 'notKnown',
-    public minAge: number,
-    public maxAge: number
+    public readonly sex: Sex = 'notKnown',
+    public readonly minAge: number,
+    public readonly maxAge: number
   ) {}
 }

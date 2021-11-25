@@ -1,3 +1,3 @@
 export class SpaceImageId {
-  constructor(public value: number) {}
+  constructor(public readonly value: number) {}
 }

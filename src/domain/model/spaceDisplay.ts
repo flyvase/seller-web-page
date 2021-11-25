@@ -2,8 +2,8 @@ import { SpaceDisplayId } from '../valueObject/spaceDisplayId';
 
 export class SpaceDisplay {
   constructor(
-    public id: SpaceDisplayId,
-    public image_url: string,
-    public description: string
+    public readonly id: SpaceDisplayId,
+    public readonly image_url: string,
+    public readonly description: string
   ) {}
 }

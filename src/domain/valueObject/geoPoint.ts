@@ -1,3 +1,6 @@
 export class GeoPoint {
-  constructor(public latitude: number, public longitude: number) {}
+  constructor(
+    public readonly latitude: number,
+    public readonly longitude: number
+  ) {}
 }
