@@ -10,3 +10,12 @@ export function durationFromMilliseconds(milliseconds: number): Duration {
       return 'day';
   }
 }
+
+export function formatDuration(duration: Duration) {
+  switch (duration) {
+    case 'day':
+      return '日';
+    case 'week':
+      return '週';
+  }
+}

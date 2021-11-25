@@ -12,3 +12,16 @@ export function sexFromCode(code: string): Sex {
       return 'notKnown';
   }
 }
+
+export function formatSex(sex: Sex): string {
+  switch (sex) {
+    case 'notKnown':
+      return '不明';
+    case 'male':
+      return '男性';
+    case 'female':
+      return '女性';
+    case 'notApplicable':
+      return '適用不能';
+  }
+}
