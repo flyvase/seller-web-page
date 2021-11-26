@@ -1,5 +1,6 @@
 import { ThemeProvider } from '@mui/material';
 import React from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 
 import { authRepositoryContext } from './domain/repository/authRepository';
@@ -17,13 +18,16 @@ export const Provider: React.VFC = () => {
     httpClient: httpClient,
     authRepository: authRepositoryImpl,
   });
+  const queryClient = new QueryClient();
 
   return (
     <RecoilRoot>
       <ThemeProvider theme={theme}>
         <authRepositoryContext.Provider value={authRepositoryImpl}>
           <spaceRepositoryContext.Provider value={spaceRepositoryImpl}>
-            <App />
+            <QueryClientProvider client={queryClient}>
+              <App />
+            </QueryClientProvider>
           </spaceRepositoryContext.Provider>
         </authRepositoryContext.Provider>
       </ThemeProvider>
