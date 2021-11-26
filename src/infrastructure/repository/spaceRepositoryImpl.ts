@@ -35,11 +35,11 @@ export class SpaceRepositoryImpl implements SpaceRepository {
       ListSpacesRequest,
       ListSpacesResponse
     >(request);
-    if (response.ok) {
-      return listSpaceResponseToSpaceModels(response.body!);
+    if (!response.ok) {
+      throw new UnexpectedError({ message: response.statusText });
     }
 
-    throw new UnexpectedError({ message: response.statusText });
+    return listSpaceResponseToSpaceModels(response.body!);
   }
 
   async Fetch(id: SpaceId): Promise<Space> {
@@ -50,15 +50,15 @@ export class SpaceRepositoryImpl implements SpaceRepository {
       FetchSpaceResponse
     >(request);
 
-    if (response.ok) {
-      return fetchSpaceResponseToSpaceModel(response.body!);
+    if (!response.ok) {
+      switch (response.statusCode) {
+        case 404:
+          throw new NotFoundError();
+        default:
+          throw new UnexpectedError({ message: response.statusText });
+      }
     }
 
-    switch (response.statusCode) {
-      case 404:
-        throw new NotFoundError();
-      default:
-        throw new UnexpectedError({ message: response.statusText });
-    }
+    return fetchSpaceResponseToSpaceModel(response.body!);
   }
 }
