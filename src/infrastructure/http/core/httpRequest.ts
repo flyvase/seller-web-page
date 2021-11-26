@@ -4,8 +4,8 @@ export abstract class HttpRequest {
   readonly path: string;
   readonly method: HttpMethods;
   readonly mode: RequestMode;
-  readonly body: Map<string, unknown>;
-  readonly headers: Map<string, string>;
+  readonly body?: Map<string, unknown>;
+  readonly headers?: Map<string, string>;
 
   constructor(params: {
     path: string;
@@ -17,7 +17,7 @@ export abstract class HttpRequest {
     this.path = params.path;
     this.method = params.method;
     this.mode = params.mode ?? 'cors';
-    this.body = params.body ?? new Map();
-    this.headers = params.headers ?? new Map();
+    this.body = params.body;
+    this.headers = params.headers;
   }
 }
