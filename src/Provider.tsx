@@ -8,7 +8,7 @@ import { spaceRepositoryContext } from './domain/repository/spaceRepository';
 import { HttpClient } from './infrastructure/http/core/httpClient';
 import { AuthRepositoryImpl } from './infrastructure/repository/authRepositoryImpl';
 import { SpaceRepositoryImpl } from './infrastructure/repository/spaceRepositoryImpl';
-import { App } from './presenter/App';
+import { Router } from './presenter/Router';
 import { theme } from './theme';
 
 export const Provider: React.VFC = () => {
@@ -26,7 +26,7 @@ export const Provider: React.VFC = () => {
         <authRepositoryContext.Provider value={authRepositoryImpl}>
           <spaceRepositoryContext.Provider value={spaceRepositoryImpl}>
             <QueryClientProvider client={queryClient}>
-              <App />
+              <Router />
             </QueryClientProvider>
           </spaceRepositoryContext.Provider>
         </authRepositoryContext.Provider>
