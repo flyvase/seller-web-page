@@ -28,7 +28,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 export const LogoAppBar: React.VFC = () => {
   return (
-    <StyledAppBar position="static" elevation={1} color="inherit">
+    <StyledAppBar elevation={1} color="inherit">
       <StyledToolbar>
         <Logo src={horizontalLogo} />
       </StyledToolbar>
