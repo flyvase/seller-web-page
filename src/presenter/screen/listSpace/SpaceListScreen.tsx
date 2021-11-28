@@ -36,7 +36,7 @@ export const SpaceListScreen: React.VFC = () => {
 
   if (isError) {
     // TODO: error handling
-    <Typography>{error!.message}</Typography>;
+    return <Typography>{error!.message}</Typography>;
   }
 
   return (
