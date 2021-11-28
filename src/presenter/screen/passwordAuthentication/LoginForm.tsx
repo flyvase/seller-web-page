@@ -1,18 +1,19 @@
 import { Box, TextField, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { styled } from '@mui/system';
-import React from 'react';
-import { object, string } from 'yup';
-import { useFormik } from 'formik';
+import React, { useContext } from 'react';
+
+import { authRepositoryContext } from '../../../domain/repository/authRepository';
+import { usePasswordAuthForm } from './passwordAuthFormHooks';
 
 const RootBox = styled(Box)(() => ({
   width: '90%',
 }));
 
-const FormSpacer = styled(Box)(({ theme }) => ({
-  height: theme.spacing(3),
+const ErrorMessageSpacer = styled(Box)(({ theme }) => ({
+  height: theme.spacing(1),
   [theme.breakpoints.up('sm')]: {
-    height: theme.spacing(6),
+    height: theme.spacing(2),
   },
 }));
 
@@ -34,33 +35,32 @@ const ButtonText = styled(Typography)(() => ({
   color: 'white',
 }));
 
-const validationSchema = object({
-  emailInput: string()
-    .required('必ず入力してください')
-    .max(100, '100文字以下にしてください'),
-  passwordInput: string()
-    .required('必ず入力してください')
-    .max(100, '100文字以下にしてください'),
-});
+const ErrorMessageText = styled(Typography)(() => ({
+  color: 'red',
+}));
 
 export const LoginForm: React.VFC = () => {
-  const formController = useFormik({
-    initialValues: {
-      emailInput: '',
-      passwordInput: '',
-    },
-    validationSchema: validationSchema,
-    onSubmit: async (values) => {
-      console.log(values);
-    },
-  });
+  const authRepository = useContext(authRepositoryContext);
+  const {
+    formController,
+    isLoading,
+    emailHasError,
+    passwordHasError,
+    emailErrorMessage,
+    passwordErrorMessage,
+    signInErrorMessage,
+  } = usePasswordAuthForm(authRepository);
 
   return (
     <RootBox>
       <Typography variant="h4" fontWeight="bold" align="center">
         ログイン
       </Typography>
-      <FormSpacer />
+      <ErrorMessageSpacer />
+      <ErrorMessageText variant="subtitle1" align="center">
+        {signInErrorMessage}
+      </ErrorMessageText>
+      <ErrorMessageSpacer />
       <form onSubmit={formController.handleSubmit}>
         <TextField
           fullWidth
@@ -68,14 +68,8 @@ export const LoginForm: React.VFC = () => {
           id="emailInput"
           value={formController.values.emailInput}
           onChange={formController.handleChange}
-          error={
-            formController.touched.emailInput &&
-            Boolean(formController.errors.emailInput)
-          }
-          helperText={
-            formController.touched.emailInput &&
-            formController.errors.emailInput
-          }
+          error={emailHasError}
+          helperText={emailErrorMessage}
         />
         <InputSpacer />
         <TextField
@@ -85,14 +79,8 @@ export const LoginForm: React.VFC = () => {
           id="passwordInput"
           value={formController.values.passwordInput}
           onChange={formController.handleChange}
-          error={
-            formController.touched.passwordInput &&
-            Boolean(formController.errors.passwordInput)
-          }
-          helperText={
-            formController.touched.passwordInput &&
-            formController.errors.passwordInput
-          }
+          error={passwordHasError}
+          helperText={passwordErrorMessage}
         />
         <ButtonSpacer />
         <LoadingButton
@@ -100,6 +88,7 @@ export const LoginForm: React.VFC = () => {
           disableElevation
           fullWidth
           type="submit"
+          loading={isLoading}
         >
           <ButtonText variant="h4" fontWeight="bold">
             ログイン
