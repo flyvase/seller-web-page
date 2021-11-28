@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import { authRepositoryContext } from '../domain/repository/authRepository';
 import { App } from './App';
+import { useInitializeAuth } from './hook/authHooks';
 import { SpaceListScreen } from './screen/listSpace/SpaceListScreen';
+import { LoadingScreen } from './screen/loadingScreen/LoadingScreen';
 import { PasswordAuthenticationScreen } from './screen/passwordAuthentication/PasswordAuthenticationScreen';
 
 export const Router: React.VFC = () => {
-  return (
+  const authRepository = useContext(authRepositoryContext);
+  const initialized = useInitializeAuth(authRepository);
+
+  return initialized ? (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
@@ -19,5 +25,7 @@ export const Router: React.VFC = () => {
         </Route>
       </Routes>
     </BrowserRouter>
+  ) : (
+    <LoadingScreen />
   );
 };
