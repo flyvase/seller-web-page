@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router';
 import { object, string } from 'yup';
 
 import { AuthRepository } from '../../../domain/repository/authRepository';
@@ -25,6 +26,7 @@ function getErrorMessage(error: DisplayableError | null) {
 
 export function usePasswordAuthForm(authRepository: AuthRepository) {
   const { isLoading, error, mutate } = usePasswordSignIn(authRepository);
+  const navigate = useNavigate();
 
   const formController = useFormik({
     initialValues: {
@@ -36,6 +38,9 @@ export function usePasswordAuthForm(authRepository: AuthRepository) {
       mutate(
         { email: values.emailInput, password: values.passwordInput },
         {
+          onSuccess: () => {
+            navigate('/');
+          },
           onError: () => {
             helpers.resetForm();
           },
