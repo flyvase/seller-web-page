@@ -2,7 +2,7 @@ import { Box, Skeleton } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React from 'react';
 
-import { useFontSize } from '../../hook/sizeQuery';
+import { useFontSize } from '../../hook/sizeQueryHooks';
 
 const ImgSkeleton = styled(Skeleton)(({ theme }) => ({
   width: '328px',
