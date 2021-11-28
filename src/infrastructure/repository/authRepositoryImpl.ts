@@ -2,6 +2,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   AuthErrorCodes,
+  onAuthStateChanged,
 } from '@firebase/auth';
 import { FirebaseError } from '@firebase/util';
 
@@ -32,5 +33,18 @@ export class AuthRepositoryImpl implements AuthRepository {
         }
       }
     }
+  }
+
+  onAuthStateChanged(callback: (uid: string | null) => void): () => void {
+    const client = getAuth();
+    const cancel = onAuthStateChanged(client, (user) => {
+      if (user == null) {
+        callback(null);
+      } else {
+        callback(user.uid);
+      }
+    });
+
+    return cancel;
   }
 }
