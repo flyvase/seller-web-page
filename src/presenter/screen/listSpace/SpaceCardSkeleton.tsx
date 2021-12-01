@@ -2,7 +2,7 @@ import { Box, Skeleton } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React from 'react';
 
-import { useFontSize } from '../../hook/sizeQueryHooks';
+import { useGetFontSize } from '../../controller/themeController';
 
 const ImgSkeleton = styled(Skeleton)(({ theme }) => ({
   width: '328px',
@@ -28,8 +28,8 @@ const HeadlineSpacer = styled(Box)(({ theme }) => ({
 }));
 
 export const SpaceCardSkeleton: React.VFC = () => {
-  const h5FontSize = useFontSize('h5');
-  const subtitle1FontSize = useFontSize('subtitle1');
+  const h5FontSize = useGetFontSize('h5');
+  const subtitle1FontSize = useGetFontSize('subtitle1');
 
   return (
     <Box>
