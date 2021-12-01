@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { object, string } from 'yup';
 
 import { AuthRepository } from '../../../domain/repository/authRepository';
@@ -27,6 +27,8 @@ function getErrorMessage(error: DisplayableError | null) {
 export function usePasswordAuthForm(authRepository: AuthRepository) {
   const { isLoading, error, mutate } = usePasswordSignIn(authRepository);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
 
   const formController = useFormik({
     initialValues: {
@@ -39,7 +41,7 @@ export function usePasswordAuthForm(authRepository: AuthRepository) {
         { email: values.emailInput, password: values.passwordInput },
         {
           onSuccess: () => {
-            navigate('/');
+            navigate(from, { replace: true });
           },
           onError: () => {
             helpers.resetForm();
@@ -49,27 +51,11 @@ export function usePasswordAuthForm(authRepository: AuthRepository) {
     },
   });
 
-  const emailHasError =
-    formController.touched.emailInput &&
-    Boolean(formController.errors.emailInput);
-  const passwordHasError =
-    formController.touched.passwordInput &&
-    Boolean(formController.errors.passwordInput);
-
-  const emailErrorMessage =
-    formController.touched.emailInput && formController.errors.emailInput;
-  const passwordErrorMessage =
-    formController.touched.passwordInput && formController.errors.passwordInput;
-
   const signInErrorMessage = getErrorMessage(error);
 
   return {
     formController,
     isLoading,
-    emailHasError,
-    passwordHasError,
-    emailErrorMessage,
-    passwordErrorMessage,
     signInErrorMessage,
   };
 }

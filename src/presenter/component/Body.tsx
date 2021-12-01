@@ -1,9 +1,9 @@
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import React, { ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 
 type BodyProps = {
-  children: ReactNode;
+  children: ReactElement;
 };
 
 const RootBox = styled(Box)(({ theme }) => ({

@@ -41,15 +41,8 @@ const ErrorMessageText = styled(Typography)(() => ({
 
 export const LoginForm: React.VFC = () => {
   const authRepository = useContext(authRepositoryContext);
-  const {
-    formController,
-    isLoading,
-    emailHasError,
-    passwordHasError,
-    emailErrorMessage,
-    passwordErrorMessage,
-    signInErrorMessage,
-  } = usePasswordAuthForm(authRepository);
+  const { formController, isLoading, signInErrorMessage } =
+    usePasswordAuthForm(authRepository);
 
   return (
     <RootBox>
@@ -68,8 +61,14 @@ export const LoginForm: React.VFC = () => {
           id="emailInput"
           value={formController.values.emailInput}
           onChange={formController.handleChange}
-          error={emailHasError}
-          helperText={emailErrorMessage}
+          error={
+            formController.touched.emailInput &&
+            Boolean(formController.errors.emailInput)
+          }
+          helperText={
+            formController.touched.emailInput &&
+            formController.errors.emailInput
+          }
         />
         <InputSpacer />
         <TextField
@@ -79,8 +78,14 @@ export const LoginForm: React.VFC = () => {
           id="passwordInput"
           value={formController.values.passwordInput}
           onChange={formController.handleChange}
-          error={passwordHasError}
-          helperText={passwordErrorMessage}
+          error={
+            formController.touched.passwordInput &&
+            Boolean(formController.errors.passwordInput)
+          }
+          helperText={
+            formController.touched.passwordInput &&
+            formController.errors.passwordInput
+          }
         />
         <ButtonSpacer />
         <LoadingButton
