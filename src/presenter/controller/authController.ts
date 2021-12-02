@@ -7,8 +7,8 @@ import { RecoilKeys } from './recoilKeys';
 class AuthState {
   readonly uid: string;
 
-  constructor(uid: string) {
-    this.uid = uid;
+  constructor(params: { uid: string }) {
+    this.uid = params.uid;
   }
 }
 
@@ -34,7 +34,7 @@ export function useInitializeAuth(authRepository: AuthRepository) {
       if (uid == null) {
         setAuthState(null);
       } else {
-        setAuthState(new AuthState(uid));
+        setAuthState(new AuthState({ uid }));
       }
 
       if (!initialized) {
