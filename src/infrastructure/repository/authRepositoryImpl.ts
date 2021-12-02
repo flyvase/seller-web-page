@@ -1,83 +1,50 @@
-import { FirebaseError } from '@firebase/util';
 import {
-  GoogleAuthProvider,
-  signInWithRedirect,
-  getRedirectResult,
-  onAuthStateChanged,
-  signOut,
   getAuth,
   signInWithEmailAndPassword,
-} from 'firebase/auth';
+  AuthErrorCodes,
+  onAuthStateChanged,
+} from '@firebase/auth';
+import { FirebaseError } from '@firebase/util';
 
-import {
-  InvalidEmailError,
-  UnexpectedAuthError,
-  UserNotFoundError,
-  WrongPasswordError,
-} from '../../core/error/authErrors';
-import { AuthEntity } from '../../domain/entity/authEntity';
 import { AuthRepository } from '../../domain/repository/authRepository';
+import { UserNotFoundError, WrongPasswordError } from '../../error/auth';
+import { UnexpectedError } from '../../error/common';
 
 export class AuthRepositoryImpl implements AuthRepository {
-  async googleSignIn(): Promise<void> {
-    const authClient = getAuth();
-    const provider = new GoogleAuthProvider();
-    await signInWithRedirect(authClient, provider);
+  async getAuthToken(): Promise<string> {
+    const client = getAuth();
+    const user = client.currentUser;
+    return user!.getIdToken();
   }
 
-  async passwordSignIn(email: string, password: string): Promise<boolean> {
-    const authClient = getAuth();
+  async signInWithPassword(email: string, password: string): Promise<void> {
+    const client = getAuth();
     try {
-      const credential = await signInWithEmailAndPassword(
-        authClient,
-        email,
-        password
-      );
-      if (credential.user == null) {
-        throw new UnexpectedAuthError('unexpected error');
-      }
+      await signInWithEmailAndPassword(client, email, password);
     } catch (e) {
       if (e instanceof FirebaseError) {
         switch (e.code) {
-          case 'auth/user-not-found':
-            throw new UserNotFoundError();
-          case 'auth/invalid-email':
-            throw new InvalidEmailError();
-          case 'auth/wrong-password':
+          case AuthErrorCodes.USER_DELETED:
+            throw new UserNotFoundError({ email });
+          case AuthErrorCodes.INVALID_PASSWORD:
             throw new WrongPasswordError();
           default:
-            throw new UnexpectedAuthError(e.message);
+            throw new UnexpectedError({ message: e.message });
         }
       }
     }
-    return true;
   }
 
-  async authResult(): Promise<boolean> {
-    const authClient = getAuth();
-    const credential = await getRedirectResult(authClient);
-    if (credential == null) {
-      return false;
-    } else {
-      return credential.user != null;
-    }
-  }
-
-  authObserver(callback: (auth: AuthEntity | null) => void): () => void {
-    const authClient = getAuth();
-    const cancel = onAuthStateChanged(authClient, async (user) => {
+  onAuthStateChanged(callback: (uid: string | null) => void): () => void {
+    const client = getAuth();
+    const cancel = onAuthStateChanged(client, (user) => {
       if (user == null) {
         callback(null);
       } else {
-        const token = await user.getIdToken();
-        callback(new AuthEntity(user.uid, token));
+        callback(user.uid);
       }
     });
-    return () => cancel();
-  }
 
-  signOut(): Promise<void> {
-    const authClient = getAuth();
-    return signOut(authClient);
+    return () => cancel();
   }
 }

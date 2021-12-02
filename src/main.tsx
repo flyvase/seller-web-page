@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import { initializeApp } from 'firebase/app';
+import ReactDOM from 'react-dom';
+import React from 'react';
 
+import { getFirebaseConfig } from './config/firebase';
 import { Provider } from './Provider';
-import { devConfig } from './config/firebase';
 
-initializeApp(devConfig);
+initializeApp(getFirebaseConfig());
 
 ReactDOM.render(<Provider />, document.getElementById('root'));

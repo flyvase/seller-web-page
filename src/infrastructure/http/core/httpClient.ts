@@ -1,46 +1,28 @@
-import { HttpMethods } from '../../../core/types';
+import { serverDomain } from '../../../config/http';
+import { HttpRequest } from './httpRequest';
+import { HttpResponse } from './httpResponse';
 
-export interface HttpClient {
-  execute<T extends HttpRequest>(request: T): Promise<HttpResponse>;
-}
+export class HttpClient {
+  async execute<T extends HttpRequest, U>(
+    request: T
+  ): Promise<HttpResponse<U>> {
+    const url = new URL(request.path, serverDomain);
+    const response = await fetch(url.toString(), {
+      method: request.method,
+      mode: request.mode,
+      body:
+        request.body != undefined
+          ? JSON.stringify(Object.fromEntries(request.body))
+          : undefined,
+      headers:
+        request.headers != undefined ? Array.from(request.headers) : undefined,
+    });
 
-type HttpRequestOptions = {
-  readonly mode: RequestMode;
-  readonly httpMethod: HttpMethods;
-  readonly httpHeaders?: Map<string, string>;
-  readonly body?: Map<string, unknown>;
-  readonly queryParameters?: Map<string, unknown>;
-};
-
-export abstract class HttpRequest {
-  constructor(path: string, options: HttpRequestOptions) {
-    this.path = path;
-    this.options = options;
-  }
-
-  readonly path: string;
-
-  readonly options: HttpRequestOptions;
-}
-
-export class HttpResponse {
-  constructor(
-    statusCode: number,
-    statusText: string,
-    body?: Map<string, unknown>
-  ) {
-    this.statusCode = statusCode;
-    this.statusText = statusText;
-    this.body = body;
-  }
-
-  readonly statusCode: number;
-
-  readonly statusText: string;
-
-  readonly body?: Map<string, unknown>;
-
-  get ok(): boolean {
-    return this.statusCode >= 200 && this.statusCode <= 299;
+    const body: U = await response.json();
+    return new HttpResponse({
+      statusCode: response.status,
+      statusText: response.statusText,
+      body: body,
+    });
   }
 }

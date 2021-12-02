@@ -1,10 +1,11 @@
 import { createContext } from 'react';
 
-import { SpaceEntity } from '../entity/spaceEntity';
+import { Space } from '../model/space';
+import { SpaceId } from '../valueObject/spaceId';
 
 export interface SpaceRepository {
-  fetchSpace(authToken: string, id: number): Promise<SpaceEntity>;
-  listSpaces(authToken: string): Promise<SpaceEntity[]>;
+  List(): Promise<Space[]>;
+  Fetch(id: SpaceId): Promise<Space>;
 }
 
 export const spaceRepositoryContext = createContext({} as SpaceRepository);

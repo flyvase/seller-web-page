@@ -1,13 +1,9 @@
 import { createContext } from 'react';
 
-import { AuthEntity } from '../entity/authEntity';
-
 export interface AuthRepository {
-  googleSignIn(): Promise<void>;
-  passwordSignIn(email: string, password: string): Promise<boolean>;
-  authResult(): Promise<boolean>;
-  authObserver(callback: (auth: AuthEntity | null) => void): () => void;
-  signOut(): Promise<void>;
+  getAuthToken(): Promise<string>;
+  signInWithPassword(email: string, password: string): Promise<void>;
+  onAuthStateChanged(callback: (uid: string | null) => void): () => void;
 }
 
 export const authRepositoryContext = createContext({} as AuthRepository);

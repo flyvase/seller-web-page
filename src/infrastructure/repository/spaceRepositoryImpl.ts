@@ -1,42 +1,64 @@
-import { SpaceEntity } from '../../domain/entity/spaceEntity';
+import { Space } from '../../domain/model/space';
+import { AuthRepository } from '../../domain/repository/authRepository';
 import { SpaceRepository } from '../../domain/repository/spaceRepository';
+import { SpaceId } from '../../domain/valueObject/spaceId';
+import { UnexpectedError } from '../../error/common';
+import { NotFoundError } from '../../error/repository';
 import { HttpClient } from '../http/core/httpClient';
+import { FetchSpaceRequest } from '../http/request/fetchSpaceRequest';
+import { ListSpacesRequest } from '../http/request/listSpacesRequest';
 import {
-  ListSpaceRequest,
-  FetchSpaceRequest,
-} from '../http/request/spaceRequest';
-
-interface Space {
-  id: number;
-  name: string;
-}
+  FetchSpaceResponse,
+  fetchSpaceResponseToSpaceModel,
+} from '../http/response/fetchSpaceResponse';
+import {
+  listSpaceResponseToSpaceModels,
+  ListSpacesResponse,
+} from '../http/response/listSpacesResponse';
 
 export class SpaceRepositoryImpl implements SpaceRepository {
-  constructor(client: HttpClient) {
-    this.client = client;
+  private readonly httpClient: HttpClient;
+  private readonly authRepository: AuthRepository;
+
+  constructor(params: {
+    httpClient: HttpClient;
+    authRepository: AuthRepository;
+  }) {
+    this.httpClient = params.httpClient;
+    this.authRepository = params.authRepository;
   }
 
-  client: HttpClient;
+  async List(): Promise<Space[]> {
+    const token = await this.authRepository.getAuthToken();
+    const request = new ListSpacesRequest({ authToken: token });
+    const response = await this.httpClient.execute<
+      ListSpacesRequest,
+      ListSpacesResponse
+    >(request);
+    if (!response.ok) {
+      throw new UnexpectedError({ message: response.statusText });
+    }
 
-  async fetchSpace(authToken: string, id: number): Promise<SpaceEntity> {
-    const request = new FetchSpaceRequest(authToken, id);
-    const response = await this.client.execute(request);
-    const body = response.body!;
-    const space = new SpaceEntity(
-      body.get('id') as number,
-      body.get('name') as string
-    );
-    return space;
+    return listSpaceResponseToSpaceModels(response.body!);
   }
 
-  async listSpaces(authToken: string): Promise<SpaceEntity[]> {
-    const request = new ListSpaceRequest(authToken);
-    const response = await this.client.execute(request);
-    const body = response.body!;
-    const spaces = [] as SpaceEntity[];
-    body.forEach((space) => {
-      spaces.push(new SpaceEntity((space as Space).id, (space as Space).name));
-    });
-    return spaces;
+  async Fetch(id: SpaceId): Promise<Space> {
+    const token = await this.authRepository.getAuthToken();
+    const request = new FetchSpaceRequest({ id: id, authToken: token });
+    const response = await this.httpClient.execute<
+      FetchSpaceRequest,
+      FetchSpaceResponse
+    >(request);
+
+    if (!response.ok) {
+      switch (response.statusCode) {
+        case 404:
+          throw new NotFoundError();
+        default:
+          throw new UnexpectedError({ message: response.statusText });
+      }
+    }
+
+    return fetchSpaceResponseToSpaceModel(response.body!);
   }
 }

@@ -32,6 +32,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({template: 'template.html'}),
     new webpack.DefinePlugin({
+      'process.env.ENVIRONMENT': JSON.stringify('stg'),
       'process.env.SERVER_DOMAIN': JSON.stringify('https://flyvase-stg.an.r.appspot.com')
     })
   ]

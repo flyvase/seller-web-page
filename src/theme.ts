@@ -7,21 +7,34 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Hiragino Kaku Gothic ProN',
+    fontFamily: 'Hiragino Kaku Gothic Pro',
     h2: {
-      fontSize: '48px',
-      fontColor: '#333333',
+      fontSize: '1.5rem',
       lineHeight: '150%',
+      '@media (min-width:600px)': {
+        fontSize: '3rem',
+      },
     },
     h4: {
-      fontSize: '24px',
-      fontColor: '#333333',
+      fontSize: '1rem',
       lineHeight: '150%',
+      '@media (min-width:600px)': {
+        fontSize: '1.5rem',
+      },
+    },
+    h5: {
+      fontSize: '0.875rem',
+      lineHeight: '150%',
+      '@media (min-width:600px)': {
+        fontSize: '1.25rem',
+      },
     },
     subtitle1: {
-      fontSize: '16px',
-      fontColor: '#333333',
+      fontSize: '0.75rem',
       lineHeight: '150%',
+      '@media (min-width:600px)': {
+        fontSize: '1rem',
+      },
     },
   },
 });

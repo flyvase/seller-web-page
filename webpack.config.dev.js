@@ -9,7 +9,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
-    clean: true
+    clean: true,
+    // https://stackoverflow.com/questions/56573363/react-router-v4-nested-routes-not-work-with-webpack-dev-server
+    publicPath: '/'
   },
   devServer: {
     static: {
@@ -17,9 +19,7 @@ module.exports = {
     },
     port: 3000,
     open: true,
-    historyApiFallback: {
-      rewrites: [{ from: /^\/*/, to: '/index.html' }],
-    },
+    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -41,6 +41,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({template: 'template.html'}),
     new webpack.DefinePlugin({
+      'process.env.ENVIRONMENT': JSON.stringify('dev'),
       'process.env.SERVER_DOMAIN': JSON.stringify('http://localhost:8080')
     })
   ]
