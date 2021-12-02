@@ -45,6 +45,6 @@ export class AuthRepositoryImpl implements AuthRepository {
       }
     });
 
-    return cancel;
+    return () => cancel();
   }
 }
