@@ -17,7 +17,7 @@ type SpaceCardProps = {
 const RootBox = styled(Box)(({ theme }) => ({
   width: '328px',
   [theme.breakpoints.up('sm')]: {
-    width: '456px',
+    width: '432px',
   },
 }));
 
@@ -27,7 +27,7 @@ const Photo = styled('img')(({ theme }) => ({
   height: '164px',
   objectFit: 'cover',
   [theme.breakpoints.up('sm')]: {
-    width: '456px',
+    width: '432px',
     height: '228px',
   },
 }));
