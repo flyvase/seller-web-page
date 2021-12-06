@@ -14,7 +14,7 @@ const RootBox = styled(Box)(() => ({
   overflow: 'scroll',
 }));
 
-const GridRoot = styled(Box)(({ theme }) => ({
+const Container = styled(Box)(({ theme }) => ({
   width: '328px',
   marginLeft: 'auto',
   marginRight: 'auto',
@@ -23,10 +23,26 @@ const GridRoot = styled(Box)(({ theme }) => ({
   },
 }));
 
-const TitleSpacer = styled(Box)(({ theme }) => ({
-  height: '20px',
+const TitleSpacerTop = styled(Box)(({ theme }) => ({
+  height: theme.spacing(2.5),
   [theme.breakpoints.up('sm')]: {
-    height: '48px',
+    height: theme.spacing(6),
+  },
+}));
+
+const TitleSpacerBottom = styled(Box)(({ theme }) => ({
+  height: theme.spacing(0.5),
+  [theme.breakpoints.up('sm')]: {
+    height: theme.spacing(1),
+  },
+}));
+
+const GridItem = styled(Grid)(({ theme }) => ({
+  paddingTop: theme.spacing(2),
+  [theme.breakpoints.up('sm')]: {
+    paddingLeft: theme.spacing(3),
+    paddingRight: theme.spacing(3),
+    paddingTop: theme.spacing(5),
   },
 }));
 
@@ -42,26 +58,26 @@ export const SpaceListScreen: React.VFC = () => {
   return (
     <RootBox>
       <LogoAppBar />
-      <GridRoot>
-        <TitleSpacer />
+      <Container>
+        <TitleSpacerTop />
         <Typography align="center" variant="h4" fontWeight="bold">
           スペース一覧
         </Typography>
-        <TitleSpacer />
-        <Grid container columnSpacing={6} rowSpacing={{ xs: 2, sm: 5 }}>
+        <TitleSpacerBottom />
+        <Grid container>
           {isLoading
             ? [...range(0, 4)].map((i) => (
-                <Grid item xs={12} sm={6} key={i}>
+                <GridItem item xs={12} sm={6} key={i}>
                   <SpaceCardSkeleton />
-                </Grid>
+                </GridItem>
               ))
             : data!.map((space) => (
-                <Grid item xs={12} sm={6} key={space.id.value}>
+                <GridItem item xs={12} sm={6} key={space.id.value}>
                   <SpaceCard space={space} />
-                </Grid>
+                </GridItem>
               ))}
         </Grid>
-      </GridRoot>
+      </Container>
     </RootBox>
   );
 };

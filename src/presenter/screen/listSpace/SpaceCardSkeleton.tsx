@@ -8,7 +8,7 @@ const ImgSkeleton = styled(Skeleton)(({ theme }) => ({
   width: '328px',
   height: '164px',
   [theme.breakpoints.up('sm')]: {
-    width: '456px',
+    width: '432px',
     height: '228px',
   },
 }));
@@ -16,7 +16,7 @@ const ImgSkeleton = styled(Skeleton)(({ theme }) => ({
 const TextSkeleton = styled(Skeleton)(({ theme }) => ({
   width: '328px',
   [theme.breakpoints.up('sm')]: {
-    width: '456px',
+    width: '432px',
   },
 }));
 
