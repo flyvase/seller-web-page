@@ -1,0 +1,15 @@
+steps:
+  - name: 'node'
+    entrypoint: 'npm'
+    args: ['install']
+    id: 'npm-install'
+
+  - name: 'node'
+    entrypoint: 'npm'
+    args: ['run', 'lint']
+    waitFor: ['npm-install']
+
+  - name: 'node'
+    entrypoint: 'npm'
+    args: ['run', 'test']
+    waitFor: ['npm-install']
