@@ -4,8 +4,7 @@
     "start": "webpack serve -c webpack.config.dev.js",
     "build:stg": "webpack -c webpack.config.stg.js",
     "build:prod": "webpack -c webpack.config.prod.js",
-    "deploy:stg": "gcloud app deploy",
-    "deploy:prod": "firebase deploy --only hosting",
+    "deploy": "firebase deploy --only hosting",
     "test": "jest",
     "lint": "eslint --max-warnings 0 src/"
   },

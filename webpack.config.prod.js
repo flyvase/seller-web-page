@@ -8,9 +8,10 @@ module.exports = {
   devtool: 'hidden-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'static/main.js',
+    filename: 'main.js',
     clean: true,
-    assetModuleFilename: 'static/[hash][ext]'
+    // https://stackoverflow.com/questions/56573363/react-router-v4-nested-routes-not-work-with-webpack-dev-server
+    publicPath: '/'
   },
   module: {
     rules: [
