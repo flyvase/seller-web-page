@@ -6,7 +6,7 @@ import { App } from './App';
 import { RequireAuth } from './component/RequireAuth';
 import { useInitializeAuth } from './controller/authController';
 import { SpaceListScreen } from './screen/listSpace/SpaceListScreen';
-import { LoadingScreen } from './screen/loadingScreen/LoadingScreen';
+import { LoadingScreen } from './screen/loading/LoadingScreen';
 import { PasswordAuthenticationScreen } from './screen/passwordAuthentication/PasswordAuthenticationScreen';
 
 export const Router: React.VFC = () => {
