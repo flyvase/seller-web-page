@@ -31,10 +31,6 @@ const ButtonSpacer = styled(Box)(({ theme }) => ({
   },
 }));
 
-const ButtonText = styled(Typography)(() => ({
-  color: 'white',
-}));
-
 const ErrorMessageText = styled(Typography)(() => ({
   color: 'red',
 }));
@@ -95,9 +91,9 @@ export const LoginForm: React.VFC = () => {
           type="submit"
           loading={isLoading}
         >
-          <ButtonText variant="h4" fontWeight="bold">
+          <Typography variant="h4" fontWeight="bold">
             ログイン
-          </ButtonText>
+          </Typography>
         </LoadingButton>
       </form>
     </RootBox>
