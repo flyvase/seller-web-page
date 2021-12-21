@@ -1,9 +1,10 @@
-import { Box, Button, styled, Typography } from '@mui/material';
+import { Box, styled, Typography } from '@mui/material';
 import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { spaceRepositoryContext } from '../../../domain/repository/spaceRepository';
 import { SpaceId } from '../../../domain/valueObject/spaceId';
+import { BookingButton } from './BookingButton';
 import { SpaceDisplays } from './SpaceDisplays';
 import { useFetchSpace } from './spaceHooks';
 import { SpaceInfo } from './SpaceInfo';
@@ -15,6 +16,13 @@ const RootBox = styled(Box)(({ theme }) => ({
     width: '960px',
     marginLeft: 'auto',
     marginRight: 'auto',
+  },
+}));
+
+const HeadlineSpacer = styled(Box)(({ theme }) => ({
+  height: theme.spacing(3),
+  [theme.breakpoints.up('sm')]: {
+    height: theme.spacing(4),
   },
 }));
 
@@ -30,10 +38,16 @@ const ButtonWrapper = styled(Box)(({ theme }) => ({
     bottom: 'initial',
     left: 'initial',
     right: 'initial',
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(8),
+    paddingTop: 'initial',
+    paddingBottom: 'initial',
     paddingLeft: theme.spacing(22),
     paddingRight: theme.spacing(22),
+  },
+}));
+
+const ButtonSpacer = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.up('sm')]: {
+    height: theme.spacing(8),
   },
 }));
 
@@ -76,14 +90,15 @@ export const SpaceDetailsScreen: React.VFC = () => {
 
   return (
     <RootBox>
-      <Typography>{data!.headline}</Typography>
+      <HeadlineSpacer />
+      <Typography variant="h2" fontWeight="bold">
+        {data!.headline}
+      </Typography>
+      <HeadlineSpacer />
       <ButtonWrapper>
-        <Button variant="contained" fullWidth>
-          <Typography variant="h4" fontWeight="bold">
-            予約リクエスト
-          </Typography>
-        </Button>
+        <BookingButton />
       </ButtonWrapper>
+      <ButtonSpacer />
       <InfoAndDisplayWrapper>
         <InfoWrapper>
           <SpaceInfo space={data!} />
