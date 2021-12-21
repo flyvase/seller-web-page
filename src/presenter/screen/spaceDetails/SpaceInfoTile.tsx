@@ -17,6 +17,10 @@ const Labels = styled(Box)(() => ({
   alignItems: 'center',
 }));
 
+const Spacer = styled(Box)(({ theme }) => ({
+  width: theme.spacing(0.5),
+}));
+
 export const SpaceInfoTile: React.VFC<SpaceInfoTileProps> = (
   props: SpaceInfoTileProps
 ) => {
@@ -24,6 +28,7 @@ export const SpaceInfoTile: React.VFC<SpaceInfoTileProps> = (
     <RootBox>
       <Labels>
         {props.icon}
+        <Spacer />
         <Typography variant="h4">{props.label}</Typography>
       </Labels>
       <Typography variant="h4" fontWeight="bold">
