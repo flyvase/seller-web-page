@@ -3,7 +3,7 @@ import React from 'react';
 
 import { SpaceImage } from '../../../domain/model/spaceImage';
 
-type SpaceImageSliderProps = {
+type ImageSliderProps = {
   spaceImages: SpaceImage[];
 };
 
@@ -16,8 +16,8 @@ const Image = styled('img')(({ theme }) => ({
   },
 }));
 
-export const SpaceImageSlider: React.VFC<SpaceImageSliderProps> = (
-  props: SpaceImageSliderProps
+export const ImageSlider: React.VFC<ImageSliderProps> = (
+  props: ImageSliderProps
 ) => {
   return <Image src={props.spaceImages[0].imageUrl} />;
 };
