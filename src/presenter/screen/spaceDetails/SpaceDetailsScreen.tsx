@@ -7,7 +7,7 @@ import { SpaceId } from '../../../domain/valueObject/spaceId';
 import { BookingButton } from './BookingButton';
 import { SpaceDisplays } from './SpaceDisplays';
 import { useFetchSpace } from './spaceHooks';
-import { SpaceImageSlider } from './SpaceImageSlider';
+import { ImageSlider } from './ImageSlider';
 import { SpaceInfo } from './SpaceInfo';
 
 const RootBox = styled(Box)(({ theme }) => ({
@@ -40,9 +40,9 @@ const HeadlineSpacer = styled(Box)(({ theme }) => ({
 
 const ButtonWrapper = styled(Box)(({ theme }) => ({
   position: 'fixed',
-  bottom: 0,
-  left: 0,
-  right: 0,
+  bottom: '0px',
+  left: '0px',
+  right: '0px',
   backgroundColor: 'rgba(255, 255, 255, 0.85)',
   padding: theme.spacing(3),
   [theme.breakpoints.up('sm')]: {
@@ -103,7 +103,7 @@ export const SpaceDetailsScreen: React.VFC = () => {
   return (
     <RootBox>
       <ImageSliderWrapper>
-        <SpaceImageSlider spaceImages={data!.images} />
+        <ImageSlider spaceImages={data!.images} />
       </ImageSliderWrapper>
       <HeadlineSpacer />
       <Typography variant="h2" fontWeight="bold">
