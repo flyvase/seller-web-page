@@ -8,8 +8,6 @@ type ImageSliderProps = {
 };
 
 const RootBox = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  overflow: 'scroll',
   width: '100%',
   aspectRatio: '1.3',
   [theme.breakpoints.up('sm')]: {
@@ -17,11 +15,25 @@ const RootBox = styled(Box)(({ theme }) => ({
   },
 }));
 
+const Carousel = styled(Box)(() => ({
+  display: 'flex',
+  overflow: 'scroll',
+  scrollSnapType: 'x mandatory',
+  aspectRatio: 'inherit',
+  // disable scroll bars on multiple browsers
+  msOverflowStyle: 'none',
+  '&::-webkit-scrollbar': {
+    display: 'none',
+  },
+  scrollbarWidth: 'none',
+}));
+
 const Image = styled('img')(() => ({
   objectFit: 'cover',
   width: '100%',
   height: '100%',
   aspectRatio: 'inherit',
+  scrollSnapAlign: 'start',
 }));
 
 export const ImageSlider: React.VFC<ImageSliderProps> = (
@@ -29,9 +41,11 @@ export const ImageSlider: React.VFC<ImageSliderProps> = (
 ) => {
   return (
     <RootBox>
-      {props.spaceImages.map((i) => (
-        <Image src={i.imageUrl} key={i.id.value} />
-      ))}
+      <Carousel>
+        {props.spaceImages.map((i) => (
+          <Image src={i.imageUrl} key={i.id.value} />
+        ))}
+      </Carousel>
     </RootBox>
   );
 };
