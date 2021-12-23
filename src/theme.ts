@@ -44,6 +44,9 @@ export const theme = createTheme({
           color: 'white',
         },
       },
+      defaultProps: {
+        disableElevation: true,
+      },
     },
   },
 });

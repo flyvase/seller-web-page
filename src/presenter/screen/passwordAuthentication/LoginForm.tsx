@@ -86,7 +86,6 @@ export const LoginForm: React.VFC = () => {
         <ButtonSpacer />
         <LoadingButton
           variant="contained"
-          disableElevation
           fullWidth
           type="submit"
           loading={isLoading}
