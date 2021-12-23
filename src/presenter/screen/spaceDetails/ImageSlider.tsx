@@ -48,6 +48,32 @@ const ArrowImg = styled('img')(({ theme }) => ({
   },
 }));
 
+const IndicatorWrapper = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  bottom: 0,
+  display: 'flex',
+  justifyContent: 'center',
+  width: '100%',
+  paddingBottom: theme.spacing(2),
+  [theme.breakpoints.up('sm')]: {
+    paddingBottom: theme.spacing(3),
+  },
+}));
+
+const EllipseWrapper = styled(Box)(() => ({
+  paddingLeft: '4px',
+  paddingRight: '4px',
+}));
+
+const Ellipse = styled(Box, {
+  shouldForwardProp: (prop) => prop != 'selected',
+})<{ selected?: boolean }>(({ selected = false }) => ({
+  width: '8px',
+  height: '8px',
+  borderRadius: '50%',
+  backgroundColor: selected ? 'white' : 'rgba(255, 255, 255, 0.3)',
+}));
+
 const Carousel = styled(Box)(() => ({
   display: 'flex',
   overflow: 'scroll',
@@ -84,6 +110,13 @@ export const ImageSlider: React.VFC<ImageSliderProps> = (
           <ArrowImg src={rightArrow} />
         </ArrowButton>
       </RightArrowButtonWrapper>
+      <IndicatorWrapper>
+        {props.spaceImages.map((i) => (
+          <EllipseWrapper key={i.id.value}>
+            <Ellipse />
+          </EllipseWrapper>
+        ))}
+      </IndicatorWrapper>
       <Carousel>
         {props.spaceImages.map((i) => (
           <Image src={i.imageUrl} key={i.id.value} />
