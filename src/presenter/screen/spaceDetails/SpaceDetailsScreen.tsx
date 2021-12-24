@@ -7,8 +7,8 @@ import { SpaceId } from '../../../domain/valueObject/spaceId';
 import { BookingButton } from './BookingButton';
 import { SpaceDisplays } from './SpaceDisplays';
 import { useFetchSpace } from './spaceHooks';
-import { ImageSlider } from './ImageSlider';
 import { SpaceInfo } from './SpaceInfo';
+import { SpaceImageSlider } from './SpaceImageSlider';
 
 const RootBox = styled(Box)(({ theme }) => ({
   paddingLeft: theme.spacing(3),
@@ -103,7 +103,7 @@ export const SpaceDetailsScreen: React.VFC = () => {
   return (
     <RootBox>
       <ImageSliderWrapper>
-        <ImageSlider spaceImages={data!.images} />
+        <SpaceImageSlider spaceImages={data!.images} />
       </ImageSliderWrapper>
       <HeadlineSpacer />
       <Typography variant="h2" fontWeight="bold">

@@ -1,21 +1,36 @@
 import { Box, Button, styled } from '@mui/material';
-import React from 'react';
+import React, { ReactElement } from 'react';
 
-import { SpaceImage } from '../../../domain/model/spaceImage';
-import leftArrow from '../../../assets/left_arrow.svg';
-import rightArrow from '../../../assets/right_arrow.svg';
+import leftArrow from '../../assets/left_arrow.svg';
+import rightArrow from '../../assets/right_arrow.svg';
+import { range } from '../../core/array';
 
-type ImageSliderProps = {
-  spaceImages: SpaceImage[];
+type CarouselSliderProps = {
+  width?: string;
+  aspectRatio: {
+    xs: string;
+    sm: string;
+  };
+  items: ReactElement[];
 };
 
-const RootBox = styled(Box)(({ theme }) => ({
-  width: '100%',
-  aspectRatio: '1.3',
-  [theme.breakpoints.up('sm')]: {
-    aspectRatio: '2',
-  },
+type RootBoxProps = {
+  width?: string;
+  aspectRatio: {
+    xs: string;
+    sm: string;
+  };
+};
+
+const RootBox = styled(Box, {
+  shouldForwardProp: (prop) => prop != 'width' && prop != 'aspectRatio',
+})<RootBoxProps>(({ theme, width = '100%', aspectRatio }) => ({
+  width: width,
+  aspectRatio: aspectRatio.xs,
   position: 'relative',
+  [theme.breakpoints.up('sm')]: {
+    aspectRatio: aspectRatio.sm,
+  },
 }));
 
 const LeftArrowButtonWrapper = styled(Box)(() => ({
@@ -65,9 +80,13 @@ const EllipseWrapper = styled(Box)(() => ({
   paddingRight: '4px',
 }));
 
+type EllipseProps = {
+  selected?: boolean;
+};
+
 const Ellipse = styled(Box, {
   shouldForwardProp: (prop) => prop != 'selected',
-})<{ selected?: boolean }>(({ selected = false }) => ({
+})<EllipseProps>(({ selected = false }) => ({
   width: '8px',
   height: '8px',
   borderRadius: '50%',
@@ -87,19 +106,16 @@ const Carousel = styled(Box)(() => ({
   scrollbarWidth: 'none',
 }));
 
-const Image = styled('img')(() => ({
-  objectFit: 'cover',
-  width: '100%',
-  height: '100%',
+const ItemWrapper = styled(Box)(() => ({
   aspectRatio: 'inherit',
   scrollSnapAlign: 'start',
 }));
 
-export const ImageSlider: React.VFC<ImageSliderProps> = (
-  props: ImageSliderProps
+export const CarouselSlider: React.VFC<CarouselSliderProps> = (
+  props: CarouselSliderProps
 ) => {
   return (
-    <RootBox>
+    <RootBox width={props.width} aspectRatio={props.aspectRatio}>
       <LeftArrowButtonWrapper>
         <ArrowButton disableFocusRipple disableRipple disableTouchRipple>
           <ArrowImg src={leftArrow} />
@@ -111,15 +127,15 @@ export const ImageSlider: React.VFC<ImageSliderProps> = (
         </ArrowButton>
       </RightArrowButtonWrapper>
       <IndicatorWrapper>
-        {props.spaceImages.map((i) => (
-          <EllipseWrapper key={i.id.value}>
+        {[...range(0, props.items.length)].map((i) => (
+          <EllipseWrapper key={i}>
             <Ellipse />
           </EllipseWrapper>
         ))}
       </IndicatorWrapper>
       <Carousel>
-        {props.spaceImages.map((i) => (
-          <Image src={i.imageUrl} key={i.id.value} />
+        {props.items.map((i) => (
+          <ItemWrapper key={i.key}>{i}</ItemWrapper>
         ))}
       </Carousel>
     </RootBox>
