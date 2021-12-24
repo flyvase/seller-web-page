@@ -9,6 +9,6 @@ export function useFetchSpace(
   spaceRepository: SpaceRepository
 ) {
   return useQuery<Space, Error>(['fetchSpace', spaceId.value], () => {
-    return spaceRepository.Fetch(spaceId);
+    return spaceRepository.fetch(spaceId);
   });
 }

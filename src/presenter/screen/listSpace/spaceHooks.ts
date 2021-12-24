@@ -5,6 +5,6 @@ import { SpaceRepository } from '../../../domain/repository/spaceRepository';
 
 export function useListSpaces(spaceRepository: SpaceRepository) {
   return useQuery<Space[], Error>('listSpaces', () => {
-    return spaceRepository.List();
+    return spaceRepository.list();
   });
 }

@@ -28,7 +28,7 @@ export class SpaceRepositoryImpl implements SpaceRepository {
     this.authRepository = params.authRepository;
   }
 
-  async List(): Promise<Space[]> {
+  async list(): Promise<Space[]> {
     const token = await this.authRepository.getAuthToken();
     const request = new ListSpacesRequest({ authToken: token });
     const response = await this.httpClient.execute<
@@ -42,7 +42,7 @@ export class SpaceRepositoryImpl implements SpaceRepository {
     return listSpaceResponseToSpaceModels(response.body!);
   }
 
-  async Fetch(id: SpaceId): Promise<Space> {
+  async fetch(id: SpaceId): Promise<Space> {
     const token = await this.authRepository.getAuthToken();
     const request = new FetchSpaceRequest({ id: id, authToken: token });
     const response = await this.httpClient.execute<
