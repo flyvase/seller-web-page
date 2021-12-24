@@ -134,8 +134,8 @@ export const CarouselSlider: React.VFC<CarouselSliderProps> = (
         ))}
       </IndicatorWrapper>
       <Carousel>
-        {props.items.map((i) => (
-          <ItemWrapper key={i.key}>{i}</ItemWrapper>
+        {props.items.map((i, index) => (
+          <ItemWrapper key={index}>{i}</ItemWrapper>
         ))}
       </Carousel>
     </RootBox>
