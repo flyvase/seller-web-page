@@ -1,16 +1,22 @@
 import { Space } from '../../domain/model/space';
 import { AuthRepository } from '../../domain/repository/authRepository';
 import { SpaceRepository } from '../../domain/repository/spaceRepository';
+import { OgpProperties } from '../../domain/valueObject/ogpProperties';
 import { SpaceId } from '../../domain/valueObject/spaceId';
 import { UnexpectedError } from '../../error/common';
 import { NotFoundError } from '../../error/repository';
 import { HttpClient } from '../http/core/httpClient';
 import { FetchSpaceRequest } from '../http/request/fetchSpaceRequest';
+import { GetSpaceOgpRequest } from '../http/request/getSpaceOgpRequest';
 import { ListSpacesRequest } from '../http/request/listSpacesRequest';
 import {
   FetchSpaceResponse,
   fetchSpaceResponseToSpaceModel,
 } from '../http/response/fetchSpaceResponse';
+import {
+  GetSpaceOgpResponse,
+  getSpaceOgpResponseToOgpProperties,
+} from '../http/response/getSpaceOgpResponse';
 import {
   listSpaceResponseToSpaceModels,
   ListSpacesResponse,
@@ -60,5 +66,25 @@ export class SpaceRepositoryImpl implements SpaceRepository {
     }
 
     return fetchSpaceResponseToSpaceModel(response.body!);
+  }
+
+  async getOgpProperties(id: SpaceId): Promise<OgpProperties> {
+    const token = await this.authRepository.getAuthToken();
+    const request = new GetSpaceOgpRequest({ id: id, authToken: token });
+    const response = await this.httpClient.execute<
+      GetSpaceOgpRequest,
+      GetSpaceOgpResponse
+    >(request);
+
+    if (!response.ok) {
+      switch (response.statusCode) {
+        case 404:
+          throw new NotFoundError();
+        default:
+          throw new UnexpectedError({ message: response.statusText });
+      }
+    }
+
+    return getSpaceOgpResponseToOgpProperties(response.body!);
   }
 }
