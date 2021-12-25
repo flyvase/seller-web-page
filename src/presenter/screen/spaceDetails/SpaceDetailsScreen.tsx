@@ -10,10 +10,12 @@ import { useFetchSpace } from './spaceHooks';
 import { SpaceInfo } from './SpaceInfo';
 import { SpaceImageSlider } from './SpaceImageSlider';
 import { WebsiteDisplay } from './WebsiteDisplay';
+import { SpaceMap } from './SpaceMap';
 
 const RootBox = styled(Box)(({ theme }) => ({
   paddingLeft: theme.spacing(3),
   paddingRight: theme.spacing(3),
+  paddingBottom: theme.spacing(11),
   [theme.breakpoints.up('sm')]: {
     width: '912px',
     marginLeft: 'auto',
@@ -46,6 +48,7 @@ const ButtonWrapper = styled(Box)(({ theme }) => ({
   right: '0px',
   backgroundColor: 'rgba(255, 255, 255, 0.85)',
   padding: theme.spacing(3),
+  zIndex: 1,
   [theme.breakpoints.up('sm')]: {
     position: 'initial',
     bottom: 'initial',
@@ -96,6 +99,13 @@ const WebsiteDisplaySpacer = styled(Box)(({ theme }) => ({
   },
 }));
 
+const MapSpacer = styled(Box)(({ theme }) => ({
+  height: theme.spacing(3),
+  [theme.breakpoints.up('sm')]: {
+    height: theme.spacing(8),
+  },
+}));
+
 export const SpaceDetailsScreen: React.VFC = () => {
   const { spaceId } = useParams();
   const spaceRepository = useContext(spaceRepositoryContext);
@@ -131,6 +141,8 @@ export const SpaceDetailsScreen: React.VFC = () => {
       </InfoAndDisplayWrapper>
       <WebsiteDisplaySpacer />
       <WebsiteDisplay spaceId={_spaceId} />
+      <MapSpacer />
+      <SpaceMap geoPoint={data!.coordinate} />
     </RootBox>
   );
 };
