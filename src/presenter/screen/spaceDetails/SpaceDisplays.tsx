@@ -1,5 +1,5 @@
 import { TableRestaurant } from '@mui/icons-material';
-import { Box, Grid, styled, Typography, useTheme } from '@mui/material';
+import { Box, Grid, styled, Typography } from '@mui/material';
 import React from 'react';
 
 import { Space } from '../../../domain/model/space';

@@ -18,7 +18,13 @@ export function useGetSpaceOgpProperties(
   spaceId: SpaceId,
   spaceRepository: SpaceRepository
 ) {
-  return useQuery<OgpProperties, Error>('getSpaceOgpProperties', () => {
-    return spaceRepository.getOgpProperties(spaceId);
-  });
+  return useQuery<OgpProperties, Error>(
+    'getSpaceOgpProperties',
+    () => {
+      return spaceRepository.getOgpProperties(spaceId);
+    },
+    {
+      retry: false,
+    }
+  );
 }

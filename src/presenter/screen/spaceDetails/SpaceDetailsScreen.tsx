@@ -9,6 +9,7 @@ import { SpaceDisplays } from './SpaceDisplays';
 import { useFetchSpace } from './spaceHooks';
 import { SpaceInfo } from './SpaceInfo';
 import { SpaceImageSlider } from './SpaceImageSlider';
+import { WebsiteDisplay } from './WebsiteDisplay';
 
 const RootBox = styled(Box)(({ theme }) => ({
   paddingLeft: theme.spacing(3),
@@ -88,13 +89,18 @@ const DisplaysWrapper = styled(Box)(({ theme }) => ({
   },
 }));
 
+const WebsiteDisplaySpacer = styled(Box)(({ theme }) => ({
+  height: theme.spacing(3),
+  [theme.breakpoints.up('sm')]: {
+    height: theme.spacing(8),
+  },
+}));
+
 export const SpaceDetailsScreen: React.VFC = () => {
   const { spaceId } = useParams();
   const spaceRepository = useContext(spaceRepositoryContext);
-  const { data, isLoading } = useFetchSpace(
-    new SpaceId({ value: parseInt(spaceId!) }),
-    spaceRepository
-  );
+  const _spaceId = new SpaceId({ value: parseInt(spaceId!) });
+  const { data, isLoading } = useFetchSpace(_spaceId, spaceRepository);
 
   if (isLoading) {
     return <Box></Box>;
@@ -123,6 +129,8 @@ export const SpaceDetailsScreen: React.VFC = () => {
           <SpaceDisplays space={data!} />
         </DisplaysWrapper>
       </InfoAndDisplayWrapper>
+      <WebsiteDisplaySpacer />
+      <WebsiteDisplay spaceId={_spaceId} />
     </RootBox>
   );
 };
