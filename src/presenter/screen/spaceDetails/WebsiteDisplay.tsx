@@ -35,6 +35,11 @@ const ImageBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.divider,
 }));
 
+const WebsiteLink = styled('a')(() => ({
+  width: '100%',
+  height: '100%',
+}));
+
 const Image = styled('img')(() => ({
   width: '100%',
   height: '100%',
@@ -66,7 +71,13 @@ export const WebsiteDisplay: React.VFC<WebsiteDisplayProps> = (
         {data!.images.length === 0 ? (
           <ImageNotSupported fontSize="large" />
         ) : (
-          <Image src={data!.images[0].url} />
+          <WebsiteLink
+            href={data!.url}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <Image src={data!.images[0].url} />
+          </WebsiteLink>
         )}
       </ImageBox>
     </Box>
