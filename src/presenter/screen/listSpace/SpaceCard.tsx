@@ -9,6 +9,7 @@ import {
 } from '@mui/icons-material';
 
 import { Space } from '../../../domain/model/space';
+import { StyleRemovedLink } from '../../component/StyleRemovedLink';
 
 type SpaceCardProps = {
   space: Space;
@@ -61,11 +62,15 @@ const responsiveIconSize = {
 export const SpaceCard: React.VFC<SpaceCardProps> = (props: SpaceCardProps) => {
   return (
     <RootBox>
-      <Photo src={props.space.images[0].imageUrl} />
+      <StyleRemovedLink to={`spaces/${props.space.id.value}`}>
+        <Photo src={props.space.images[0].imageUrl} />
+      </StyleRemovedLink>
       <HeadlineSpacer />
-      <Typography variant="h5" fontWeight="bold">
-        {props.space.headline}
-      </Typography>
+      <StyleRemovedLink to={`spaces/${props.space.id.value}`}>
+        <Typography variant="h5" fontWeight="bold">
+          {props.space.headline}
+        </Typography>
+      </StyleRemovedLink>
       <HeadlineSpacer />
       <PropertiesBox>
         <PropertyWrapper>
