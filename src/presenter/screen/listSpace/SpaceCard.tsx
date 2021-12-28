@@ -62,11 +62,11 @@ const responsiveIconSize = {
 export const SpaceCard: React.VFC<SpaceCardProps> = (props: SpaceCardProps) => {
   return (
     <RootBox>
-      <StyleRemovedLink to={`spaces/${props.space.id.value}`}>
+      <StyleRemovedLink to={`/spaces/${props.space.id.value}`}>
         <Photo src={props.space.images[0].imageUrl} />
       </StyleRemovedLink>
       <HeadlineSpacer />
-      <StyleRemovedLink to={`spaces/${props.space.id.value}`}>
+      <StyleRemovedLink to={`/spaces/${props.space.id.value}`}>
         <Typography variant="h5" fontWeight="bold">
           {props.space.headline}
         </Typography>
