@@ -1,5 +1,5 @@
 import { ImageNotSupported, Link } from '@mui/icons-material';
-import { Box, styled, Typography } from '@mui/material';
+import { Box, Skeleton, styled, Typography } from '@mui/material';
 import React, { useContext } from 'react';
 
 import { spaceRepositoryContext } from '../../../domain/repository/spaceRepository';
@@ -55,10 +55,6 @@ export const WebsiteDisplay: React.VFC<WebsiteDisplayProps> = (
     spaceRepository
   );
 
-  if (isLoading) {
-    return <Box />;
-  }
-
   return (
     <Box>
       <SectionTitle>
@@ -68,7 +64,9 @@ export const WebsiteDisplay: React.VFC<WebsiteDisplayProps> = (
       </SectionTitle>
       <ImageSpacer />
       <ImageBox>
-        {data!.images.length === 0 ? (
+        {isLoading ? (
+          <Skeleton />
+        ) : data!.images.length === 0 ? (
           <ImageNotSupported fontSize="large" />
         ) : (
           <WebsiteLink

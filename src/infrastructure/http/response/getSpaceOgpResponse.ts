@@ -5,13 +5,14 @@ export type GetSpaceOgpResponse = {
   url: string;
   title: string;
   description: string;
-  images: {
-    url: string;
-    secure_url: string;
-    type: string;
-    width: number;
-    height: number;
-  }[];
+  images?:
+    | {
+        url: string;
+        secure_url: string;
+        type: string;
+        width: number;
+        height: number;
+      }[];
 };
 
 export function getSpaceOgpResponseToOgpProperties(
@@ -19,7 +20,7 @@ export function getSpaceOgpResponseToOgpProperties(
 ) {
   return new OgpProperties({
     url: response.url,
-    images: response.images.map(
+    images: response.images?.map(
       (i) =>
         new OgpImage({
           url: i.url,

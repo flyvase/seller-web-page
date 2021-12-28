@@ -8,12 +8,12 @@ export class OgpProperties {
 
   constructor(params: {
     url: string;
-    images: OgpImage[];
+    images?: OgpImage[];
     title?: string;
     description?: string;
   }) {
     this.url = params.url;
-    this.images = params.images;
+    this.images = params.images ?? [];
     this.title = params.title;
     this.description = params.description;
   }
