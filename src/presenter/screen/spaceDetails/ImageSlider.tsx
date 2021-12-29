@@ -12,7 +12,7 @@ type ImageSliderProps = {
   spaceImages: SpaceImage[];
 };
 
-const ImageSlider = styled(Swiper)(({ theme }) => ({
+const Carousel = styled(Swiper)(({ theme }) => ({
   aspectRatio: '1.3',
   [theme.breakpoints.up('sm')]: {
     aspectRatio: '2',
@@ -25,11 +25,11 @@ const Image = styled('img')(() => ({
   height: '100%',
 }));
 
-export const SpaceImageSlider: React.VFC<ImageSliderProps> = (
+export const ImageSlider: React.VFC<ImageSliderProps> = (
   props: ImageSliderProps
 ) => {
   return (
-    <ImageSlider
+    <Carousel
       modules={[Pagination, Navigation]}
       navigation
       pagination={{ clickable: true }}
@@ -39,6 +39,6 @@ export const SpaceImageSlider: React.VFC<ImageSliderProps> = (
           <Image src={i.imageUrl} />
         </SwiperSlide>
       ))}
-    </ImageSlider>
+    </Carousel>
   );
 };

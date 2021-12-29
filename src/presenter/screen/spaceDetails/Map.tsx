@@ -1,4 +1,4 @@
-import { Map } from '@mui/icons-material';
+import { Map as MapIcon } from '@mui/icons-material';
 import { Box, styled, Typography } from '@mui/material';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import React from 'react';
@@ -6,7 +6,7 @@ import React from 'react';
 import { getGoogleMapsApiKey } from '../../../config/googleMaps';
 import { GeoPoint } from '../../../domain/valueObject/geoPoint';
 
-type SpaceMapProps = {
+type MapProps = {
   geoPoint: GeoPoint;
 };
 
@@ -24,13 +24,13 @@ const MapBox = styled(Box)(() => ({
   aspectRatio: '2',
 }));
 
-export const SpaceMap: React.VFC<SpaceMapProps> = (props: SpaceMapProps) => {
+export const Map: React.VFC<MapProps> = (props: MapProps) => {
   const apiKey = getGoogleMapsApiKey();
 
   return (
     <Box>
       <SectionTitle>
-        <Map />
+        <MapIcon />
         <TitleSpacer />
         <Typography variant="h4">地図</Typography>
       </SectionTitle>

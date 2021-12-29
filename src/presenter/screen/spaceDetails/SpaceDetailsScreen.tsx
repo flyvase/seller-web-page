@@ -5,12 +5,12 @@ import { useParams } from 'react-router-dom';
 import { spaceRepositoryContext } from '../../../domain/repository/spaceRepository';
 import { SpaceId } from '../../../domain/valueObject/spaceId';
 import { BookingButton } from './BookingButton';
-import { SpaceDisplays } from './SpaceDisplays';
+import { Displays } from './Displays';
 import { useFetchSpace } from './spaceHooks';
-import { SpaceInfo } from './SpaceInfo';
-import { SpaceImageSlider } from './SpaceImageSlider';
+import { Info } from './Info';
+import { ImageSlider } from './ImageSlider';
 import { WebsiteDisplay } from './WebsiteDisplay';
-import { SpaceMap } from './SpaceMap';
+import { Map } from './Map';
 import { InfoSkeleton } from './InfoSkeleton';
 import { DisplaysSkeleton } from './DisplaysSkeleton';
 import { WebsiteDisplaySkeleton } from './WebsiteDisplaySkeleton';
@@ -133,7 +133,7 @@ export const SpaceDetailsScreen: React.VFC = () => {
             <Skeleton height="100%" variant="rectangular" />
           </ImageSliderSkeletonWrapper>
         ) : (
-          <SpaceImageSlider spaceImages={data!.images} />
+          <ImageSlider spaceImages={data!.images} />
         )}
       </ImageSliderWrapper>
       <HeadlineSpacer />
@@ -153,11 +153,11 @@ export const SpaceDetailsScreen: React.VFC = () => {
       <ButtonSpacer />
       <InfoAndDisplayWrapper>
         <InfoWrapper>
-          {isLoading ? <InfoSkeleton /> : <SpaceInfo space={data!} />}
+          {isLoading ? <InfoSkeleton /> : <Info space={data!} />}
         </InfoWrapper>
         <InfoAndDisplaySpacer />
         <DisplaysWrapper>
-          {isLoading ? <DisplaysSkeleton /> : <SpaceDisplays space={data!} />}
+          {isLoading ? <DisplaysSkeleton /> : <Displays space={data!} />}
         </DisplaysWrapper>
       </InfoAndDisplayWrapper>
       <WebsiteDisplaySpacer />
@@ -167,7 +167,7 @@ export const SpaceDetailsScreen: React.VFC = () => {
         <WebsiteDisplay spaceId={_spaceId} />
       )}
       <MapSpacer />
-      {isLoading ? <MapSkeleton /> : <SpaceMap geoPoint={data!.coordinate} />}
+      {isLoading ? <MapSkeleton /> : <Map geoPoint={data!.coordinate} />}
     </RootBox>
   );
 };

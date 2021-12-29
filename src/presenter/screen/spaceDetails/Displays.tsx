@@ -3,9 +3,9 @@ import { Box, Grid, styled, Typography } from '@mui/material';
 import React from 'react';
 
 import { Space } from '../../../domain/model/space';
-import { SpaceDisplayCard } from './SpaceDisplayCard';
+import { DisplayCard } from './DisplayCard';
 
-type SpaceDisplaysProps = {
+type DisplaysProps = {
   space: Space;
 };
 
@@ -22,9 +22,7 @@ const ItemSpacer = styled(Box)(({ theme }) => ({
   height: theme.spacing(2),
 }));
 
-export const SpaceDisplays: React.VFC<SpaceDisplaysProps> = (
-  props: SpaceDisplaysProps
-) => {
+export const Displays: React.VFC<DisplaysProps> = (props: DisplaysProps) => {
   return (
     <Box>
       <SectionTitle>
@@ -40,10 +38,7 @@ export const SpaceDisplays: React.VFC<SpaceDisplaysProps> = (
       >
         {props.space.displays.map((d) => (
           <Grid item xs={6} key={d.id.value}>
-            <SpaceDisplayCard
-              imageSrc={d.imageUrl}
-              description={d.description}
-            />
+            <DisplayCard imageSrc={d.imageUrl} description={d.description} />
           </Grid>
         ))}
       </Grid>

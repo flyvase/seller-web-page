@@ -1,7 +1,7 @@
 import { Box, styled, Typography } from '@mui/material';
 import React from 'react';
 
-type SpaceDisplayCardProps = {
+type DisplayCardProps = {
   imageSrc: string;
   description: string;
 };
@@ -17,8 +17,8 @@ const Spacer = styled(Box)(({ theme }) => ({
   height: theme.spacing(1),
 }));
 
-export const SpaceDisplayCard: React.VFC<SpaceDisplayCardProps> = (
-  props: SpaceDisplayCardProps
+export const DisplayCard: React.VFC<DisplayCardProps> = (
+  props: DisplayCardProps
 ) => {
   return (
     <Box>
