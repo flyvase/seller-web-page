@@ -1,4 +1,4 @@
-import { Box, styled, Typography } from '@mui/material';
+import { Box, Skeleton, styled, Typography } from '@mui/material';
 import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -11,6 +11,10 @@ import { SpaceInfo } from './SpaceInfo';
 import { SpaceImageSlider } from './SpaceImageSlider';
 import { WebsiteDisplay } from './WebsiteDisplay';
 import { SpaceMap } from './SpaceMap';
+import { InfoSkeleton } from './InfoSkeleton';
+import { DisplaysSkeleton } from './DisplaysSkeleton';
+import { WebsiteDisplaySkeleton } from './WebsiteDisplaySkeleton';
+import { MapSkeleton } from './MapSkeleton';
 
 const RootBox = styled(Box)(({ theme }) => ({
   paddingLeft: theme.spacing(3),
@@ -34,6 +38,14 @@ const ImageSliderWrapper = styled(Box)(({ theme }) => ({
   },
 }));
 
+const ImageSliderSkeletonWrapper = styled(Box)(({ theme }) => ({
+  aspectRatio: '1.3',
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    aspectRatio: '2',
+  },
+}));
+
 const HeadlineSpacer = styled(Box)(({ theme }) => ({
   height: theme.spacing(3),
   [theme.breakpoints.up('sm')]: {
@@ -48,6 +60,7 @@ const ButtonWrapper = styled(Box)(({ theme }) => ({
   right: '0px',
   backgroundColor: 'rgba(255, 255, 255, 0.85)',
   padding: theme.spacing(3),
+  // render button area over the google maps
   zIndex: 1,
   [theme.breakpoints.up('sm')]: {
     position: 'initial',
@@ -112,37 +125,49 @@ export const SpaceDetailsScreen: React.VFC = () => {
   const _spaceId = new SpaceId({ value: parseInt(spaceId!) });
   const { data, isLoading } = useFetchSpace(_spaceId, spaceRepository);
 
-  if (isLoading) {
-    return <Box></Box>;
-  }
-
   return (
     <RootBox>
       <ImageSliderWrapper>
-        <SpaceImageSlider spaceImages={data!.images} />
+        {isLoading ? (
+          <ImageSliderSkeletonWrapper>
+            <Skeleton height="100%" variant="rectangular" />
+          </ImageSliderSkeletonWrapper>
+        ) : (
+          <SpaceImageSlider spaceImages={data!.images} />
+        )}
       </ImageSliderWrapper>
       <HeadlineSpacer />
       <Typography variant="h2" fontWeight="bold">
-        {data!.headline}
+        {isLoading ? <Skeleton /> : data!.headline}
       </Typography>
       <HeadlineSpacer />
       <ButtonWrapper>
-        <BookingButton />
+        {isLoading ? (
+          <Typography variant="h4">
+            <Skeleton />
+          </Typography>
+        ) : (
+          <BookingButton />
+        )}
       </ButtonWrapper>
       <ButtonSpacer />
       <InfoAndDisplayWrapper>
         <InfoWrapper>
-          <SpaceInfo space={data!} />
+          {isLoading ? <InfoSkeleton /> : <SpaceInfo space={data!} />}
         </InfoWrapper>
         <InfoAndDisplaySpacer />
         <DisplaysWrapper>
-          <SpaceDisplays space={data!} />
+          {isLoading ? <DisplaysSkeleton /> : <SpaceDisplays space={data!} />}
         </DisplaysWrapper>
       </InfoAndDisplayWrapper>
       <WebsiteDisplaySpacer />
-      <WebsiteDisplay spaceId={_spaceId} />
+      {isLoading ? (
+        <WebsiteDisplaySkeleton />
+      ) : (
+        <WebsiteDisplay spaceId={_spaceId} />
+      )}
       <MapSpacer />
-      <SpaceMap geoPoint={data!.coordinate} />
+      {isLoading ? <MapSkeleton /> : <SpaceMap geoPoint={data!.coordinate} />}
     </RootBox>
   );
 };
