@@ -6,8 +6,9 @@ import { App } from './App';
 import { RequireAuth } from './component/RequireAuth';
 import { useInitializeAuth } from './controller/authController';
 import { SpaceListScreen } from './screen/listSpace/SpaceListScreen';
-import { LoadingScreen } from './screen/loadingScreen/LoadingScreen';
+import { LoadingScreen } from './screen/loading/LoadingScreen';
 import { PasswordAuthenticationScreen } from './screen/passwordAuthentication/PasswordAuthenticationScreen';
+import { SpaceDetailsScreen } from './screen/spaceDetails/SpaceDetailsScreen';
 
 export const Router: React.VFC = () => {
   const authRepository = useContext(authRepositoryContext);
@@ -33,10 +34,18 @@ export const Router: React.VFC = () => {
               </RequireAuth>
             }
           />
-          <Route path="auth">
-            <Route index element={<PasswordAuthenticationScreen />} />
-            <Route path="password" element={<PasswordAuthenticationScreen />} />
-          </Route>
+          <Route
+            path="spaces/:spaceId"
+            element={
+              <RequireAuth>
+                <SpaceDetailsScreen />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="auth/password"
+            element={<PasswordAuthenticationScreen />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -37,4 +37,16 @@ export const theme = createTheme({
       },
     },
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        contained: {
+          color: 'white',
+        },
+      },
+      defaultProps: {
+        disableElevation: true,
+      },
+    },
+  },
 });
