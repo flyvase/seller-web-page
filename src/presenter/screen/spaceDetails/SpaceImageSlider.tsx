@@ -13,9 +13,7 @@ type ImageSliderProps = {
 };
 
 const ImageSlider = styled(Swiper)(({ theme }) => ({
-  width: '100%',
   aspectRatio: '1.3',
-  position: 'relative',
   [theme.breakpoints.up('sm')]: {
     aspectRatio: '2',
   },
