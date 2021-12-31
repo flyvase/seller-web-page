@@ -11,15 +11,6 @@ export function getFirebaseConfig() {
         messagingSenderId: '702731706525',
         appId: '1:702731706525:web:0f31cf139d0abeac937474',
       };
-    case 'stg':
-      return {
-        apiKey: 'AIzaSyDkNNEIJap15UA64NxqaP53maBuRlAw-0I',
-        authDomain: 'flyvase-stg.firebaseapp.com',
-        projectId: 'flyvase-stg',
-        storageBucket: 'flyvase-stg.appspot.com',
-        messagingSenderId: '613980372042',
-        appId: '1:613980372042:web:fd2f5abbd1dfe26f063ab3',
-      };
     default:
       return {
         apiKey: 'AIzaSyARAPo5YFMO2A1nXbzf2byYAdginW-KC1A',

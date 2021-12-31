@@ -2,8 +2,7 @@
   "name": "seller-web-page",
   "scripts": {
     "start": "webpack serve -c webpack.config.dev.js",
-    "build:stg": "webpack -c webpack.config.stg.js",
-    "build:prod": "webpack -c webpack.config.prod.js",
+    "build": "webpack -c webpack.config.prod.js",
     "deploy": "firebase deploy --only hosting",
     "test": "jest --passWithNoTests",
     "lint": "eslint --max-warnings 0 src/"
