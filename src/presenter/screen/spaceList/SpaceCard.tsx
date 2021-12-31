@@ -52,12 +52,33 @@ const PropertyWrapper = styled(Box)(({ theme }) => ({
   paddingRight: theme.spacing(2),
 }));
 
-const responsiveIconSize = {
-  '@media (min-width:600px)': {
+const LocationOnIcon = styled(LocationOn)(({ theme }) => ({
+  fontSize: '1.125rem',
+  [theme.breakpoints.up('sm')]: {
     fontSize: '1.5rem',
   },
+}));
+
+const CurrencyYenIcon = styled(CurrencyYen)(({ theme }) => ({
   fontSize: '1.125rem',
-};
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '1.5rem',
+  },
+}));
+
+const PeopleAltIcon = styled(PeopleAlt)(({ theme }) => ({
+  fontSize: '1.125rem',
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '1.5rem',
+  },
+}));
+
+const AccountBoxIcon = styled(AccountBox)(({ theme }) => ({
+  fontSize: '1.125rem',
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '1.5rem',
+  },
+}));
 
 export const SpaceCard: React.VFC<SpaceCardProps> = (props: SpaceCardProps) => {
   return (
@@ -74,25 +95,25 @@ export const SpaceCard: React.VFC<SpaceCardProps> = (props: SpaceCardProps) => {
       <HeadlineSpacer />
       <PropertiesBox>
         <PropertyWrapper>
-          <LocationOn sx={responsiveIconSize} />
+          <LocationOnIcon />
           <Typography variant="subtitle1">
             {props.space.access ?? '不明'}
           </Typography>
         </PropertyWrapper>
         <PropertyWrapper>
-          <CurrencyYen sx={responsiveIconSize} />
+          <CurrencyYenIcon />
           <Typography variant="subtitle1">
             {props.space.price.format()}
           </Typography>
         </PropertyWrapper>
         <PropertyWrapper>
-          <PeopleAlt sx={responsiveIconSize} />
+          <PeopleAltIcon />
           <Typography variant="subtitle1">
             {props.space.numberOfVisitors?.format() ?? '不明'}
           </Typography>
         </PropertyWrapper>
         <PropertyWrapper>
-          <AccountBox sx={responsiveIconSize} />
+          <AccountBoxIcon />
           <Typography variant="subtitle1">
             {props.space.customerSegment?.format() ?? '不明'}
           </Typography>

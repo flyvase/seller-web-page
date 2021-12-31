@@ -9,17 +9,12 @@ import { SpaceCard } from './SpaceCard';
 import { SpaceCardSkeleton } from './SpaceCardSkeleton';
 import { useListSpaces } from './spaceHooks';
 
-const RootBox = styled(Box)(() => ({
-  height: '100vh',
-  overflow: 'scroll',
-}));
-
 const Container = styled(Box)(({ theme }) => ({
   width: '328px',
   marginLeft: 'auto',
   marginRight: 'auto',
   [theme.breakpoints.up('sm')]: {
-    width: '960px',
+    width: '912px',
   },
 }));
 
@@ -31,18 +26,9 @@ const TitleSpacerTop = styled(Box)(({ theme }) => ({
 }));
 
 const TitleSpacerBottom = styled(Box)(({ theme }) => ({
-  height: theme.spacing(0.5),
+  height: theme.spacing(2.5),
   [theme.breakpoints.up('sm')]: {
-    height: theme.spacing(1),
-  },
-}));
-
-const GridItem = styled(Grid)(({ theme }) => ({
-  paddingTop: theme.spacing(2),
-  [theme.breakpoints.up('sm')]: {
-    paddingLeft: theme.spacing(3),
-    paddingRight: theme.spacing(3),
-    paddingTop: theme.spacing(5),
+    height: theme.spacing(6),
   },
 }));
 
@@ -56,7 +42,7 @@ export const SpaceListScreen: React.VFC = () => {
   }
 
   return (
-    <RootBox>
+    <Box>
       <LogoAppBar />
       <Container>
         <TitleSpacerTop />
@@ -64,20 +50,20 @@ export const SpaceListScreen: React.VFC = () => {
           スペース一覧
         </Typography>
         <TitleSpacerBottom />
-        <Grid container>
+        <Grid container columnSpacing={{ sm: 6 }} rowSpacing={{ xs: 3, sm: 6 }}>
           {isLoading
             ? [...range(0, 4)].map((i) => (
-                <GridItem item xs={12} sm={6} key={i}>
+                <Grid item xs={12} sm={6} key={i}>
                   <SpaceCardSkeleton />
-                </GridItem>
+                </Grid>
               ))
             : data!.map((space) => (
-                <GridItem item xs={12} sm={6} key={space.id.value}>
+                <Grid item xs={12} sm={6} key={space.id.value}>
                   <SpaceCard space={space} />
-                </GridItem>
+                </Grid>
               ))}
         </Grid>
       </Container>
-    </RootBox>
+    </Box>
   );
 };
