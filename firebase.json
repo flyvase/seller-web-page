@@ -6,6 +6,20 @@
         "source": "**",
         "destination": "/index.html"
       }
+    ],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "src",
+      "jest.config.js",
+      "package.json",
+      "package-lock.json",
+      "README.md",
+      "template.html",
+      "tsconfig.json",
+      "webpack.config.dev.js",
+      "webpack.config.prod.js"
     ]
   }
 }
