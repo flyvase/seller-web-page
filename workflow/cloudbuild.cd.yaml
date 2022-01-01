@@ -1,0 +1,12 @@
+steps:
+  - name: 'node'
+    entrypoint: 'npm'
+    args: ['install']
+
+  - name: 'node'
+    entrypoint: 'npm'
+    args: ['run', 'build']
+
+  - name: 'asia-northeast1-docker.pkg.dev/$PROJECT_ID/ci-images/firebase:node16.13.1'
+    entrypoint: 'firebase'
+    args: ['deploy', '--only', 'hosting', '--project', '$PROJECT_ID']
