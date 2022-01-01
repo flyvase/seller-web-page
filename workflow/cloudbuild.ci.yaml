@@ -1,8 +1,8 @@
 steps:
   - name: 'node'
     entrypoint: 'npm'
-    args: ['install']
     id: 'npm-install'
+    args: ['install']
 
   - name: 'node'
     entrypoint: 'npm'
