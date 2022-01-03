@@ -5,7 +5,7 @@ export interface DisplayableError extends Error {
 export class UnexpectedError implements DisplayableError {
   name: string;
   message: string;
-  stack?: string | undefined;
+  stack?: string;
 
   constructor(params: { message: string }) {
     this.name = 'UnexpectedError';
