@@ -3,7 +3,7 @@ import { DisplayableError } from './common';
 export class WrongPasswordError implements DisplayableError {
   name: string;
   message: string;
-  stack?: string | undefined;
+  stack?: string;
 
   constructor() {
     this.name = 'WrongPasswordError';
@@ -19,7 +19,7 @@ export class UserNotFoundError implements DisplayableError {
   name: string;
   message: string;
   email: string;
-  stack?: string | undefined;
+  stack?: string;
 
   constructor(params: { email: string }) {
     this.name = 'UserNotFoundError';
