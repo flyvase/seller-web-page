@@ -15,6 +15,7 @@ import { InfoSkeleton } from './InfoSkeleton';
 import { DisplaysSkeleton } from './DisplaysSkeleton';
 import { WebsiteDisplaySkeleton } from './WebsiteDisplaySkeleton';
 import { MapSkeleton } from './MapSkeleton';
+import { NotFoundError } from '../../../error/repository';
 
 const ErrorRootBox = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -142,7 +143,9 @@ export const SpaceDetailsScreen: React.VFC = () => {
     return (
       <ErrorRootBox>
         <Typography variant="h4">
-          指定されたURLをもつスペースが見つかりません
+          {error instanceof NotFoundError
+            ? '指定されたURLにスペースが見つかりません'
+            : '予期せぬエラーが発生しました。後ほどお試しください'}
         </Typography>
       </ErrorRootBox>
     );

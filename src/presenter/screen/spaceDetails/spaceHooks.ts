@@ -4,6 +4,7 @@ import { Space } from '../../../domain/model/space';
 import { SpaceRepository } from '../../../domain/repository/spaceRepository';
 import { OgpProperties } from '../../../domain/valueObject/ogpProperties';
 import { SpaceId } from '../../../domain/valueObject/spaceId';
+import { NotFoundError } from '../../../error/repository';
 
 export function useFetchSpace(
   spaceId: SpaceId,
@@ -15,6 +16,13 @@ export function useFetchSpace(
       return spaceRepository.fetch(spaceId);
     },
     {
+      retry: (count, error) => {
+        if (error instanceof NotFoundError) {
+          return false;
+        }
+
+        return true;
+      },
       refetchOnWindowFocus: false,
     }
   );
