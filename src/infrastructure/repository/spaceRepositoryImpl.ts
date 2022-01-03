@@ -4,7 +4,7 @@ import { SpaceRepository } from '../../domain/repository/spaceRepository';
 import { OgpProperties } from '../../domain/valueObject/ogpProperties';
 import { SpaceId } from '../../domain/valueObject/spaceId';
 import { UnexpectedError } from '../../error/common';
-import { BadRequestError, NotFoundError } from '../../error/repository';
+import { NotFoundError } from '../../error/repository';
 import { HttpClient } from '../http/core/httpClient';
 import { FetchSpaceRequest } from '../http/request/fetchSpaceRequest';
 import { GetSpaceOgpRequest } from '../http/request/getSpaceOgpRequest';
