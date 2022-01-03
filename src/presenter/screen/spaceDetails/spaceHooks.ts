@@ -9,9 +9,15 @@ export function useFetchSpace(
   spaceId: SpaceId,
   spaceRepository: SpaceRepository
 ) {
-  return useQuery<Space, Error>(['fetchSpace', spaceId.value], () => {
-    return spaceRepository.fetch(spaceId);
-  });
+  return useQuery<Space, Error>(
+    ['fetchSpace', spaceId.value],
+    () => {
+      return spaceRepository.fetch(spaceId);
+    },
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 }
 
 export function useGetSpaceOgpProperties(
@@ -25,6 +31,7 @@ export function useGetSpaceOgpProperties(
     },
     {
       retry: false,
+      refetchOnWindowFocus: false,
     }
   );
 }
