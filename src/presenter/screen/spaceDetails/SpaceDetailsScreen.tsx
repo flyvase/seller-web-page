@@ -147,7 +147,7 @@ export const SpaceDetailsScreen: React.VFC = () => {
             ? '不正なURLです'
             : error instanceof NotFoundError
             ? '指定されたURLにスペースが見つかりません'
-            : '予期せぬエラーが発生しました。後ほどお試しください'}
+            : '予期せぬエラーが発生しました。しばらくしてからお試しください'}
         </Typography>
       </ErrorRootBox>
     );

@@ -9,6 +9,16 @@ import { SpaceCard } from './SpaceCard';
 import { SpaceCardSkeleton } from './SpaceCardSkeleton';
 import { useListSpaces } from './spaceHooks';
 
+const ErrorRootBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: 'calc(100vh - 56px)',
+  [theme.breakpoints.up('sm')]: {
+    height: 'calc(100vh - 80px)',
+  },
+}));
+
 const Container = styled(Box)(({ theme }) => ({
   width: '328px',
   marginLeft: 'auto',
@@ -34,11 +44,16 @@ const TitleSpacerBottom = styled(Box)(({ theme }) => ({
 
 export const SpaceListScreen: React.VFC = () => {
   const spaceRepository = useContext(spaceRepositoryContext);
-  const { data, isLoading, isError, error } = useListSpaces(spaceRepository);
+  const { data, isLoading, isError } = useListSpaces(spaceRepository);
 
   if (isError) {
-    // TODO: error handling
-    return <Typography>{error!.message}</Typography>;
+    return (
+      <ErrorRootBox>
+        <Typography variant="h4">
+          予期せぬエラーが発生しました。しばらくしてからお試しください
+        </Typography>
+      </ErrorRootBox>
+    );
   }
 
   return (
