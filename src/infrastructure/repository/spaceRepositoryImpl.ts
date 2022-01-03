@@ -4,7 +4,11 @@ import { SpaceRepository } from '../../domain/repository/spaceRepository';
 import { OgpProperties } from '../../domain/valueObject/ogpProperties';
 import { SpaceId } from '../../domain/valueObject/spaceId';
 import { UnexpectedError } from '../../error/common';
-import { BadRequestError, NotFoundError } from '../../error/repository';
+import {
+  BadRequestError,
+  NetworkError,
+  NotFoundError,
+} from '../../error/repository';
 import { HttpClient } from '../http/core/httpClient';
 import { FetchSpaceRequest } from '../http/request/fetchSpaceRequest';
 import { GetSpaceOgpRequest } from '../http/request/getSpaceOgpRequest';
@@ -37,10 +41,14 @@ export class SpaceRepositoryImpl implements SpaceRepository {
   async list(): Promise<Space[]> {
     const token = await this.authRepository.getAuthToken();
     const request = new ListSpacesRequest({ authToken: token });
-    const { response, isHttpError, error } = await this.httpClient.execute<
-      ListSpacesRequest,
-      ListSpacesResponse
-    >(request);
+    const { response, isNetworkError, isHttpError, error } =
+      await this.httpClient.execute<ListSpacesRequest, ListSpacesResponse>(
+        request
+      );
+
+    if (isNetworkError) {
+      throw new NetworkError();
+    }
 
     if (isHttpError) {
       throw new UnexpectedError({ message: error!.message });
@@ -52,10 +60,14 @@ export class SpaceRepositoryImpl implements SpaceRepository {
   async fetch(id: SpaceId): Promise<Space> {
     const token = await this.authRepository.getAuthToken();
     const request = new FetchSpaceRequest({ id: id, authToken: token });
-    const { response, isHttpError, error } = await this.httpClient.execute<
-      FetchSpaceRequest,
-      FetchSpaceResponse
-    >(request);
+    const { response, isNetworkError, isHttpError, error } =
+      await this.httpClient.execute<FetchSpaceRequest, FetchSpaceResponse>(
+        request
+      );
+
+    if (isNetworkError) {
+      throw new NetworkError();
+    }
 
     if (isHttpError) {
       switch (error!.statusCode) {
@@ -76,10 +88,14 @@ export class SpaceRepositoryImpl implements SpaceRepository {
   async getOgpProperties(id: SpaceId): Promise<OgpProperties> {
     const token = await this.authRepository.getAuthToken();
     const request = new GetSpaceOgpRequest({ id: id, authToken: token });
-    const { response, isHttpError, error } = await this.httpClient.execute<
-      GetSpaceOgpRequest,
-      GetSpaceOgpResponse
-    >(request);
+    const { response, isNetworkError, isHttpError, error } =
+      await this.httpClient.execute<GetSpaceOgpRequest, GetSpaceOgpResponse>(
+        request
+      );
+
+    if (isNetworkError) {
+      throw new NetworkError();
+    }
 
     if (isHttpError) {
       switch (error!.statusCode) {

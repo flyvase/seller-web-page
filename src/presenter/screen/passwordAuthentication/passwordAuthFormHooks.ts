@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router';
 import { object, string } from 'yup';
 
 import { AuthRepository } from '../../../domain/repository/authRepository';
-import { DisplayableError } from '../../../error/common';
 import { usePasswordSignIn } from './passwordAuthHooks';
 
 const validationSchema = object({
@@ -15,14 +14,6 @@ const validationSchema = object({
     .required('必ず入力してください')
     .max(100, '100文字以下にしてください'),
 });
-
-function getErrorMessage(error: DisplayableError | null) {
-  if (error == null) {
-    return '';
-  }
-
-  return error.display();
-}
 
 export function usePasswordAuthForm(authRepository: AuthRepository) {
   const { isLoading, error, mutate } = usePasswordSignIn(authRepository);
@@ -51,7 +42,7 @@ export function usePasswordAuthForm(authRepository: AuthRepository) {
     },
   });
 
-  const signInErrorMessage = getErrorMessage(error);
+  const signInErrorMessage = error?.display() ?? '';
 
   return {
     formController,
