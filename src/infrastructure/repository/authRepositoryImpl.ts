@@ -9,6 +9,7 @@ import { FirebaseError } from '@firebase/util';
 import { AuthRepository } from '../../domain/repository/authRepository';
 import { UserNotFoundError, WrongPasswordError } from '../../error/auth';
 import { UnexpectedError } from '../../error/common';
+import { NetworkError } from '../../error/repository';
 
 export class AuthRepositoryImpl implements AuthRepository {
   async getAuthToken(): Promise<string> {
@@ -28,6 +29,8 @@ export class AuthRepositoryImpl implements AuthRepository {
             throw new UserNotFoundError({ email });
           case AuthErrorCodes.INVALID_PASSWORD:
             throw new WrongPasswordError();
+          case AuthErrorCodes.NETWORK_REQUEST_FAILED:
+            throw new NetworkError();
           default:
             throw new UnexpectedError({ message: e.message });
         }
