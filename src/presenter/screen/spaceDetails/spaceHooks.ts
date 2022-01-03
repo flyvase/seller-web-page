@@ -24,9 +24,12 @@ export function useFetchSpace(
           return false;
         }
 
+        if (count > 3) {
+          return false;
+        }
+
         return true;
       },
-      refetchOnWindowFocus: false,
     }
   );
 }
