@@ -9,6 +9,7 @@ import { SpaceListScreen } from './screen/spaceList/SpaceListScreen';
 import { LoadingScreen } from './screen/loading/LoadingScreen';
 import { PasswordAuthenticationScreen } from './screen/passwordAuthentication/PasswordAuthenticationScreen';
 import { SpaceDetailsScreen } from './screen/spaceDetails/SpaceDetailsScreen';
+import { PageNotFoundScreen } from './screen/pageNotFound/PageNotFoundScreen';
 
 export const Router: React.VFC = () => {
   const authRepository = useContext(authRepositoryContext);
@@ -46,6 +47,7 @@ export const Router: React.VFC = () => {
             path="auth/password"
             element={<PasswordAuthenticationScreen />}
           />
+          <Route path="*" element={<PageNotFoundScreen />} />
         </Route>
       </Routes>
     </BrowserRouter>
