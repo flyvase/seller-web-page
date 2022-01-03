@@ -50,7 +50,7 @@ export const WebsiteDisplay: React.VFC<WebsiteDisplayProps> = (
   props: WebsiteDisplayProps
 ) => {
   const spaceRepository = useContext(spaceRepositoryContext);
-  const { data, isLoading } = useGetSpaceOgpProperties(
+  const { data, isLoading, isError } = useGetSpaceOgpProperties(
     props.spaceId,
     spaceRepository
   );
@@ -66,7 +66,7 @@ export const WebsiteDisplay: React.VFC<WebsiteDisplayProps> = (
       <ImageBox>
         {isLoading ? (
           <Skeleton />
-        ) : data!.images.length === 0 ? (
+        ) : isError || data!.images.length === 0 ? (
           <ImageNotSupported fontSize="large" />
         ) : (
           <WebsiteLink

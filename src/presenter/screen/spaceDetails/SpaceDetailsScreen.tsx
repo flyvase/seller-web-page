@@ -15,7 +15,6 @@ import { InfoSkeleton } from './InfoSkeleton';
 import { DisplaysSkeleton } from './DisplaysSkeleton';
 import { WebsiteDisplaySkeleton } from './WebsiteDisplaySkeleton';
 import { MapSkeleton } from './MapSkeleton';
-import { BadRequestError, NotFoundError } from '../../../error/repository';
 
 const ErrorRootBox = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -142,13 +141,7 @@ export const SpaceDetailsScreen: React.VFC = () => {
   if (isError) {
     return (
       <ErrorRootBox>
-        <Typography variant="h4">
-          {error instanceof BadRequestError
-            ? '不正なURLです'
-            : error instanceof NotFoundError
-            ? '指定されたURLにスペースが見つかりません'
-            : '予期せぬエラーが発生しました。しばらくしてからお試しください'}
-        </Typography>
+        <Typography variant="h4">{error!.display()}</Typography>
       </ErrorRootBox>
     );
   }

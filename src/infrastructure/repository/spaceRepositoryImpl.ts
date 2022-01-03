@@ -41,6 +41,7 @@ export class SpaceRepositoryImpl implements SpaceRepository {
       ListSpacesRequest,
       ListSpacesResponse
     >(request);
+
     if (isHttpError) {
       throw new UnexpectedError({ message: error!.message });
     }
@@ -59,9 +60,11 @@ export class SpaceRepositoryImpl implements SpaceRepository {
     if (isHttpError) {
       switch (error!.statusCode) {
         case 400:
-          throw new BadRequestError();
+          throw new BadRequestError({ messageToDisplay: '不正なURLです' });
         case 404:
-          throw new NotFoundError();
+          throw new NotFoundError({
+            messageToDisplay: 'スペースが見つかりません',
+          });
         default:
           throw new UnexpectedError({ message: error!.message });
       }
@@ -81,9 +84,11 @@ export class SpaceRepositoryImpl implements SpaceRepository {
     if (isHttpError) {
       switch (error!.statusCode) {
         case 400:
-          throw new BadRequestError();
+          throw new BadRequestError({ messageToDisplay: '不正なURLです' });
         case 404:
-          throw new NotFoundError();
+          throw new NotFoundError({
+            messageToDisplay: 'スペースが見つかりません',
+          });
         default:
           throw new UnexpectedError({ message: error!.message });
       }

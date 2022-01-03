@@ -44,14 +44,12 @@ const TitleSpacerBottom = styled(Box)(({ theme }) => ({
 
 export const SpaceListScreen: React.VFC = () => {
   const spaceRepository = useContext(spaceRepositoryContext);
-  const { data, isLoading, isError } = useListSpaces(spaceRepository);
+  const { data, isLoading, isError, error } = useListSpaces(spaceRepository);
 
   if (isError) {
     return (
       <ErrorRootBox>
-        <Typography variant="h4">
-          予期せぬエラーが発生しました。しばらくしてからお試しください
-        </Typography>
+        <Typography variant="h4">{error!.display()}</Typography>
       </ErrorRootBox>
     );
   }
