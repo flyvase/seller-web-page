@@ -16,6 +16,16 @@ import { DisplaysSkeleton } from './DisplaysSkeleton';
 import { WebsiteDisplaySkeleton } from './WebsiteDisplaySkeleton';
 import { MapSkeleton } from './MapSkeleton';
 
+const ErrorRootBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: 'calc(100vh - 56px)',
+  [theme.breakpoints.up('sm')]: {
+    height: 'calc(100vh - 80px)',
+  },
+}));
+
 const RootBox = styled(Box)(({ theme }) => ({
   paddingLeft: theme.spacing(3),
   paddingRight: theme.spacing(3),
@@ -123,7 +133,20 @@ export const SpaceDetailsScreen: React.VFC = () => {
   const { spaceId } = useParams();
   const spaceRepository = useContext(spaceRepositoryContext);
   const _spaceId = new SpaceId({ value: parseInt(spaceId!) });
-  const { data, isLoading } = useFetchSpace(_spaceId, spaceRepository);
+  const { data, isLoading, error, isError } = useFetchSpace(
+    _spaceId,
+    spaceRepository
+  );
+
+  if (isError) {
+    return (
+      <ErrorRootBox>
+        <Typography variant="h4">
+          指定されたURLをもつスペースが見つかりません
+        </Typography>
+      </ErrorRootBox>
+    );
+  }
 
   return (
     <RootBox>
