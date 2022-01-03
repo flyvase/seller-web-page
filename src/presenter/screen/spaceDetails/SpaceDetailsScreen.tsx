@@ -15,6 +15,17 @@ import { InfoSkeleton } from './InfoSkeleton';
 import { DisplaysSkeleton } from './DisplaysSkeleton';
 import { WebsiteDisplaySkeleton } from './WebsiteDisplaySkeleton';
 import { MapSkeleton } from './MapSkeleton';
+import { NotFoundError } from '../../../error/repository';
+
+const ErrorRootBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: 'calc(100vh - 56px)',
+  [theme.breakpoints.up('sm')]: {
+    height: 'calc(100vh - 80px)',
+  },
+}));
 
 const RootBox = styled(Box)(({ theme }) => ({
   paddingLeft: theme.spacing(3),
@@ -123,7 +134,22 @@ export const SpaceDetailsScreen: React.VFC = () => {
   const { spaceId } = useParams();
   const spaceRepository = useContext(spaceRepositoryContext);
   const _spaceId = new SpaceId({ value: parseInt(spaceId!) });
-  const { data, isLoading } = useFetchSpace(_spaceId, spaceRepository);
+  const { data, isLoading, error, isError } = useFetchSpace(
+    _spaceId,
+    spaceRepository
+  );
+
+  if (isError) {
+    return (
+      <ErrorRootBox>
+        <Typography variant="h4">
+          {error instanceof NotFoundError
+            ? '指定されたURLにスペースが見つかりません'
+            : '予期せぬエラーが発生しました。後ほどお試しください'}
+        </Typography>
+      </ErrorRootBox>
+    );
+  }
 
   return (
     <RootBox>
