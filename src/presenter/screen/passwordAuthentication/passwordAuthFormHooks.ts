@@ -21,7 +21,7 @@ function getErrorMessage(error: DisplayableError | null) {
     return '';
   }
 
-  return error.format();
+  return error.display();
 }
 
 export function usePasswordAuthForm(authRepository: AuthRepository) {
