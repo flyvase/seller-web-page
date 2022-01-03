@@ -1,5 +1,5 @@
 export interface DisplayableError extends Error {
-  format(): string;
+  display(): string;
 }
 
 export class UnexpectedError implements DisplayableError {
@@ -12,7 +12,7 @@ export class UnexpectedError implements DisplayableError {
     this.message = params.message;
   }
 
-  format() {
+  display() {
     return '何らかのエラーが発生しました。しばらくしてからお試しください';
   }
 }

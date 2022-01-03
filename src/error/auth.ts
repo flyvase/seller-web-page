@@ -10,7 +10,7 @@ export class WrongPasswordError implements DisplayableError {
     this.message = 'Wrong password';
   }
 
-  format() {
+  display() {
     return 'パスワードが間違っています';
   }
 }
@@ -27,7 +27,7 @@ export class UserNotFoundError implements DisplayableError {
     this.email = params.email;
   }
 
-  format() {
+  display() {
     return `${this.email}で登録されたユーザーが存在しません`;
   }
 }
