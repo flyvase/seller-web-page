@@ -4,7 +4,7 @@ import { SpaceRepository } from '../../domain/repository/spaceRepository';
 import { OgpProperties } from '../../domain/valueObject/ogpProperties';
 import { SpaceId } from '../../domain/valueObject/spaceId';
 import { UnexpectedError } from '../../error/common';
-import { NotFoundError } from '../../error/repository';
+import { BadRequestError, NotFoundError } from '../../error/repository';
 import { HttpClient } from '../http/core/httpClient';
 import { FetchSpaceRequest } from '../http/request/fetchSpaceRequest';
 import { GetSpaceOgpRequest } from '../http/request/getSpaceOgpRequest';
@@ -58,6 +58,8 @@ export class SpaceRepositoryImpl implements SpaceRepository {
 
     if (isHttpError) {
       switch (error!.statusCode) {
+        case 400:
+          throw new BadRequestError();
         case 404:
           throw new NotFoundError();
         default:
@@ -78,6 +80,8 @@ export class SpaceRepositoryImpl implements SpaceRepository {
 
     if (isHttpError) {
       switch (error!.statusCode) {
+        case 400:
+          throw new BadRequestError();
         case 404:
           throw new NotFoundError();
         default:
