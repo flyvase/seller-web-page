@@ -37,56 +37,54 @@ export class SpaceRepositoryImpl implements SpaceRepository {
   async list(): Promise<Space[]> {
     const token = await this.authRepository.getAuthToken();
     const request = new ListSpacesRequest({ authToken: token });
-    const response = await this.httpClient.execute<
+    const { response, isHttpError, error } = await this.httpClient.execute<
       ListSpacesRequest,
       ListSpacesResponse
     >(request);
-    if (!response.ok) {
-      throw new UnexpectedError({ message: response.statusText });
+    if (isHttpError) {
+      throw new UnexpectedError({ message: error!.message });
     }
 
-    return listSpaceResponseToSpaceModels(response.body!);
+    return listSpaceResponseToSpaceModels(response!.body!);
   }
 
   async fetch(id: SpaceId): Promise<Space> {
     const token = await this.authRepository.getAuthToken();
     const request = new FetchSpaceRequest({ id: id, authToken: token });
-    const response = await this.httpClient.execute<
+    const { response, isHttpError, error } = await this.httpClient.execute<
       FetchSpaceRequest,
       FetchSpaceResponse
     >(request);
 
-    if (!response.ok) {
-      switch (response.statusCode) {
-        case 400:
-          throw new BadRequestError();
+    if (isHttpError) {
+      switch (error!.statusCode) {
         case 404:
           throw new NotFoundError();
         default:
-          throw new UnexpectedError({ message: response.statusText });
+          throw new UnexpectedError({ message: error!.message });
       }
     }
 
-    return fetchSpaceResponseToSpaceModel(response.body!);
+    return fetchSpaceResponseToSpaceModel(response!.body!);
   }
 
   async getOgpProperties(id: SpaceId): Promise<OgpProperties> {
     const token = await this.authRepository.getAuthToken();
     const request = new GetSpaceOgpRequest({ id: id, authToken: token });
-    const response = await this.httpClient.execute<
+    const { response, isHttpError, error } = await this.httpClient.execute<
       GetSpaceOgpRequest,
       GetSpaceOgpResponse
     >(request);
 
-    if (!response.ok) {
-      switch (response.statusCode) {
+    if (isHttpError) {
+      switch (error!.statusCode) {
         case 404:
           throw new NotFoundError();
         default:
-          throw new UnexpectedError({ message: response.statusText });
+          throw new UnexpectedError({ message: error!.message });
       }
     }
 
-    return getSpaceOgpResponseToOgpProperties(response.body!);
+    return getSpaceOgpResponseToOgpProperties(response!.body!);
   }
 }
