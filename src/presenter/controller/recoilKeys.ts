@@ -1,4 +1,4 @@
 export enum RecoilKeys {
-  AUTH = 'auth',
+  USER = 'user',
   IS_SIGNED_IN = 'isSignedIn',
 }
