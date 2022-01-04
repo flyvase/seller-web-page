@@ -1,25 +1,23 @@
 import { useEffect, useState } from 'react';
 import { atom, selector, useRecoilValue, useSetRecoilState } from 'recoil';
 
+import { User } from '../../domain/model/user';
 import { AuthRepository } from '../../domain/repository/authRepository';
 import { RecoilKeys } from './recoilKeys';
 
-class AuthState {
-  readonly uid: string;
-
-  constructor(params: { uid: string }) {
-    this.uid = params.uid;
-  }
-}
-
-const authState = atom<AuthState | null>({
-  key: RecoilKeys.AUTH,
-  default: null,
+const userState = atom<User | undefined>({
+  key: RecoilKeys.USER,
+  default: undefined,
 });
 
 const isSignedInSelector = selector({
   key: RecoilKeys.IS_SIGNED_IN,
-  get: ({ get }) => get(authState) != null,
+  get: ({ get }) => get(userState) != undefined,
+});
+
+const emailSelector = selector({
+  key: RecoilKeys.EMAIL,
+  get: ({ get }) => get(userState)?.email,
 });
 
 export function useIsSignedInState() {
@@ -28,13 +26,13 @@ export function useIsSignedInState() {
 
 export function useInitializeAuth(authRepository: AuthRepository) {
   const [initialized, setInitialized] = useState(false);
-  const setAuthState = useSetRecoilState(authState);
+  const setUserState = useSetRecoilState(userState);
   useEffect(() => {
-    const cancel = authRepository.onAuthStateChanged((uid) => {
-      if (uid == null) {
-        setAuthState(null);
+    const cancel = authRepository.onAuthStateChanged((user) => {
+      if (user) {
+        setUserState(user);
       } else {
-        setAuthState(new AuthState({ uid }));
+        setUserState(undefined);
       }
 
       if (!initialized) {
@@ -46,4 +44,8 @@ export function useInitializeAuth(authRepository: AuthRepository) {
   });
 
   return initialized;
+}
+
+export function useGetEmail() {
+  return useRecoilValue(emailSelector);
 }

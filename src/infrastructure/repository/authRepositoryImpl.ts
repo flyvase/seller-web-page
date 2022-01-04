@@ -6,7 +6,9 @@ import {
 } from '@firebase/auth';
 import { FirebaseError } from '@firebase/util';
 
+import { User } from '../../domain/model/user';
 import { AuthRepository } from '../../domain/repository/authRepository';
+import { ProviderUid } from '../../domain/valueObject/providerUid';
 import { UserNotFoundError, WrongPasswordError } from '../../error/auth';
 import { UnexpectedError } from '../../error/common';
 import { NetworkError } from '../../error/repository';
@@ -38,13 +40,18 @@ export class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  onAuthStateChanged(callback: (uid: string | null) => void): () => void {
+  onAuthStateChanged(callback: (user?: User) => void): () => void {
     const client = getAuth();
-    const cancel = onAuthStateChanged(client, (user) => {
-      if (user == null) {
-        callback(null);
+    const cancel = onAuthStateChanged(client, (u) => {
+      if (u == null) {
+        callback(undefined);
       } else {
-        callback(user.uid);
+        callback(
+          new User({
+            providerUid: new ProviderUid({ value: u.uid }),
+            email: u.email ?? undefined,
+          })
+        );
       }
     });
 
