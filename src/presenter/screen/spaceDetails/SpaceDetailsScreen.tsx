@@ -168,7 +168,7 @@ export const SpaceDetailsScreen: React.VFC = () => {
             <Skeleton />
           </Typography>
         ) : (
-          <BookingButton />
+          <BookingButton spaceHeadline={data!.headline} />
         )}
       </ButtonWrapper>
       <ButtonSpacer />

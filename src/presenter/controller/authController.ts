@@ -15,6 +15,11 @@ const isSignedInSelector = selector({
   get: ({ get }) => get(userState) != undefined,
 });
 
+const emailSelector = selector({
+  key: RecoilKeys.EMAIL,
+  get: ({ get }) => get(userState)?.email,
+});
+
 export function useIsSignedInState() {
   return useRecoilValue(isSignedInSelector);
 }
@@ -39,4 +44,8 @@ export function useInitializeAuth(authRepository: AuthRepository) {
   });
 
   return initialized;
+}
+
+export function useGetEmail() {
+  return useRecoilValue(emailSelector);
 }
