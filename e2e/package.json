@@ -1,0 +1,11 @@
+{
+  "name": "seller-web-page-e2e",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "devDependencies": {
+    "cypress": "^9.2.1",
+    "typescript": "^4.5.4"
+  }
+}

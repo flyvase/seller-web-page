@@ -5,7 +5,7 @@
     "build": "webpack -c webpack.config.prod.js",
     "deploy": "firebase deploy --only hosting",
     "test": "jest --passWithNoTests",
-    "lint": "eslint --max-warnings 0 src/"
+    "lint": "eslint --max-warnings 0 src/ e2e/cypress/"
   },
   "devDependencies": {
     "@testing-library/react": "^12.1.2",
