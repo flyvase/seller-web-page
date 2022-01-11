@@ -25,9 +25,9 @@ describe('password authentication tests', () => {
   it("tests auth doesn't work with invalid email", () => {
     cy.visit('/');
 
-    const email = 'invalid@gmail.com';
+    const invalidEmail = 'invalid@gmail.com';
 
-    cy.get('[data-test=email]').should('be.visible').type(email);
+    cy.get('[data-test=email]').should('be.visible').type(invalidEmail);
     cy.get('[data-test=password]')
       .should('be.visible')
       .type(userAccount.password);
@@ -37,7 +37,20 @@ describe('password authentication tests', () => {
     expect(
       cy
         .get('[data-test=error]')
-        .contains(`${email}で登録されたユーザーが存在しません`)
+        .contains(`${invalidEmail}で登録されたユーザーが存在しません`)
     );
+  });
+
+  it("tests auth doesn't work with invalid password", () => {
+    cy.visit('/');
+
+    const invalidPassword = 'invalid_password';
+
+    cy.get('[data-test=email]').should('be.visible').type(userAccount.email);
+    cy.get('[data-test=password]').should('be.visible').type(invalidPassword);
+
+    cy.get('[data-test=submit]').should('be.visible').click();
+
+    expect(cy.get('[data-test=error]').contains('パスワードが間違っています'));
   });
 });
