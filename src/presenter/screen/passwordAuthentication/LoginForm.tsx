@@ -46,7 +46,7 @@ export const LoginForm: React.VFC = () => {
         ログイン
       </Typography>
       <ErrorMessageSpacer />
-      <ErrorMessageText variant="subtitle1" align="center">
+      <ErrorMessageText variant="subtitle1" align="center" data-test="error">
         {signInErrorMessage}
       </ErrorMessageText>
       <ErrorMessageSpacer />
@@ -65,6 +65,7 @@ export const LoginForm: React.VFC = () => {
             formController.touched.emailInput &&
             formController.errors.emailInput
           }
+          data-test="email"
         />
         <InputSpacer />
         <TextField
@@ -82,6 +83,7 @@ export const LoginForm: React.VFC = () => {
             formController.touched.passwordInput &&
             formController.errors.passwordInput
           }
+          data-test="password"
         />
         <ButtonSpacer />
         <LoadingButton
@@ -89,6 +91,7 @@ export const LoginForm: React.VFC = () => {
           fullWidth
           type="submit"
           loading={isLoading}
+          data-test="submit"
         >
           <Typography variant="h4" fontWeight="bold">
             ログイン
