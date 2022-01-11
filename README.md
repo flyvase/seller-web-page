@@ -5,7 +5,7 @@
 - launch dev server
 
 ```zsh
-npm run start
+npm run start:dev
 ```
 
 - run static analysis
