@@ -2,7 +2,8 @@
   "name": "seller-web-page-e2e",
   "scripts": {
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "lint": "eslint --max-warnings 0 cypress/"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.9.1",

@@ -15,7 +15,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "import"
     ],
     "rules": {
         "import/order": [
@@ -34,5 +35,6 @@
             }
         ],
         "@typescript-eslint/no-non-null-assertion": "off"
-    }
+    },
+    "root": true
 }
