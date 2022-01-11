@@ -22,7 +22,7 @@ describe('password authentication tests', () => {
     expect(cy.url(), 'http://localhost:3000/');
   });
 
-  it("tests auth doesn't work with invalid email", () => {
+  it('tests auth does not work with invalid email', () => {
     cy.visit('/');
 
     const invalidEmail = 'invalid@gmail.com';
@@ -41,7 +41,7 @@ describe('password authentication tests', () => {
     );
   });
 
-  it("tests auth doesn't work with invalid password", () => {
+  it('tests auth does not work with invalid password', () => {
     cy.visit('/');
 
     const invalidPassword = 'invalid_password';
