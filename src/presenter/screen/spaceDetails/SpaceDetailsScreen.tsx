@@ -15,6 +15,7 @@ import { InfoSkeleton } from './InfoSkeleton';
 import { DisplaysSkeleton } from './DisplaysSkeleton';
 import { WebsiteDisplaySkeleton } from './WebsiteDisplaySkeleton';
 import { MapSkeleton } from './MapSkeleton';
+import { useScrollToTop } from '../../controller/scroll';
 
 const ErrorRootBox = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -130,6 +131,8 @@ const MapSpacer = styled(Box)(({ theme }) => ({
 }));
 
 export const SpaceDetailsScreen: React.VFC = () => {
+  useScrollToTop();
+
   const { spaceId } = useParams();
   const spaceRepository = useContext(spaceRepositoryContext);
   const _spaceId = new SpaceId({ value: parseInt(spaceId!) });
